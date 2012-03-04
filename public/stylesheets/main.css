@@ -1,0 +1,108 @@
+body {
+	font-size: 12px;
+	font-family: arial,SimSun,Verdana,Geneva,Helvetica;
+	color: #131313;
+	line-height: 20px;
+	margin: 0;
+}
+.content {
+	width:960px;
+}
+a,a:ACTIVE {
+	text-decoration: none;
+}
+a:HOVER {
+	text-decoration: underline;
+}
+.header-top {
+	width: 960px;
+	height: 30px;
+	margin: 0 auto;
+	padding-top: 12px;
+}
+.header-top .logo {
+	width: 218px;
+	height: 39px;
+	float: left;
+	margin-top: 2px;
+}
+.header-top .tools {
+	margin-top: -4px;
+	float: right;
+}
+.header-top .tools .tel{
+	padding-left: 18px;
+	float: right;
+	font-weight: bold;
+	background: url("/public/images/tel.jpg") no-repeat;
+	line-height: 14px;
+}
+.nav-box {
+	background-color: #0078BB;
+	height: 39px;
+	margin: 20px 0 5px 0;
+}
+.nav {
+	width: 960px;
+	height: 39px;
+	margin: 0 auto;
+	position: relative;
+}
+.nav ul {
+	float: left;
+	list-style: none;
+	padding-left: 0px;
+}
+.nav ul li {
+	display: list-item;
+	text-align: -webkit-match-parent;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	float: left;
+	position: relative;
+	padding: 0 20px 0 0;
+	line-height: 20px;
+}
+.nav ul li a {
+	color: white;
+}
+.footer {
+	width: 960px;
+	margin: 30px auto 0;
+	color: #666;
+	text-align: left;
+	padding-top: 8px;
+	padding-bottom: 20px;
+	border-top: 1px #CCC solid;
+}
+.footer-left {
+	float: left;
+	margin: 5px 0 15px 0;
+	text-align: left;
+	color: #666;
+}
+.footer-left p {
+	margin-bottom: 5px;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+.footer-left p span {
+	font-weight: bold;
+	margin-right: 10px;
+}
+.footer-left p a {
+	color: black;
+}
+.footer-right {
+	float: right;
+	border-left: 1px solid #CCC;
+	padding: 15px 0 10px 15px;
+	margin-top: 5px;
+	display: block;
+	text-align: left;
+	color: #666;
+}

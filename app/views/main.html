@@ -11,6 +11,10 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-        #{doLayout /}
+    	#{include 'Application/header.html'/}
+    	<div class="content">
+			#{doLayout /}
+		</div>
+        #{include 'Application/footer.html'/}
     </body>
 </html>
