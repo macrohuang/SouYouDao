@@ -7,6 +7,7 @@ body {
 }
 .content {
 	width:960px;
+	margin: 0 auto;
 }
 a,a:ACTIVE {
 	text-decoration: none;
@@ -105,4 +106,32 @@ a:HOVER {
 	display: block;
 	text-align: left;
 	color: #666;
+}
+.souyou-left {
+	float: left;
+	width: 720px;
+	height: 300px;
+	margin-left: 40px;
+	margin-top: 40px;
+}
+.souyou-left-option {
+	margin: 10px 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+.souyou-right {
+	float: right;
+	width: 150px;
+	margin-top: 150px;
+}
+.souyou-btn {
+	height: 40px;
+	width: 100px;
+}
+<!--  -->
+
+#souyou-box {
+	margin-top: 20px;
+	border: #2778BB 4px solid;
+	height: 400px;
 }
