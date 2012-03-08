@@ -1,0 +1,124 @@
+#scenic-box {
+}
+#scenic-left {
+	float: left;
+	width: 247px;
+}
+#scenic-search {
+	height: 198px;
+	background-color: #6ACADC;
+	padding: 15px;
+	color: white;
+}
+#scenic-search h2 {
+	width: 146px;
+	height: 30px;
+	font-weight: bold;
+	font-size: 24px;
+}
+#scenic-target {
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 12px;
+}
+#search-btn-box {
+	padding-top: 30px;
+	padding-left: 60px;
+}
+#target-field{
+	width: 130px;
+}
+.scenic-type {
+	border-left: 2px solid #6ECBDD;
+	border-right: 2px solid #6ECBDD;
+	background: #49B9CF url("/public/images/nav_item_bdb.gif") no-repeat 5px bottom;
+	padding: 14px 15px;
+	width: 213px;
+	position: relative;
+	z-index: 1000;
+	color: white;
+}
+.scenic-type h3 {
+	position: relative;
+	font-size: 14px;
+	font-weight: bold;
+	width: 213px;
+	line-height: 18px;
+	margin: 0 8px;
+}
+.scenic-type p {
+	width: 213px;
+	height: 14px;
+	line-height: 14px;
+	overflow: hidden;
+	margin: 5px 8px 0 8px;
+}
+.scenic-type h3 em {
+	position: absolute;
+	font-family: simsun;
+	font-style: normal;
+	font-weight: bold;
+	right: 0;
+	top: 0;
+	color: #0087A3;
+}
+#scenic-right {
+	float: right;
+	width: 705px;
+	overflow: hidden;
+}
+#scenic-right h3 {
+	font-family: "Microsoft Yahei",Tahoma,"SimSun";
+	font-size: 18px;
+	margin-top: 11px;
+	font-weight: 400;
+	color: #0092B0;
+	margin: 10px 0;
+}
+#slider {
+	height: 226px;
+	border: 1px solid black;
+	overflow: hidden;
+	position: relative;
+}
+#location {
+	border-bottom: #2778BB 2px solid;
+	padding-left: 20px;
+	margin-top: 20px;
+}
+#scenic-name {
+	margin-bottom: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #000;
+	letter-spacing: 2px;
+}
+#scenic-address {
+	margin-bottom: 5px;
+}
+#scenic-level {
+	color: green;
+}
+#scenic-overview {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#scenic-left {
+	float: left;
+}
+#scenic-right {
+	float: right;
+	border: #E1E1E1 1px solid;
+	width: 250px;
+	height: 240px;
+}
+#scenic-detail {
+	border: #2778BB 1px solid;
+	margin-top: 20px;
+}
+#detail-left {
+	float: left;
+}
+#detail-right {
+	float: right;
+}
