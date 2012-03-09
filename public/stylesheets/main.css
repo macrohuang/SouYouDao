@@ -167,3 +167,50 @@ a:HOVER {
 	border: #2778BB 4px solid;
 	height: 400px;
 }
+.side-top, .right-side-top {
+    height: 33px;
+    padding-left: 10px;
+    line-height: 33px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: bold;
+}
+.side-top {
+    background:url("/public/images/side-banner-bg.png") 0 0 no-repeat;
+}
+.right-side-top {
+    background: url("/public/images/right-banner-bg.png") no-repeat 0 0;
+}
+.side-middle, .right-side-middle {
+    padding: 10px 7px 5px 10px;
+    border-left: 1px solid #C6C6C6;
+    border-right: 1px solid #C6C6C6;
+}
+.side-bottom {
+    height: 6px;
+    background: url("/public/images/side-banner-bg.png") 0 -33px no-repeat;
+    overflow: hidden;
+}
+.right-side-bottom {
+   height: 5px;
+   background: url("/public/images/right-banner-bg.png") 0 -33px no-repeat;
+   overflow: hidden;
+}
+.side-box {
+   margin-bottom: 10px;
+}
+.right-side-box{
+   width: 720px;
+   margin-bottom: 10px;
+   padding-left: 20px;
+}
+.tab-btn, .tab-btn-on {
+   float: left;
+   cursor: pointer;
+   padding:0 10px;
+   width: 90px;
+   text-align: center;
+}
+.tab-btn-on {
+   background: #E1E1E1; 
+}
