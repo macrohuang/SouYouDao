@@ -2,6 +2,7 @@
  * #0078BB	导航栏背景
  * #2778BB	content边框
  * #E1E1E1	灰色边框
+ * #EDEDED	大背景灰色
  */
 body {
 	font-size: 12px;
@@ -9,6 +10,13 @@ body {
 	color: #131313;
 	line-height: 20px;
 	margin: 0;
+	/*background-color: #EDEDED;*/
+}
+h1,h2,h3,p {
+	margin: 0;
+}
+em {
+	font-style: normal;
 }
 .content {
 	width:960px;
@@ -167,6 +175,9 @@ a:HOVER {
 	border: #2778BB 4px solid;
 	height: 400px;
 }
+.side-box {
+   margin-bottom: 10px;
+}
 .side-top, .right-side-top {
     height: 33px;
     padding-left: 10px;
@@ -195,9 +206,6 @@ a:HOVER {
    height: 5px;
    background: url("/public/images/right-banner-bg.png") 0 -33px no-repeat;
    overflow: hidden;
-}
-.side-box {
-   margin-bottom: 10px;
 }
 .right-side-box{
    width: 720px;

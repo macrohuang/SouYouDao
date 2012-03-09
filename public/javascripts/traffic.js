@@ -39,16 +39,4 @@ $(function() {
 			changeYear: true,
 			changeMonth: true
 		});
-		//每晚费用
-		$( "#slider-day-price" ).slider({
-			range: true,
-			min: 0,
-			max: 2000,
-			values: [ 100, 500 ],
-			slide: function( event, ui ) {
-				$( "#day-price" ).val( "￥" + ui.values[ 0 ] + " - ￥" + ui.values[ 1 ] );
-			}
-		});
-		$( "#day-price" ).val( "￥" + $( "#slider-day-price" ).slider( "values", 0 ) +
-			" - ￥" + $( "#slider-day-price" ).slider( "values", 1 ) );
 	});

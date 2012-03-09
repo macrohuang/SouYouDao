@@ -1,0 +1,130 @@
+#hotel-search-box {
+	height: 150px;
+	border-bottom: #E1E1E1 1px solid;
+}
+#hs-left {
+	float: left;
+	margin-left: 110px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#hs-left span {
+	margin-right: 10px;
+	width: 70px;
+	font-weight: 600;
+	line-height: 25px;
+	font-size: 14px;
+}
+#hs-right {
+	float: right;
+	margin-right: 200px;
+	padding-top: 20px;
+}
+#hotel-options {
+	margin-left: 110px;
+}
+.hotel-query-item {
+	margin-right: 10px;
+	float: left;
+	height: 15px;
+}
+.hotel-query-item input {
+	vertical-align:bottom;
+	float: left;
+	display: inline;
+	margin: 0 5px;
+	padding: 0;
+	width: 13px;
+	height: 13px;
+}
+.hotel-query-item label {
+	float: left;
+	line-height: 14px;
+	font-size: 12px;
+	cursor: pointer;
+}
+.hotel-option {
+	height: 20px;
+}
+#hotel-list-banner {
+	font-weight: bold;
+	border-bottom: 1px solid #DEDEDE;
+	padding: 6px 0 3px;
+	_padding: 6px 0 3px;
+	height: 15px;
+	line-height: 1.231;
+	background-color: #EFEFEF;
+}
+.hl-item {
+	position: relative;
+	border-bottom: 1px solid #CCC;
+	line-height: 18px;
+	height: 80px;
+}
+.hl-info {
+	padding: 8px 0;
+}
+.hl-col1 {
+	float: left;
+	background: url("/public/images/list-no-bg.png") no-repeat;
+	color: white;
+	text-align: center;
+	display: block;
+	width: 18px;
+	height: 37px;
+	margin-left: 10px;
+}
+.hl-col2 {
+	float: left;
+	padding: 0 0 0 5px;
+	width: 380px;
+	overflow: hidden;
+}
+.hl-col2 h2 {
+	color: #0069CA;
+}
+.hl-col2 p {
+	padding-top: 5px;
+}
+.hl-col3 {
+	float: left;
+}
+.hl-col4 {
+	float:left;
+	padding-left: 40px;
+	max-width: 120px;
+	text-align: center;
+	margin-top: 5px;
+}
+.hl-col5 {
+	float: right;
+	line-height: 18px;
+	color: #0069CA;
+	width: 80px;
+	margin-right: 30px;
+	margin-top: 8px;
+}
+.hl-col5 a {
+	color: #0069CA;
+	display: block;
+	cursor: pointer;
+	float: right;
+	text-align: right;
+	text-decoration: none;
+}
+.hl-col5 strong {
+	font-size: 22px;
+	font-weight: bold;
+}
+.hl-col5 span {
+	float: right;
+	display: block;
+	margin-top: 1px;
+	background: url("/public/images/detail-btn.png") 0px 0px no-repeat;
+	width: 72px;
+	height: 22px;
+	color: white;
+	text-align: center;
+	line-height: 22px;
+	overflow: hidden;
+}

@@ -3,26 +3,132 @@
 #{set 'moreScripts'}
      #{script 'hotel.js'/}
 #{/set}
-<div id="souyou-box">
-	<div class="souyou-left">
-		<!-- 酒店类型 -->
-		<div class="souyou-left-option">
-			<div id="hotel_type">
-				<input type="radio" id="radio1" name="radio"  checked="checked"/><label for="radio1">酒店</label>
-				<input type="radio" id="radio2" name="radio"/><label for="radio2">家庭旅馆</label>
-				<input type="radio" id="radio3" name="radio" /><label for="radio3">青年旅社</label>
-				<input type="radio" id="radio4" name="radio"/><label for="radio4">宾馆</label>
-			</div>
+#{set 'moreStyles'}
+     #{stylesheet 'hotel.css'/}
+#{/set}
+<div id="hotel-search-box">
+	<div id="hs-left">
+		<div>
+			<span>所在城市:</span><span><input type="text"/></span>
+			<span>搜索内容:</span><span><input type="text"/></span>
 		</div>
-		<div class="souyou-left-option">
-			所在城市:<input type="text" name="city"/>
-		</div>
-		<div class="souyou-left-option">
-			入住时间:<input type="text" name="begin_date" id="begin_date"/>
-			离店时间:<input type="text" name="end_date" id="end_date"/>
+		<div>
+			<span>入住时间:</span><span><input type="text" id="begin_date"/></span>
+			<span>离店时间:</span><span><input type="text" id="end_date"/></span>
 		</div>
 	</div>
-	<div class="souyou-right">
-		<button class="souyou-btn">搜住宿</button>
+	<div id="hs-right">
+		<input type="button" class="search-btn"/>
+	</div>
+	<div class="clearfix"></div>
+	<div id="hotel-options">
+		<div class="hotel-option">
+			<div class="hotel-query-item"><label>价格:</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>¥200以下</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>¥200以下</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>¥200以下</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>¥200以下</label></div>
+		</div>
+		<div class="hotel-option">
+			<div class="hotel-query-item"><label>档次:</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>家庭旅馆</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>经济型</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>三星级</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>四星级</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>五星级</label></div>
+		</div>
+		<div class="hotel-option">
+			<div class="hotel-query-item"><label>品牌:</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>如家连锁</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>7天连锁</label></div>
+			<div class="hotel-query-item"><input type="checkbox"/><label>速8酒店</label></div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+<div id="hotel-list">
+	<div class="hl-item">
+		<div class="hl-info">
+			<div class="hl-col1">1</div>
+			<div class="hl-col2">
+				<h2>北京瓦当国际青年旅舍</h2>
+				<p>传统四合院式青旅，隐匿在胡同深处，距地铁步行五分钟。网友评价说“地道的四合院”。</p>
+			</div>
+			<div class="hl-col3">
+				<img alt="" src="/data/hotel-pics.png" height="62"/>
+			</div>
+			<div class="hl-col4">
+				<a href="#">4.6分/110个点评</a>
+				<div>电话：59928684</div>
+				<div>www.xxxxxxxxx.com</div>
+			</div>
+			<div class="hl-col5">
+				<a href="#">
+					<em>¥</em>
+					<strong>35</strong>
+					<em>起</em>
+					<span>查看详情</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="hl-item">
+		<div class="hl-info">
+			<div class="hl-col1">2</div>
+			<div class="hl-col2">
+				<h2>北京瓦当国际青年旅舍</h2>
+				<p>传统四合院式青旅，隐匿在胡同深处，距地铁步行五分钟。网友评价说“地道的四合院”。</p>
+			</div>
+			<div class="hl-col3">
+				<img alt="" src="/data/hotel-pics.png" height="62"/>
+			</div>
+			<div class="hl-col4">
+				<a href="#">4.6分/110个点评</a>
+				<div>电话：59928684</div>
+				<div>www.xxxxxxxxx.com</div>
+			</div>
+			<div class="hl-col5">
+				<a href="#">
+					<em>¥</em>
+					<strong>35</strong>
+					<em>起</em>
+					<span>查看详情</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="hl-item">
+		<div class="hl-info">
+			<div class="hl-col1">3</div>
+			<div class="hl-col2">
+				<h2>北京瓦当国际青年旅舍</h2>
+				<p>传统四合院式青旅，隐匿在胡同深处，距地铁步行五分钟。网友评价说“地道的四合院”。</p>
+			</div>
+			<div class="hl-col3">
+				<img alt="" src="/data/hotel-pics.png" height="62"/>
+			</div>
+			<div class="hl-col4">
+				<a href="#">4.6分/110个点评</a>
+				<div>电话：59928684</div>
+				<div>www.xxxxxxxxx.com</div>
+			</div>
+			<div class="hl-col5">
+				<a href="#">
+					<em>¥</em>
+					<strong>35</strong>
+					<em>起</em>
+					<span>查看详情</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="pager" align="right">
+		12345 ... 222下一页
 	</div>
 </div>

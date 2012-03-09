@@ -1,75 +1,88 @@
 #{extends 'main.html' /}
-#{set title:'住宿' /}
+#{set title:'交通' /}
+#{set 'moreScripts'}
+     #{script 'traffic.js'/}
+#{/set}
+#{set 'moreStyles'}
+     #{stylesheet 'traffic.css'/}
+#{/set}
 
-<script>
-	$(function() {
-		//交通类型
-		$("#traffic_type").buttonset();
-		//往返类型
-		$("#travel_type").buttonset();
-		//日期选择
-		$.datepicker.regional['zh-CN'] = {  
-        closeText: '关闭', 
-        closeStatus: '不改变当前选择', 
-        prevText: '<上月', 
-        prevStatus: '显示上月', 
-        prevBigText: '<<', 
-        prevBigStatus: '显示上一年', 
-        nextText: '下月>', 
-        nextStatus: '显示下月', 
-        nextBigText: '>>', 
-        nextBigStatus: '显示下一年', 
-        currentText: '今天', 
-        currentStatus: '显示本月', 
-        monthNames: ['一月','二月','三月','四月','五月','六月', '七月','八月','九月','十月','十一月','十二月'], 
-        monthNamesShort: ['一','二','三','四','五','六', '七','八','九','十','十一','十二'], 
-        monthStatus: '选择月份', 
-        yearStatus: '选择年份', 
-        weekHeader: '周', 
-        weekStatus: '年内周次', 
-        dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'], 
-        dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'], 
-        dayNamesMin: ['日','一','二','三','四','五','六'],  
-        dateFormat: 'yy-mm-dd', 
-        firstDay: 1, 
-        isRTL: false
-        }; 
-        $.datepicker.setDefaults($.datepicker.regional['zh-CN']); 
-		$("#begin_date" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true,
-			changeYear: true,
-			changeMonth: true
-		});
-		$("#end_date" ).datepicker({
-			numberOfMonths: 3,
-			showButtonPanel: true,
-			changeYear: true,
-			changeMonth: true
-		});
-	});
-</script>
-<div id="souyou-box">
-	<div class="souyou-left">
-		<!-- 交通类型 -->
-		<div class="souyou-left-option">
-			<div id="traffic_type">
-				<input type="radio" id="radio1" name="traffic_type"  checked="checked"/><label for="radio1">飞机</label>
-				<input type="radio" id="radio2" name="traffic_type"/><label for="radio2">火车</label>
+<div id="traffic-left">
+	<div class="side-box">
+		<div class="side-top">
+			<div class="tab-btn">飞机票</div>
+			<div class="tab-btn">火车票</div>
+		</div>
+		<div class="side-middle">
+			<div>
+				<span>航班类型:</span>
+				<span>
+					<select>
+						<option>国内机票</option>
+						<option>国际机票</option>
+					</select>
+				</span>
+			</div>
+			<div>
+				<span>往返类型:</span>
+				<span>
+					<select>
+						<option>单程</option>
+						<option>往返</option>
+						<option>联程</option>
+					</select>
+				</span>
+			</div>
+			<div>
+				<span>出发城市:</span>
+				<span>
+					<input type="text" size="10"/>
+				</span>
+			</div>
+			<div>
+				<span>目的城市:</span>
+				<span>
+					<input type="text" size="10"/>
+				</span>
+			</div>
+			<div>
+				<span>出发日期:</span>
+				<span>
+					<input type="text" size="10"/>
+				</span>
+			</div>
+			<div>
+				<span>舱位等级:</span>
+				<span>
+					<select>
+						<option>经济舱</option>
+						<option>头等舱</option>
+					</select>
+				</span>
+			</div>
+			<div id="search-btn-box" align="center">
+				<input type="button" class="search-btn"/>
 			</div>
 		</div>
-		<div class="souyou-left-option">
-			<div id="travel_type">
-				<input type="radio" id="radio3" name="travel_type"  checked="checked"/><label for="radio3">单程</label>
-				<input type="radio" id="radio4" name="travel_type"/><label for="radio4">往返</label>
-			</div>
-		</div>
-		<div class="souyou-left-option">
-			出发时间:<input type="text" name="begin_date" id="begin_date"/>
-			返程时间:<input type="text" name="end_date" id="end_date"/>
-		</div>
+		<div class="side-bottom"></div>
 	</div>
-	<div class="souyou-right">
-		<button class="souyou-btn">搜机票</button>
+	
+	<div class="side-box">
+		<div class="side-top">特价促销</div>
+		<div class="side-middle">
+			<div>特价促销1</div>
+			<div>特价促销2</div>
+			<div>特价促销3</div>
+		</div>
+		<div class="side-bottom"></div>
 	</div>
 </div>
+<div id="traffic-right">
+	<div id="plane-slider">
+		<img alt="" src="/data/plane-pic.png"/>
+	</div>
+	<div style="margin: 10px;">最近30天特价</div>
+	<div style="margin: 10px;">国内特惠机票</div>
+	<div style="margin: 10px;">国际特惠机票</div>
+</div>
+<div class="clearfix"></div>
