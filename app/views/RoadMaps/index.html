@@ -1,0 +1,52 @@
+#{extends 'main.html' /}
+#{set 'moreScripts'}
+     #{script 'roadmap.js'/}
+#{/set}
+#{set 'moreStyles'}
+     #{stylesheet 'roadmap.css'/}
+#{/set}
+<div id="souyou-box">
+	<div class="souyou-left">
+		<div class="souyou-left-option">
+			出发地:
+			<input type="text"/>
+			目的地:
+			<input type="text"/>
+		</div>
+		<div class="souyou-left-option">喜欢的游玩风格:</div>
+		<div class="souyou-left-option">
+			<div id="format">
+				<input type="checkbox" id="check1" /><label for="check1">山水</label>
+				<input type="checkbox" id="check2" /><label for="check2">古镇</label>
+				<input type="checkbox" id="check3" /><label for="check3">海滩</label>
+				<input type="checkbox" id="check4" /><label for="check4">艺术</label>
+				<input type="checkbox" id="check5" /><label for="check5">大森林</label>
+				<input type="checkbox" id="check6" /><label for="check6">海洋世界</label>
+			</div>
+		</div>
+		<div class="souyou-left-option">
+			<div id="radio">
+				<input type="radio" id="radio1" name="radio"  checked="checked"/><label for="radio1">自助游</label>
+				<input type="radio" id="radio2" name="radio"/><label for="radio2">旅行社</label>
+				<input type="radio" id="radio3" name="radio" /><label for="radio3">驴友组队</label>
+			</div>
+		</div>
+		<div class="souyou-left-option">
+			<p>
+				<label for="price-amount">人均费用:</label>
+				<input type="text" id="price-amount" style="border:0; color:#f6931f; font-weight:bold;" />
+			</p>
+			<div id="slider-range-price"></div>
+		</div>
+		<div class="souyou-left-option">
+			<p>
+				<label for="date-amount">时间规划:</label>
+				<input type="text" id="date-amount" style="border:0; color:#f6931f; font-weight:bold;" />
+			</p>
+			<div id="slider-range-date"></div>
+		</div>
+	</div>
+	<div class="souyou-right">
+		<a href="@{RoadMaps.list()}"><button class="search-btn">搜游</button></a>
+	</div>
+</div>

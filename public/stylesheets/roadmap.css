@@ -1,0 +1,42 @@
+#road-maps-left {
+	float: left;
+	width: 300px;
+	border-top : 1px solid #CCC;
+	border-left : 1px solid #CCC;
+	border-right : 1px solid #CCC;
+}
+#road-maps-right {
+	float: right;
+}
+.rm-item {
+	position: relative;
+	border-bottom: 1px solid #CCC;
+	line-height: 18px;
+	height: 80px;
+	overflow: hidden;
+}
+.rm-info {
+	padding: 8px 0;
+}
+.rm-col1 {
+	float: left;
+	background: url("/public/images/list-no-bg.png") no-repeat;
+	color: white;
+	text-align: center;
+	display: block;
+	width: 18px;
+	height: 37px;
+	margin-left: 10px;
+}
+.rm-col2 {
+	float: left;
+	padding: 0 0 0 5px;
+	width: 250px;
+	overflow: hidden;
+}
+.rm-col2 h2 {
+	color: #0069CA;
+}
+.rm-col2 p {
+	padding-top: 5px;
+}
