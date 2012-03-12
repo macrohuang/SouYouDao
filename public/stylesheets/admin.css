@@ -1,0 +1,22 @@
+#header {
+	height:30px;
+	text-align: center;
+}
+#footer {
+	height: 30px;
+	text-align: center;
+}
+#scenic-list, #scenic-form {
+	float: left;
+	margin-left: 10px;
+	border: GRAY 1px solid;
+}
+#scenic-list {
+	width: 200px;
+}
+#scenic-form {
+  width: 500px;
+}
+.clearfix {
+	clear: both;
+}
