@@ -2,7 +2,7 @@ package controllers;
 
 import play.mvc.Controller;
 
-public class RoadMaps extends Controller {
+public class Roadmaps extends Controller {
 
     public static void index() {
         render();

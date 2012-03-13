@@ -11,6 +11,6 @@ import play.db.jpa.Model;
  */
 @Entity
 @Table(name = "T_ROADMAP")
-public class RoadMap extends Model {
+public class Roadmap extends Model {
 
 }

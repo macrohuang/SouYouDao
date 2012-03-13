@@ -1,10 +1,53 @@
 #{extends 'Admins/main.html' /}
 #{set title:'Administrations' /}
-<div>已编辑条目：</div>
+<div>剩余未编辑条目总数：${count}</div>
+
+#{include 'Application/error.html'/}
+
+<form id="scenicForm" action="@{Admins.saveScenic()}" method="post" enctype="multipart/form-data">
+<input name="scenic.id" value="${scenic.id}" type="hidden"/>
 <div id="scenic-list">
-list
+  <div>您已编辑的条目</div>
 </div>
 <div id="scenic-form">
-left
+  <table>
+    <tr><td>景点全称</td><td>${scenic.name}</td></tr>
+    <tr><td>行政区域</td><td></td></tr>
+    <tr><td>景点简介</td><td><textarea name="scenic.description" cols="40" rows="5"></textarea></td></tr>
+    <tr><td>详细地址</td><td><input name="scenic.address" type="text" size="60"/></td></tr>
+    <tr><td>景区电话</td><td><input name="scenic.tel" type="text" size="60"/></td></tr>
+    <tr><td>景点评级</td><td>
+      <select name="scenic.level">
+        <option></option>
+        <option>A</option>
+        <option>AA</option>
+        <option>AAA</option>
+        <option>AAAA</option>
+        <option>AAAAA</option>
+      </select>
+    </td></tr>
+    <tr><td>景点坐标</td><td><input type="text" name="scenic.loaction" size="60"/></td></tr>
+    <tr><td>景点门票</td><td><input type="text" name="scenic.ticketPrice" size="60"/></td></tr>
+    <tr><td>景点规模(亩/平方米)</td><td><input type="text" name="scenic.scale" size="60"/></td></tr>
+    <tr><td>景点内部线路图</td><td><input type="file" name="roadmapImage"/></td></tr>
+    <tr><td>景点外部交通</td><td><input type="text" name="scenic.outterTraffic" size="60"/></td></tr>
+    <tr><td>景点内部交通</td><td><input type="text" name="scenic.innerTraffic" size="60"/></td></tr>
+    <tr><td>内部游玩路线</td><td>
+      <textarea name="innerRoadmaps" cols="40" rows="5"></textarea><br/>
+      <textarea name="innerRoadmaps" cols="40" rows="5"></textarea>
+    </td></tr>
+    <tr><td>景点图片</td><td>
+      <input type="file" name="images"/><br/>
+      <input type="file" name="images"/><br/>
+      <input type="file" name="images"/><br/>
+      <input type="file" name="images"/><br/>
+      <input type="file" name="images"/>
+    </td></tr>
+  </table>
+</div>
+<div id="scenic-list">
+  <div><a href="#" onclick="$('#scenicForm').submit()">保存数据 & 获取下一个</a></div>
+  <div><a href="@{Admins.editScenic(scenic.id,true)}">放弃编辑 & 获取下一个</a></div>
 </div>
 <div class="clearfix"></div>
+</form>

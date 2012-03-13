@@ -17,10 +17,15 @@ import play.db.jpa.Model;
 public class ScenicImage extends Model {
   @Required
   public String imageName;
-  // 相对于data目录的文件夹
-  @Required
-  public String dir = "scenic";
   @ManyToOne
   @Required
   public Scenic scenic;
+
+  public ScenicImage() {
+  }
+
+  public ScenicImage(String imageName, Scenic scenic) {
+    this.imageName = imageName;
+    this.scenic = scenic;
+  }
 }

@@ -14,6 +14,14 @@
 #scenic-list {
 	width: 200px;
 }
+#scenic-list div{
+	margin-bottom: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#scenic-list a {
+	color: #E19;
+}
 #scenic-form {
   width: 500px;
 }
