@@ -16,3 +16,17 @@ $(function() {
         }); 
     });
 });
+//错误提示框初始化
+$(function() {
+	if($("#errors").html().indexOf("div") > 0){
+		$("#errors").dialog({
+		    modal: true,
+		    buttons: {
+		      Ok: function() {
+		        $( this ).dialog( "close" );
+		      }
+		    }
+		 });
+	}
+});
+

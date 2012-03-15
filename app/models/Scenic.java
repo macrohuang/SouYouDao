@@ -23,27 +23,27 @@ import play.db.jpa.Model;
 @Table(name = "T_SCENIC")
 public class Scenic extends Model {
   // 全称
-  @Required
+  @Required(message = "请输入景点全称")
   @Column(unique = true)
   public String name;
   // 详细地址
-  @Required
+  @Required(message = "请输入景点地址")
   public String address;
   // 联系电话
   public String tel;
   // 景点介绍
-  @Required
+  @Required(message = "请输入景点描述")
   public String description;
   // 评级
-  @Required
+  @Required(message = "请选择景点评级")
   public String level;
   // 景点坐标，如 123,123(以英文逗号分割)
-  @Required
+  @Required(message = "请输入景点坐标,如：47.123,-47.123")
   public String location;
   // 景点门票（RMB/人）
   public int ticketPrice;
   // 景点规模（亩）
-  @Required
+  @Required(message = "请输入景点规模(亩或平方米)")
   public int scale;
   // 景点内部游览图
   public String roadmapImage;
@@ -51,10 +51,10 @@ public class Scenic extends Model {
   @OneToMany(mappedBy = "scenic")
   public List<ScenicInnerRoadmap> innerRoadmaps;
   // 周边交通
-  @Required
+  @Required(message = "请输入景点周边交通描述")
   public String outterTraffic;
   // 景区内交通
-  @Required
+  @Required(message = "请输入景点内部交通描述")
   public String innerTraffic;
   // 是否通过管理员审核
   public boolean authorized = false;

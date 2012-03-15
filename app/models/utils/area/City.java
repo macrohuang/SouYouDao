@@ -2,6 +2,7 @@ package models.utils.area;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,6 +23,6 @@ public class City extends Model {
   @Required
   @ManyToOne
   public Province province;
-  @OneToMany(mappedBy = "city")
+  @OneToMany(mappedBy = "city", cascade = CascadeType.REMOVE)
   public List<Region> regions;
 }

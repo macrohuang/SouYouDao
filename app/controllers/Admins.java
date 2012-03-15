@@ -38,7 +38,7 @@ public class Admins extends Controller {
   /**
    * 审核并保存景区数据
    */
-  public static void saveScenic(@Valid Scenic scenic,
+  public static void saveScenic(@Valid(message = "") Scenic scenic,
       @Required(message = "内部游览图是必须的！") File roadmapImage,
       @Required(message = "景点图片是必须的！") File[] images,
       @Required(message = "内部游览路线是必须的！") String[] innerRoadmaps) throws Exception {

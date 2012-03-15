@@ -2,6 +2,7 @@ package models.utils.area;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +19,6 @@ import play.db.jpa.Model;
 public class Province extends Model {
   @Required
   public String name;
-  @OneToMany(mappedBy = "province")
+  @OneToMany(mappedBy = "province", cascade = CascadeType.REMOVE)
   public List<City> cities;
 }

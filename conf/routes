@@ -7,6 +7,9 @@ GET     /                                       RoadMaps.index
 # Admin requests
 *       /admin                                  Admins.index
 
+# Test Restful
+GET     /admins/editscenic/{scenicId}/{next}    Admins.editScenic
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 GET     /data/                                	staticDir:data

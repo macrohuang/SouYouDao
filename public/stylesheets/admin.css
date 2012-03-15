@@ -28,3 +28,6 @@
 .clearfix {
 	clear: both;
 }
+#errors div{
+	white-space: nowrap;
+}
