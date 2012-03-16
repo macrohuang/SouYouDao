@@ -36,7 +36,7 @@
 				    <!-- form -->
 				    <div class="span8">
 				      <form id="scenicForm" action="@{Admins.saveScenic()}" method="post" enctype="multipart/form-data" onsubmit="return scenicSave()">
-								<input name="scenic.id" value="${scenic.id}" type="hidden"/>
+								<input name="scenic.id" value="${scenic?.id}" type="hidden"/>
 								<div id="scenic-form">
 								  <table class="table">
 								    <tr><td>景点全称</td><td>${scenic.name}</td></tr>
