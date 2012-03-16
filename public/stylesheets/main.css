@@ -218,3 +218,6 @@ a:HOVER {
 .tab-btn-on {
    background: #E1E1E1; 
 }
+.error{
+  color: red;
+}
