@@ -1,7 +1,8 @@
-<div class="errors" id="errors">
-	  #{ifErrors}   
-		  #{errors}
-		  <div>${error}</div>
-		  #{/errors}                          
-	  #{/ifErrors}
-</div>
+#{ifErrors}
+	<div class="alert alert-error">
+	  <div><a class="close" data-dismiss="alert" href="#">×</a></div>
+	  #{errors}
+	  <div>${error}</div>
+	  #{/errors}
+  	</div>
+#{/ifErrors}

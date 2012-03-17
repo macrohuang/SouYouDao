@@ -3,7 +3,6 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import play.data.validation.Password;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -14,10 +13,9 @@ import play.db.jpa.Model;
 @Entity
 @Table(name = "T_ADMIN")
 public class Admin extends Model {
-  @Required
+  @Required(message="请填写账号")
   public String username;
-  @Required
-  @Password
+  @Required(message="请填写密码")
   public String password;
 
   public Admin() {

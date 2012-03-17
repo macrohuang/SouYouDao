@@ -1,0 +1,16 @@
+#{extends 'Admins/main.html' /}
+#{set title:'管理员登录' /}
+<form action="@{Admins.loginOK()}" method="post">
+	<div class="well form-horizontal" align="center">
+		#{include 'Application/error.html'/}
+		<div>
+	      	<span for="username">账号:</span>
+	        <input type="text" id="username" name="admin.username" placeholder="请输入账号"/>
+		</div>
+		<div style="margin: 20px;">
+	      	<span for="password">密码:</span>
+	       	<input type="password" id="password" name="admin.password" placeholder="请输入密码"/>
+		</div>
+		<div align="center"><button type="submit" class="btn">登录</button></div>
+	</div>
+</form>
