@@ -39,7 +39,7 @@
 								<input name="scenic.id" value="${scenic?.id}" type="hidden"/>
 								<div id="scenic-form">
 								  <table class="table">
-								    <tr><td>景点全称</td><td>${scenic.name}</td></tr>
+								    <tr><td>景点全称</td><td>${scenic?.name}</td></tr>
 								    <tr><td>行政区域</td><td></td></tr>
 								    <tr><td>景点简介</td><td><textarea class="required" name="scenic.description" cols="40" rows="5"></textarea></td></tr>
 								    <tr><td>详细地址</td><td><input class="required" name="scenic.address" type="text" size="60"/></td></tr>
@@ -79,7 +79,7 @@
 				    <div class="span2">
 				      <div id="scenic-list">
                  <div><a class="btn" href="#" onclick="$('#scenicForm').submit()">保存 & 下一个</a></div>
-                 <div><a class="btn" href="@{Admins.editScenic(scenic.id,true)}">放弃 & 下一个</a></div>
+                 <div><a class="btn" href="@{Admins.editScenic(scenic?.id,true)}">放弃 & 下一个</a></div>
                </div>
 				    </div>
 				  </div>
