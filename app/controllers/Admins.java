@@ -120,4 +120,8 @@ public class Admins extends Application {
     session.put(Constants.ADMIN_ID_IN_SESSION, a.id);
     render("Admins/index.html");
   }
+  public static void logout(){
+    session.remove(Constants.ADMIN_ID_IN_SESSION);
+    login();
+  }
 }
