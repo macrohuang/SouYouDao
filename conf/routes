@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                                       RoadMaps.index
+GET     /                                       Application.index
 # Admin requests
 *       /admin                                  Admins.index
 

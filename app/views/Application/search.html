@@ -1,0 +1,25 @@
+#{extends 'main.html' /}
+#{set title:'搜游岛' /}
+<div>
+	<div>
+		<div align="center">
+		<form action="@{Application.search()}" method="get">
+			<input value="${keywords}" type="text" class="input-xlarge search-query" name="keywords" id="search-box" placeholder="输入景点名、游玩风格等进行搜索"/>
+		  	<button type="submit" class="btn btn-large btn-primary" id="search-btn">
+		  		<i class="icon-search icon-white"></i>
+		  		<span>旅游搜索</span>
+		  	</button>
+		</form>
+		</div>
+		<div class="bottom-line-bold">
+			<div>搜索结果</div>
+		</div>
+		<div class="well">
+			<ul class="nav nav-pills">
+			  <li class="active"><a href="#">景区</a></li>
+			  <li><a href="#">路线</a></li>
+			  <li><a href="#">评论</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

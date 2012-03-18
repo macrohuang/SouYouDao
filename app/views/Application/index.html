@@ -1,3 +1,18 @@
 #{extends 'main.html' /}
 #{set title:'搜游岛' /}
-Application/index.html
+<script>
+	$(document).ready(function(){
+		$("#search-box").focus();
+	});
+</script>
+<div style="height: 400px">
+	<div align="center" style="padding-top: 150px">
+		<form action="@{Application.search()}" method="get">
+			<input type="text" class="input-xlarge search-query" id="search-box" name="keywords" placeholder="输入景点名、游玩风格等进行搜索">
+	  		<button type="submit" class="btn btn-large btn-primary" id="search-btn">
+	  			<i class="icon-search icon-white"></i>
+		  		<span>旅游搜索</span>
+		  	</button>
+	  	</form>
+	</div>
+</div>

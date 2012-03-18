@@ -11,6 +11,10 @@ public class Application extends Controller {
       render();
     }
 
+    public static void search(String keywords){
+      render(keywords);
+    }
+
     @Before
     public static void login(){
 
