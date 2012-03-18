@@ -1,95 +1,154 @@
 #{extends 'Admins/main.html' /}
-#{set title:'Administrations' /}
+#{set title:'景点管理' /}
 #{set 'moreScripts'}
      #{script 'jquery.validate.js'/}
 #{/set}
 <script type="text/javascript">
-	$(document).ready(function(){
-	    $("#scenicForm").validate({
-	    	errorElement: "div"
+    $(document).ready(function(){
+        $("#scenicForm").validate({
+            errorElement: "div"
+        });
+      	//初始化省市联动
+        locationSelection("province","city","region","${scenic?.region?.city?.province?.id}","${scenic?.region?.city?.id}","${scenic?.region?.id}");
+      	//设置select选项
+        $("#scenicLevel option[value='${scenic?.level}']").attr("selected","selected");
+    });
+    
+    function scenicSave(){
+    	$("#tips").html('<a class="close" data-dismiss="alert" href="#">×</a>');
+    	var result = true;
+    	if($("#region").val().length==0){
+    		$("#tips").html($("#tips").html() + "<div>请选择景点行政区域</div>");
+    		result = false;
+    	}
+    	if($("#roadmapImage").val()=='' && "${scenic?.roadmapImage}"==null){
+    		$("#tips").html($("#tips").html() + "<div>需要上传至少一张景点内部路线图</div>");
+    		result = false;
+    	}
+	   	$("textarea[name='innerRoadmaps']").each(function(){
+	       	if($(this).val().length == 0){
+	       		$("#tips").html($("#tips").html() + "<div>内部游览路线需要填写两条</div>");
+	       		result = false;
+	       	}
 	    });
-	});
-	function scenicSave(){
-		
-	}
+	   	$("input[name='images']").each(function(){
+	       	if($(this).val().length == 0 && "${scenic?.images}"==null){
+	       		$("#tips").html($("#tips").html() + "<div>景点图片至少需要五张</div>");
+	       		result = false;
+	       	}
+	    });
+	   	if(result==false){
+	   		$("#tips").attr("class","alert alert-error");
+	   	}
+	   	return result;
+    }
 </script>
 
 <div class="container-fluid">
   <!-- 左侧导航栏 -->
   <div class="row-fluid">
     <div class="span2">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#">Edit</a></li>
-        <li><a href="#">View</a></li>
-			</ul>
+      <ul class="nav nav-pills nav-stacked" id="scenic-menus">
+      	<li><a href="@{Admins.newScenic()}">添加新景点</a></li>
+        <li class="active"><a href="@{Admins.editScenic()}">完善景点基本信息</a></li>
+      </ul>
     </div>
     <!-- 右侧内容栏 -->
     <div class="span10">
       <div class="well">
+      	#{include 'Application/error.html'/}
+      	<div id="tips"></div>
         <div class="container-fluid">
-				  <div class="row-fluid">
-				    <!-- 左侧已编辑景点 -->
-				    <div class="span2">
-				      <div>未编辑条目总数：${count}</div>
-				      <div>您已编辑的条目</div>
-				    </div>
-				    <!-- form -->
-				    <div class="span8">
-				      <form id="scenicForm" action="@{Admins.saveScenic()}" method="post" enctype="multipart/form-data" onsubmit="return scenicSave()">
-								<input name="scenic.id" value="${scenic.id}" type="hidden"/>
-								<div id="scenic-form">
-								  <table class="table">
-								    <tr><td>景点全称</td><td>${scenic.name}</td></tr>
-								    <tr><td>行政区域</td><td></td></tr>
-								    <tr><td>景点简介</td><td><textarea class="required" name="scenic.description" cols="40" rows="5"></textarea></td></tr>
-								    <tr><td>详细地址</td><td><input class="required" name="scenic.address" type="text" size="60"/></td></tr>
-								    <tr><td>景区电话</td><td><input class="required" name="scenic.tel" type="text" size="60"/></td></tr>
-								    <tr><td>景点评级</td><td>
-								      <select class="required" name="scenic.level">
-								        <option></option>
-								        <option>A</option>
-								        <option>AA</option>
-								        <option>AAA</option>
-								        <option>AAAA</option>
-								        <option>AAAAA</option>
-								      </select>
-								    </td></tr>
-								    <tr><td>景点坐标</td><td><input class="required" type="text" name="scenic.location" size="60"/></td></tr>
-								    <tr><td>景点门票</td><td><input class="required" type="text" name="scenic.ticketPrice" size="60"/></td></tr>
-								    <tr><td>景点规模(亩/平方米)</td><td><input class="required" type="text" name="scenic.scale" size="60"/></td></tr>
-								    <tr><td>景点内部线路图</td><td><input class="required" type="file" name="roadmapImage"/></td></tr>
-								    <tr><td>景点外部交通</td><td><input class="required" type="text" name="scenic.outterTraffic" size="60"/></td></tr>
-								    <tr><td>景点内部交通</td><td><input class="required" type="text" name="scenic.innerTraffic" size="60"/></td></tr>
-								    <tr><td>内部游玩路线</td><td>
-								      <div><textarea class="required" id="innerRoadmaps1" name="innerRoadmaps" cols="40" rows="5"></textarea></div>
-								      <div><textarea class="required" id="innerRoadmaps2" name="innerRoadmaps" cols="40" rows="5"></textarea></div>
-								    </td></tr>
-								    <tr><td>景点图片</td><td>
-								      <div><input class="required" type="file" id="images1" name="images"/></div>
-								      <div><input class="required" type="file" id="images2" name="images"/></div>
-								      <div><input class="required" type="file" id="images3" name="images"/></div>
-								      <div><input class="required" type="file" id="images4" name="images"/></div>
-								      <div><input class="required" type="file" id="images5" name="images"/></div>
-								    </td></tr>
-								  </table>
-								</div>
-								</form>
-				    </div>
-				    <!-- 提交按钮 -->
-				    <div class="span2">
-				      <div id="scenic-list">
-                 <div><a class="btn" href="#" onclick="$('#scenicForm').submit()">保存 & 下一个</a></div>
-                 <div><a class="btn" href="@{Admins.editScenic(scenic.id,true)}">放弃 & 下一个</a></div>
+                  <div class="row-fluid">
+                    <!-- 左侧已编辑景点 -->
+                    <div class="span2">
+                      <div>未编辑条目总数：${count}</div>
+                      <div class="well">
+                      	<div>已编辑景点:</div>
+	                      <ul>
+	                      	#{list scenics,as : 's'}
+	                      		<li><a href="@{Admins.editScenic(s.id,false)}">${s.name}</a></li>
+	                      	#{/list}
+	                      </ul>
+                      </div>
+                    </div>
+                    <!-- form -->
+                    <div class="span8">
+                      <form id="scenicForm" action="@{Admins.saveScenic()}" method="post" enctype="multipart/form-data" onsubmit="return scenicSave()">
+                                <input name="scenic.id" value="${scenic?.id}" type="hidden"/>
+                                <div id="scenic-form">
+                                  <table class="table-condensed">
+                                    <tr><td>景点全称</td><td>${scenic?.name}</td></tr>
+                                    <tr><td>行政区域</td><td>
+						              <select id="province" name="province" class="span2">
+						                <option value="">所在省/直辖市</option>
+						              </select>
+						              <select id="city" name="city" class="span2">
+						                <option value="">所在城市</option>
+						              </select>
+						              <select id="region" name="scenic.region.id" class="span2">
+						                <option value="">所在区</option>
+						              </select>
+                                    </td></tr>
+                                    <tr><td>景点简介</td><td><textarea class="required input-xlarge" name="scenic.description" rows="5">${scenic?.description }</textarea></td></tr>
+                                    <tr><td>详细地址</td><td><input class="required input-xlarge" name="scenic.address" type="text" value="${scenic?.address }"/></td></tr>
+                                    <tr><td>景区电话</td><td><input class="required input-xlarge" name="scenic.tel" type="text" value="${scenic?.tel }"/></td></tr>
+                                    <tr><td>景点评级</td><td>
+                                      <select class="required span2" name="scenic.level" id="scenicLevel">
+                                        <option></option>
+                                        <option value="A">A</option>
+                                        <option value="AA">AA</option>
+                                        <option value="AAA">AAA</option>
+                                        <option value="AAAA">AAAA</option>
+                                        <option value="AAAAA">AAAAA</option>
+                                      </select>
+                                    </td></tr>
+                                    <tr><td>景点坐标</td><td><input class="required input-xlarge" type="text" name="scenic.location" value="${scenic?.location}"/></td></tr>
+                                    <tr><td>景点门票</td><td><input class="required number input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
+                                    <tr><td>景点规模(亩/平方米)</td><td><input class="required number input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
+                                    <tr><td>景点内部线路图</td><td>
+                                    	#{if scenic?.roadmapImage!=null }
+                                    	<span><img width="60" height="60" src="/data/scenic/roadmaps/${scenic?.roadmapImage}"/></span>
+                                    	#{/if}
+                                    	<input class="input-xlarge" type="file" name="roadmapImage" id="roadmapImage"/>
+                                    </td></tr>
+                                    <tr><td>景点外部交通</td><td><input class="required input-xlarge" type="text" name="scenic.outterTraffic" value="${scenic?.outterTraffic}"/></td></tr>
+                                    <tr><td>景点内部交通</td><td><input class="required input-xlarge" type="text" name="scenic.innerTraffic" value="${scenic?.innerTraffic}"/></td></tr>
+                                    <tr><td>内部游玩路线</td><td>
+									<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[0]?.content}</textarea></div>
+									<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[1]?.content}</textarea></div>
+                                    </td></tr>
+                                    <tr><td>景点图片</td><td>
+                                    #{if scenic?.images[4]!= null}
+                                    	<div>
+                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[0]?.imageName}">
+                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[1]?.imageName}">
+                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[2]?.imageName}">
+                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[3]?.imageName}">
+                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[4]?.imageName}">
+                                    	</div>
+                                    #{/if}
+                                      <div><input type="file" name="images"/></div>
+                                      <div><input type="file" name="images"/></div>
+                                      <div><input type="file"  name="images"/></div>
+                                      <div><input type="file" name="images"/></div>
+                                      <div><input type="file" name="images"/></div>
+                                    </td></tr>
+                                  </table>
+                                </div>
+                                </form>
+                    </div>
+                    <!-- 提交按钮 -->
+                    <div class="span2">
+                      <div id="scenic-list">
+                 <div><a class="btn" href="#" onclick="$('#scenicForm').submit()">保存数据</a></div>
+                 <div></div>
+                 <div><a class="btn" href="@{Admins.editScenic(scenic?.id,true)}">换下一个</a></div>
                </div>
-				    </div>
-				  </div>
-				 </div>
+              </div>
+            </div>
+           </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-#{include 'Application/error.html'/}
-

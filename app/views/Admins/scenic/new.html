@@ -1,0 +1,78 @@
+#{extends 'Admins/main.html' /}
+#{set title:'添加景点' /}
+<script type="text/javascript">
+    $(document).ready(function(){
+       //初始化省市联动
+       locationSelection("province","city","region");
+    });
+    function saveNew(){
+    	var result = true;
+    	if($("#name").val()==''){
+    		$("#tips").attr("class","alert alert-error");
+    		$("#tips").html("<div>输入景点名称</div>");
+    		result = false;
+    	}
+    	if($("#region").val()==''){
+    		$("#tips").attr("class","alert alert-error");
+    		$("#tips").html($("#tips").html() + "<div>请选择景点位置</div>");
+    		result = false;
+    	}
+    	return result;
+    }
+</script>
+
+<div class="container-fluid">
+  <!-- 左侧导航栏 -->
+  <div class="row-fluid">
+    <div class="span2">
+      <ul class="nav nav-pills nav-stacked" id="scenic-menus">
+      	<li class="active"><a href="@{Admins.newScenic()}">添加新景点</a></li>
+        <li><a href="@{Admins.editScenic()}">完善景点基本信息</a></li>
+      </ul>
+    </div>
+    <!-- 右侧内容栏 -->
+    <div class="span10">
+      <div class="well">
+      	#{if status==-1}
+      		<div class="alert alert-info">没有景点需要补充数据，你可以创建新景点</div>
+      	#{/if}
+      	#{elseif status==1}
+      		<div class="alert alert-info">保存成功，可以继续添加</div>
+      	#{/elseif}
+      	#{else}
+      	#{/else}
+      	<div id="tips" class="tips"></div>
+      	<form id="newScenicForm" class="form-horizontal" action="@{Admins.saveNewScenic()}" onsubmit="return saveNew()">
+	      	<div class="control-group">
+	            <label class="control-label" for="name">景点全称:</label>
+	            <div class="controls">
+	              <input class="input-xlarge focused" placeholder="请确保是官方发布的全称" id="name" name="name" type="text">
+	            </div>
+	        </div>
+	      	<div class="control-group">
+	            <label class="control-label">景点位置:</label>
+	            <div class="controls">
+	              <select id="province" name="province">
+	                <option value="">所在省/直辖市</option>
+	              </select>
+	              <select id="city" name="city">
+	                <option value="">所在城市</option>
+	              </select>
+	              <select id="region" name="region.id">
+	                <option value="">所在区</option>
+	              </select>
+	            </div>
+	        </div>
+			<p align="center">
+		    	<button class="btn btn-primary btn-large" type="submit">添加景点</button>
+			</p>
+		</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+#{include 'Application/error.html'/}
+

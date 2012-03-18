@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import models.comments.ScenicComment;
 import models.images.ScenicImage;
 import models.roadmaps.ScenicInnerRoadmap;
+import models.utils.area.Region;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -29,6 +30,9 @@ public class Scenic extends Model {
   // 详细地址
   @Required(message = "请输入景点地址")
   public String address;
+  @Required(message = "请选择景点所在县区")
+  @ManyToOne
+  public Region region;
   // 联系电话
   public String tel;
   // 景点介绍

@@ -1,20 +1,50 @@
-/**
- * #0078BB	导航栏背景
- * #2778BB	content边框
- * #E1E1E1	灰色边框
- * #EDEDED	大背景灰色
- */
 body {
-	font-size: 12px;
-	font-family: arial,SimSun,Verdana,Geneva,Helvetica;
-	color: #131313;
-	line-height: 20px;
-	margin: 0;
-	/*background-color: #EDEDED;*/
+	font: 12px 'Microsoft Yahei',微软雅黑,宋体,Tahoma,Helvetica,Arial,sans-serif;
 }
-h1,h2,h3,p {
-	margin: 0;
+#header {
+	height: 55px;
+	background-color: #F0F0F0;
+	border-bottom: 1px #DDD solid;
+	-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.15);
 }
+.width960{
+	width: 960px;
+	margin: auto;
+}
+[class*="span"] {
+	margin-left: 0px;
+}
+#nav-ul {
+	list-style: none;
+	font-weight: 400;
+	font-style: normal;
+}
+#nav-ul li {
+	vertical-align: middle;
+	float: left;
+	position: relative;
+	z-index: 101;
+}
+#nav-ul li:HOVER {
+	background-color: #E6E6E6;
+}
+#nav-ul li a {
+	font-size: 16px;
+	display: block;
+	height: 55px;
+	line-height: 55px;
+	color: #666;
+	text-decoration: none;
+	padding: 0 15px;
+}
+
+
+
+
+
+
+
+
 em {
 	font-style: normal;
 }
@@ -56,29 +86,6 @@ a,a:ACTIVE {
 }
 a:HOVER {
 	text-decoration: underline;
-}
-.header-top {
-	width: 960px;
-	height: 30px;
-	margin: 0 auto;
-	padding-top: 12px;
-}
-.header-top .logo {
-	width: 218px;
-	height: 39px;
-	float: left;
-	margin-top: 2px;
-}
-.header-top .tools {
-	margin-top: -4px;
-	float: right;
-}
-.header-top .tools .tel{
-	padding-left: 18px;
-	float: right;
-	font-weight: bold;
-	background: url("/public/images/tel.jpg") no-repeat;
-	line-height: 14px;
 }
 .nav-box {
 	background-color: #0078BB;
@@ -148,23 +155,6 @@ a:HOVER {
 	display: block;
 	text-align: left;
 	color: #666;
-}
-.souyou-left {
-	float: left;
-	width: 720px;
-	height: 300px;
-	margin-left: 40px;
-	margin-top: 40px;
-}
-.souyou-left-option {
-	margin: 10px 10px;
-	font-size: 13px;
-	font-weight: bold;
-}
-.souyou-right {
-	float: right;
-	width: 150px;
-	margin-top: 150px;
 }
 #souyou-box {
 	margin-top: 20px;

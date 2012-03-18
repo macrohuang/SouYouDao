@@ -1,13 +1,14 @@
 <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Project name</a>
+      <a class="brand" href="#">搜游岛后台管理</a>
       <ul class="nav">
-			  <li class="active">
-			    <a href="@{Admins.index()}">Index</a>
-			  </li>
-			  <li><a href="@{Admins.editScenic()}">Scenic</a></li>
-			</ul>
+		  <li><a href="@{Admins.index()}">控制面板</a></li>
+		  <li><a href="@{Admins.editScenic()}">景点管理</a></li>
+	  </ul>
+	  <ul class="nav pull-right">
+         <li><a href="@{Admins.logout()}">退出登录</a></li>
+       </ul>
     </div>
   </div>
 </div>
