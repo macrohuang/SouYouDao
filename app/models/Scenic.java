@@ -44,21 +44,18 @@ public class Scenic extends Model {
   // 景点坐标，如 123,123(以英文逗号分割)
   @Required(message = "请输入景点坐标,如：47.123,-47.123")
   public String location;
-  // 景点门票（RMB/人）
+  // 景点门票（RMB/人)
   public int ticketPrice;
   // 景点规模（亩）
-  @Required(message = "请输入景点规模(亩或平方米)")
-  public int scale;
+  public String scale;
   // 景点内部游览图
   public String roadmapImage;
   // 内部游览路线推荐
   @OneToMany(mappedBy = "scenic")
   public List<ScenicInnerRoadmap> innerRoadmaps;
   // 周边交通
-  @Required(message = "请输入景点周边交通描述")
   public String outterTraffic;
   // 景区内交通
-  @Required(message = "请输入景点内部交通描述")
   public String innerTraffic;
   // 是否通过管理员审核
   public boolean authorized = false;

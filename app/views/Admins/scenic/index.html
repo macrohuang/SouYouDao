@@ -21,10 +21,6 @@
     		$("#tips").html($("#tips").html() + "<div>请选择景点行政区域</div>");
     		result = false;
     	}
-    	if($("#roadmapImage").val()=='' && "${scenic?.roadmapImage}"==null){
-    		$("#tips").html($("#tips").html() + "<div>需要上传至少一张景点内部路线图</div>");
-    		result = false;
-    	}
 	   	$("textarea[name='innerRoadmaps']").each(function(){
 	       	if($(this).val().length == 0){
 	       		$("#tips").html($("#tips").html() + "<div>内部游览路线需要填写两条</div>");
@@ -92,7 +88,7 @@
                                     </td></tr>
                                     <tr><td>景点简介</td><td><textarea class="required input-xlarge" name="scenic.description" rows="5">${scenic?.description }</textarea></td></tr>
                                     <tr><td>详细地址</td><td><input class="required input-xlarge" name="scenic.address" type="text" value="${scenic?.address }"/></td></tr>
-                                    <tr><td>景区电话</td><td><input class="required input-xlarge" name="scenic.tel" type="text" value="${scenic?.tel }"/></td></tr>
+                                    <tr><td>景区电话</td><td><input class="input-xlarge" name="scenic.tel" type="text" value="${scenic?.tel }"/></td></tr>
                                     <tr><td>景点评级</td><td>
                                       <select class="required span2" name="scenic.level" id="scenicLevel">
                                         <option></option>
@@ -105,18 +101,18 @@
                                     </td></tr>
                                     <tr><td>景点坐标</td><td><input class="required input-xlarge" type="text" name="scenic.location" value="${scenic?.location}"/></td></tr>
                                     <tr><td>景点门票</td><td><input class="required number input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
-                                    <tr><td>景点规模(亩/平方米)</td><td><input class="required number input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
+                                    <tr><td>景点规模(亩/平方米)</td><td><input class="number input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
                                     <tr><td>景点内部线路图</td><td>
                                     	#{if scenic?.roadmapImage!=null }
                                     	<span><img width="60" height="60" src="/data/scenic/roadmaps/${scenic?.roadmapImage}"/></span>
                                     	#{/if}
                                     	<input class="input-xlarge" type="file" name="roadmapImage" id="roadmapImage"/>
                                     </td></tr>
-                                    <tr><td>景点外部交通</td><td><input class="required input-xlarge" type="text" name="scenic.outterTraffic" value="${scenic?.outterTraffic}"/></td></tr>
-                                    <tr><td>景点内部交通</td><td><input class="required input-xlarge" type="text" name="scenic.innerTraffic" value="${scenic?.innerTraffic}"/></td></tr>
+                                    <tr><td>景点外部交通</td><td><input class="input-xlarge" type="text" name="scenic.outterTraffic" value="${scenic?.outterTraffic}"/></td></tr>
+                                    <tr><td>景点内部交通</td><td><input class="input-xlarge" type="text" name="scenic.innerTraffic" value="${scenic?.innerTraffic}"/></td></tr>
                                     <tr><td>内部游玩路线</td><td>
-									<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[0]?.content}</textarea></div>
-									<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[1]?.content}</textarea></div>
+																			<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[0]?.content}</textarea></div>
+																			<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[1]?.content}</textarea></div>
                                     </td></tr>
                                     <tr><td>景点图片</td><td>
                                     #{if scenic?.images[4]!= null}
