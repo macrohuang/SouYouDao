@@ -16,7 +16,7 @@ for l in scenics:
     cursor.execute("select count(*) from T_SCENIC where name = %s",arr[0])
     exists = cursor.fetchone()[0]
     if exists == 0:
-      cursor.execute("insert into T_SCENIC(name,level,authorized) values(%s,%s,False)",[arr[0],arr[1]])
+      cursor.execute("insert into T_SCENIC(name,level,authorized) values(%s,%s,False)",[arr[0].strip(),arr[1].strip()])
 
 conn.commit()
 cursor.close()

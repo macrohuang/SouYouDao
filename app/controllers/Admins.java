@@ -93,7 +93,7 @@ public class Admins extends Application {
     for (String i : innerRoadmaps) {
       new ScenicInnerRoadmap(i, scenic).save();
     }
-    // scenic.authorized = true;
+    scenic.authorized = true;
     scenic.authorizeDate = new Date();
     scenic.authorizer = Admin.findById(Long.parseLong(session.get(Constants.ADMIN_ID_IN_SESSION)));
     scenic.save();

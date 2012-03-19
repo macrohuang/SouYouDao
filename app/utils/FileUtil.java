@@ -33,7 +33,7 @@ public class FileUtil extends FileUtils {
 
   /**
    * 获得系统路径
-   * @param dirs
+   * @param dirs "data","scenic","images"
    * @return "/User/root/test/"
    */
   public static String getApplicationPath(String... dirs) {
