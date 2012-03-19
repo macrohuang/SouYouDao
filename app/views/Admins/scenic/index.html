@@ -93,9 +93,8 @@
                                         <option value="AAAAA">AAAAA</option>
                                       </select>
                                     </td></tr>
-                                    <tr><td>景点门票</td><td><input class="input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
-                                    <tr><td>景点规模(亩/平方米)</td><td><input class="input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
-=======
+                                    <tr><td>景点门票</td><td><input placeholder="门票类型、价格介绍" class="input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
+                                    <tr><td>景点规模</td><td><input placeholder="亩或平方米，直接输入字符串即可" class="input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
                                     <tr><td>景点坐标</td><td>
                                     	<input class="required input-xlarge" type="text" name="scenic.location" value="${scenic?.location}" placeholder="格式:  123.11111,-123.1233"/>
                                     	<a href="http://dev.baidu.com/wiki/static/map/API/tool/getPoint/" target="_blank">坐标拾取工具</a>
@@ -107,26 +106,18 @@
 																			<div><textarea class="required input-xlarge" name="innerRoadmaps" rows="2">${scenic?.innerRoadmaps[1]?.content}</textarea></div>
                                     </td></tr>
                                     <tr><td>景点图片</td><td>
-                                    #{if scenic?.images[4]!= null}
                                     	<div>
-                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[0]?.imageName}">
-                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[1]?.imageName}">
-                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[2]?.imageName}">
-                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[3]?.imageName}">
-                                    		<img width="60" height="60" src="/data/scenic/images/${scenic.images[4]?.imageName}">
+                                    	#{list scenic?.images,as:'i'}
+                                    		<img width="60" height="60" src="/data/scenic/images/${i.imageName}"/>
+                                    	#{/list}
                                     	</div>
-                                    #{/if}
-                                      <div><input type="file" name="images"/></div>
-                                      <div><input type="file" name="images"/></div>
-                                      <div><input type="file" name="images"/></div>
-                                      <div><input type="file" name="images"/></div>
-                                      <div><input type="file" name="images"/></div>
+                                    <div><textarea class="input-xlarge" name="images" placeholder="每张图片URL单独记录一行，请确保URL末尾为*.JPG/*.PNG等图片格式" rows="5"></textarea></div>
                                     </td></tr>
                                     <tr><td>景点内部线路图</td><td>
                                     	#{if scenic?.roadmapImage!=null }
-                                    	<span><img width="60" height="60" src="/data/scenic/roadmaps/${scenic?.roadmapImage}"/></span>
+                                    	<div><span><img width="60" height="60" src="/data/scenic/roadmaps/${scenic?.roadmapImage}"/></span></div>
                                     	#{/if}
-                                    	<input class="input-xlarge" type="file" name="roadmapImage" id="roadmapImage"/>
+                                    	<div><input class="input-xlarge" placeholder="请填入目标图片的url" type="text" name="roadmapImage" id="roadmapImage"/></div>
                                     </td></tr>
                                   </table>
                                 </div>

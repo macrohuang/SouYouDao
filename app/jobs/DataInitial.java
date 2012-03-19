@@ -1,5 +1,10 @@
 package jobs;
 
+import models.Admin;
+import models.utils.area.City;
+import models.utils.area.Province;
+import models.utils.area.Region;
+import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 
@@ -12,6 +17,23 @@ public class DataInitial extends Job {
 
   @Override
   public void doJob() throws Exception {
+    if (Play.configuration.get("db").equals("mem")) {
+      Admin admin = new Admin("admin", "admin");
+      admin.save();
 
+      Province p = new Province();
+      p.name = "火星";
+      p.save();
+
+      City c = new City();
+      c.name = "大海";
+      c.province = p;
+      c.save();
+
+      Region r = new Region();
+      r.name = "巧克力";
+      r.city = c;
+      r.save();
+    }
   }
 }

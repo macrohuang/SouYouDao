@@ -7,9 +7,28 @@ import org.apache.commons.io.FileUtils;
 import play.Play;
 
 public class FileUtil extends FileUtils {
+  /**
+   * @param file
+   * @return "jpg/png/NULL"
+   */
   public static String getExtension(File file) {
     if (file == null) return null;
     return file.getName().replaceAll(".+\\.", "").toLowerCase();
+  }
+
+  /**
+   * @param fullName
+   * @return "jpg/png/NULL"
+   */
+  public static String getExtension(String fullName) {
+    String extension = null;
+    if (fullName != null && fullName.length() > 0) {
+      int dotIndex = fullName.lastIndexOf(".");
+      if (dotIndex > 0) {
+        extension = fullName.substring(dotIndex + 1);
+      }
+    }
+    return extension;
   }
 
   /**
