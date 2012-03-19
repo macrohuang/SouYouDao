@@ -37,6 +37,7 @@ public class Scenic extends Model {
   public String tel;
   // 景点介绍
   @Required(message = "请输入景点描述")
+  @Column(length = 2000)
   public String description;
   // 评级
   @Required(message = "请选择景点评级")
@@ -44,9 +45,9 @@ public class Scenic extends Model {
   // 景区坐标，如 123,123(以英文逗号分割)
   @Required(message = "请输入景点坐标,如：47.123,-47.123")
   public String location;
-  // 景区门票（RMB/人)
+  // 景点门票（RMB/人)
   public String ticketPrice;
-  // 景区规模（亩）
+  // 景点规模（亩）
   public String scale;
   // 景点内部游览图
   public String roadmapImage;
