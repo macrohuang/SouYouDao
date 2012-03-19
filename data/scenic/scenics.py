@@ -8,7 +8,7 @@ conn = MySQLdb.connect(host='localhost', user='root',passwd=passwd,db='syd')
 cursor = conn.cursor()
 cursor.execute("SET NAMES 'utf8'")
 
-f = open('scenic4a.data')
+f = open('scenic.data')
 scenics = f.xreadlines()
 
 for l in scenics:
