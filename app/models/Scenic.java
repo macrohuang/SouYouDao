@@ -42,8 +42,7 @@ public class Scenic extends Model {
   // 评级
   @Required(message = "请选择景点评级")
   public String level;
-  // 景区坐标，如 123,123(以英文逗号分割)
-  @Required(message = "请输入景点坐标,如：47.123,-47.123")
+  // 景区地图位置
   public String location;
   // 景点门票（RMB/人)
   public String ticketPrice;
