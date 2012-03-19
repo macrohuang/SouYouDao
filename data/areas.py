@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 #coding utf-8
 import MySQLdb
-conn = MySQLdb.connect(host='localhost', user='root',passwd='56906950',db='syd')
+import sys
+
+passwd = sys.argv[1]
+conn = MySQLdb.connect(host='localhost', user='root',passwd=passwd,db='syd')
 
 cursor = conn.cursor()
 cursor.execute("SET NAMES 'utf8'")

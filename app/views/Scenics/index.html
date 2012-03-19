@@ -7,54 +7,9 @@
      #{script 'scenic.js'/}
 #{/set}
 
-<div id="scenic-box">
-	<div id="scenic-left">
-		<div id="scenic-search">
-			<h2>搜索景点</h2>
-			<div id="scenic-target">
-				目的地:<input type="text" class="input-field" id="target-field"/>
-			</div>
-			<div id="search-btn-box">
-				<form action="@{Scenics.detail()}" method="post">
-					<input id="search-btn" class="search-btn" value="搜索" type="submit"/>
-				</form>
-			</div>
-		</div>
-		<div id="scenic-nav">
-			<div class="scenic-type">
-				<h3>热门景点<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-			<div class="scenic-type">
-				<h3>清幽古镇<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-			<div class="scenic-type">
-				<h3>沙滩海景<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-			<div class="scenic-type">
-				<h3>田园山水<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-			<div class="scenic-type">
-				<h3>历史古迹<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-			<div class="scenic-type">
-				<h3>奇幻冒险<em>&gt;</em></h3>
-				<p>XXXX - XXXXXXXX</p>
-			</div>
-		</div>
-	</div>
-	<div id="scenic-right">
-		<div id="slider">
-			<img alt="" src="/data/silder-test.jpg"/>
-		</div>
-		<h3>现在最适合去哪度假?</h3>
-		<div id="recommand">
-			<img alt="" src="/data/tuijian.png"/>
-		</div>
-	</div>
+<div id="search-btn-box">
+	<form action="@{Scenics.detail()}" method="get">
+		<input type="text" name="scenicName" class=""/>
+		<input value="搜索" type="submit"/>
+	</form>
 </div>
-<div class="clearfix"></div>
