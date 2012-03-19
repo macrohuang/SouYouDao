@@ -100,8 +100,8 @@
                                       </select>
                                     </td></tr>
                                     <tr><td>景点坐标</td><td><input class="required input-xlarge" type="text" name="scenic.location" value="${scenic?.location}"/></td></tr>
-                                    <tr><td>景点门票</td><td><input class="required number input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
-                                    <tr><td>景点规模(亩/平方米)</td><td><input class="number input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
+                                    <tr><td>景点门票</td><td><input class="required input-xlarge" type="text" name="scenic.ticketPrice" value="${scenic?.ticketPrice}"/></td></tr>
+                                    <tr><td>景点规模(亩/平方米)</td><td><input class="input-xlarge" type="text" name="scenic.scale" value="${scenic?.scale}"/></td></tr>
                                     <tr><td>景点内部线路图</td><td>
                                     	#{if scenic?.roadmapImage!=null }
                                     	<span><img width="60" height="60" src="/data/scenic/roadmaps/${scenic?.roadmapImage}"/></span>
@@ -126,7 +126,7 @@
                                     #{/if}
                                       <div><input type="file" name="images"/></div>
                                       <div><input type="file" name="images"/></div>
-                                      <div><input type="file"  name="images"/></div>
+                                      <div><input type="file" name="images"/></div>
                                       <div><input type="file" name="images"/></div>
                                       <div><input type="file" name="images"/></div>
                                     </td></tr>
