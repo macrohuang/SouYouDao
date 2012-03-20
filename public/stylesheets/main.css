@@ -11,6 +11,10 @@ body {
 	width: 960px;
 	margin: auto;
 }
+.width1000{
+  width: 1000px;
+  margin: auto;
+}
 [class*="span"] {
 	margin-left: 0px;
 }

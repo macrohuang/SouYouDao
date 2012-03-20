@@ -17,18 +17,24 @@ public class Scenics extends Controller {
     render();
   }
 
+  public static void list() {
+    render();
+  }
+
   /**
    * 删除景区内的图片一张
    * @param imageId
    */
   public static void deleteImage(Long imageId) {
     ScenicImage image = ScenicImage.findById(imageId);
-    new File(FileUtil.getApplicationPath("data","scenic","images") + image.imageName).delete();
+    new File(FileUtil.getApplicationPath("data", "scenic", "images") + image.imageName).delete();
     image.delete();
   }
-  public static void deleteRoadmap(Long scenicId){
+
+  public static void deleteRoadmap(Long scenicId) {
     Scenic scenic = Scenic.findById(scenicId);
-    new File(FileUtil.getApplicationPath("data","scenic","roadmaps") + scenic.roadmapImage).delete();
+    new File(FileUtil.getApplicationPath("data", "scenic", "roadmaps") + scenic.roadmapImage)
+        .delete();
     scenic.roadmapImage = null;
     scenic.save();
   }

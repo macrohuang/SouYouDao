@@ -49,3 +49,21 @@
     color: gray;
     border-bottom: 1px solid #F3F3F3;
 }
+#recommend-scenic-line {
+	border-bottom: #F3F3F3 3px solid;
+	line-height: 20px;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+#scenic-thumb-recommend {
+	margin-left: -10px;
+}
+#scenic-thumb-recommend li{
+	margin-left: 10px;
+}
+#scenic-search {
+	margin-top: 5px;
+}
+#tags-box button {
+	margin-bottom: 5px;
+}
