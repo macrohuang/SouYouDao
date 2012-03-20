@@ -22,12 +22,7 @@
 }
 #overview-left {
 	float: left;
-}
-#overview-right {
-	float: right;
-	border: #E1E1E1 1px solid;
-	width: 250px;
-	height: 240px;
+	height: 200px;
 }
 #scenic-detail {
 	border-top: #2778BB 1px solid;
@@ -62,8 +57,9 @@
 	margin-left: 10px;
 }
 #scenic-search {
-	margin-top: 5px;
+	margin-top: 10px;
 }
 #tags-box button {
-	margin-bottom: 5px;
+	margin: 5px;
+	float: left;
 }

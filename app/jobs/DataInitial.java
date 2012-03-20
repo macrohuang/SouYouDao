@@ -1,6 +1,7 @@
 package jobs;
 
 import models.Admin;
+import models.Scenic;
 import models.utils.area.City;
 import models.utils.area.Province;
 import models.utils.area.Region;
@@ -18,6 +19,9 @@ public class DataInitial extends Job {
   @Override
   public void doJob() throws Exception {
     if (Play.configuration.get("db").equals("mem")) {
+      Admin.deleteAll();
+      Scenic.deleteAll();
+
       Admin admin = new Admin("admin", "admin");
       admin.save();
 
@@ -34,6 +38,11 @@ public class DataInitial extends Job {
       r.name = "巧克力";
       r.city = c;
       r.save();
+
+      Scenic scenic = new Scenic();
+      scenic.name = "你好乌鲁木齐";
+      scenic.description = "dddddddddddddddd";
+      scenic.save();
     }
   }
 }

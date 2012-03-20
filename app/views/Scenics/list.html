@@ -10,8 +10,8 @@
   <div class="row-fluid">
     <div class="span3" align="center">
       <div id="search-scenic-box">
-			  <form action="@{Scenics.list()}" method="get">
-			    <div><input type="text" name="keywords" class="input-medium search-query"/></div>
+			  <form action="@{Scenics.search()}" method="get">
+			    <div><input type="text" value="${keywords}" name="keywords" class="input-medium search-query"/></div>
 			    <div>
 				    <button type="submit" class="btn btn-primary" id="scenic-search">
 		          <i class="icon-search icon-white"></i>
@@ -34,34 +34,15 @@
 	    </div>
 	    <!-- 推荐景区列表 -->
 	    <ul class="thumbnails" id="scenic-thumb-recommend">
+	      #{list scenics,as: 's'}
 			  <li class="span2">
 			    <div class="thumbnail">
-			      <img src="/data/160120.png" alt="">
-			      <h5>Thumbnail label</h5>
-			      <p>Thumbnail caption right here...</p>
+			      <a href="@{Scenics.detail(s.id)}" target="_blank"><img src="/data/160120.png" alt="${s.name}"/></a>
+			      <h5>${s.name}</h5>
+			      <p>${s.description}</p>
 			    </div>
 			  </li>
-			  <li class="span2">
-          <div class="thumbnail">
-            <img src="/data/160120.png" alt="">
-            <h5>Thumbnail label</h5>
-            <p>Thumbnail caption right here...</p>
-          </div>
-        </li>
-        <li class="span2">
-          <div class="thumbnail">
-            <img src="/data/160120.png" alt="">
-            <h5>Thumbnail label</h5>
-            <p>Thumbnail caption right here...</p>
-          </div>
-        </li>
-        <li class="span2">
-          <div class="thumbnail">
-            <img src="/data/160120.png" alt="">
-            <h5>Thumbnail label</h5>
-            <p>Thumbnail caption right here...</p>
-          </div>
-        </li>
+			  #{/list}
 			</ul>
     </div>
   </div>
