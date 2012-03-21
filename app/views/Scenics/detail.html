@@ -9,29 +9,32 @@
 
 <div id="location">
 	<div id="scenic-name">
-		<span>重渡沟</span>
+		<span>${scenic?.name}</span>
 		<span id="scenic-level">AAAA</span>
 	</div>
 	<div id="scenic-address">地址：河南省 栾川县 潭头镇西南部</div>
 </div>
 <div id="scenic-overview">
 	<div id="overview-left">
-		<img alt="" src="/data/scenic-pic.png"/>
-	</div>
-	<div id="overview-right">
-		<div>到到网评分：4.5</div>
-		<div>门票价格: 80/人</div>
-		<div>联系电话：000-0000000</div>
+		<ul class="thumbnails">
+		  <li class="span3">
+		    <a href="#" class="thumbnail">
+		      <img src="/data/360268.png" alt="">
+		    </a>
+		  </li>
+		  
+		  <li class="span1">
+        <a href="#" class="thumbnail">
+          <img src="/data/360268.png" alt="">
+        </a>
+      </li>
+      
+		</ul>
 	</div>
 </div>
 <div class="clearfix"></div>
 <div id="scenic-detail">
 	<div id="detail-left">
-      <div class="side-box">
-        <div class="side-top">地图</div>
-        <div class="side-middle"><img src="/data/side-map.png"/></div>
-        <div class="side-bottom"></div>
-      </div>
       <div class="side-box">
         <div class="side-top">类似景点推荐</div>
         <div class="side-middle">
@@ -48,11 +51,12 @@
            <div class="right-side-top">
                 <div class="tab-btn">景点介绍</div>
                 <div class="tab-btn">附近设施</div>
+                <div class="tab-btn">周边交通</div>
                 <div class="tab-btn">游客点评</div>
                 <div class="tab-btn">旅行社推荐</div>
            </div> 
            <div class="right-side-middle">
-                <div>景点介绍</div>
+                <div>${scenic?.description}</div>
            </div> 
            <div class="right-side-bottom"></div> 
         </div>

@@ -22,12 +22,7 @@
 }
 #overview-left {
 	float: left;
-}
-#overview-right {
-	float: right;
-	border: #E1E1E1 1px solid;
-	width: 250px;
-	height: 240px;
+	height: 200px;
 }
 #scenic-detail {
 	border-top: #2778BB 1px solid;
@@ -48,4 +43,23 @@
     margin-bottom: 10px;
     color: gray;
     border-bottom: 1px solid #F3F3F3;
+}
+#recommend-scenic-line {
+	border-bottom: #F3F3F3 3px solid;
+	line-height: 20px;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+#scenic-thumb-recommend {
+	margin-left: -10px;
+}
+#scenic-thumb-recommend li{
+	margin-left: 10px;
+}
+#scenic-search {
+	margin-top: 10px;
+}
+#tags-box button {
+	margin: 5px;
+	float: left;
 }

@@ -1,0 +1,50 @@
+#{extends 'main.html' /}
+#{set title:'景点' /}
+#{set 'moreStyles'}
+     #{stylesheet 'scenic.css'/}
+#{/set}
+#{set 'moreScripts'}
+     #{script 'scenic.js'/}
+#{/set}
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3" align="center">
+      <div id="search-scenic-box">
+			  <form action="@{Scenics.search()}" method="get">
+			    <div><input type="text" value="${keywords}" name="keywords" class="input-medium search-query"/></div>
+			    <div>
+				    <button type="submit" class="btn btn-primary" id="scenic-search">
+		          <i class="icon-search icon-white"></i>
+		          <span>景区搜索</span>
+	          </button></div>
+			  </form>
+			</div>
+			<div id="tags-box">
+			   <button class="btn" data-toggle="button">海滩</button>
+			   <button class="btn" data-toggle="button">历史</button>
+			   <button class="btn" data-toggle="button">山水冒险</button>
+			   <button class="btn" data-toggle="button">浪漫</button>
+			   <button class="btn" data-toggle="button">都市</button>
+			</div>
+    </div>
+    <div class="span9">
+			<!-- 推荐景区 -->
+			<div class="bottom-line-bold">
+	      <div>搜索结果</div>
+	    </div>
+	    <!-- 推荐景区列表 -->
+	    <ul class="thumbnails" id="scenic-thumb-recommend">
+	      #{list scenics,as: 's'}
+			  <li class="span2">
+			    <div class="thumbnail">
+			      <a href="@{Scenics.detail(s.id)}" target="_blank"><img src="/data/160120.png" alt="${s.name}"/></a>
+			      <h5>${s.name}</h5>
+			      <p>${s.description}</p>
+			    </div>
+			  </li>
+			  #{/list}
+			</ul>
+    </div>
+  </div>
+</div>
+
