@@ -59,7 +59,7 @@ class ScenicSpider(CrawlSpider):
         try:
           scenic = ScenicItem()
           scenic['name'] = h.select('//span[@class="STYLE39"]/text()').extract()[0]
-          #scenic['content'] = h.select('//span[@class="STYLE3"]').extract()[0]
+          scenic['content'] = h.select('//span[@class="STYLE3"]').extract()[0]
           if scenic not in items:
               items.append(scenic)
         except:
