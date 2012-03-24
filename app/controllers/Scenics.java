@@ -27,9 +27,9 @@ public class Scenics extends Controller {
     String[] words = QuerySpliter.splite(keywords);
     StringBuilder query = new StringBuilder();
     for (int i = 0; i < words.length; i++) {
-      query.append("name like '%" + words[i] + "%'");
+      query.append("(name like '%" + words[i] + "%' or description like '%" + words[i] + "%')");
       if (i < words.length - 1) {
-        query.append(" or ");
+        query.append(" and ");
       }
     }
     int totalPage = Integer.parseInt(Scenic.count(query + " order by name asc") + "");
