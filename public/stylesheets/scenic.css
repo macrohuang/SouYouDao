@@ -59,6 +59,7 @@
 #scenic-thumb-recommend li div{
     height: 220px;
     text-align:center;
+    overflow: hidden;
 }
 #scenic-thumb-recommend h5{
     white-space: nowrap;
