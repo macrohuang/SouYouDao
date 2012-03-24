@@ -37,8 +37,10 @@ public class Scenic extends Model {
   public String tel;
   // 景点介绍
   @Required(message = "请输入景点描述")
-  @Column(length = 2000)
+  @Column(length = 60000)
   public String description;
+  @Column(length = 100)
+  public String briefDesc;
   // 评级
   @Required(message = "请选择景点评级")
   public String level;
