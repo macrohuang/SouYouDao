@@ -56,6 +56,14 @@
 #scenic-thumb-recommend li{
 	margin-left: 10px;
 }
+#scenic-thumb-recommend li div{
+    height: 220px;
+    text-align:center;
+}
+#scenic-thumb-recommend h5{
+    white-space: nowrap;
+    overflow: hidden;
+}
 #scenic-search {
 	margin-top: 10px;
 }
