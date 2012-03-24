@@ -7,6 +7,7 @@ import models.Scenic;
 import models.images.ScenicImage;
 import play.Logger;
 import play.mvc.Controller;
+import utils.Constants;
 import utils.FileUtil;
 
 public class Scenics extends Controller {
@@ -23,7 +24,8 @@ public class Scenics extends Controller {
   public static void search(String keywords) {
     Logger.info("搜索景区：" + keywords);
     // String[] words = QuerySpliter.splite(keywords);
-    List<Scenic> scenics = Scenic.findAll();
+    List<Scenic> scenics =
+        Scenic.find("order by name asc").fetch(1, Constants.SCENIC_SEARCH_PAGE_SIZE);
     render("Scenics/list.html", scenics, keywords);
   }
 
