@@ -35,11 +35,15 @@ def search(name):
 if __name__=='__main__':
   import MySQLdb
   import sys
+  import re
   passwd = sys.argv[1]
   conn = MySQLdb.connect(host='localhost', user='root',passwd=passwd,db='syd')
   cursor = conn.cursor()
   cursor.execute("SET NAMES 'utf8'")
   cursor.execute("select id,name from T_SCENIC")
-  result = cursor.fetchone()
-  id = result[0]
-  name = result[1]
+  result = cursor.fetchall()
+  p = re.compile('\[[\s\S]+\]')
+  for r in result:
+    id = r[0]
+    name = p.sub('',r[1])
+    print name
