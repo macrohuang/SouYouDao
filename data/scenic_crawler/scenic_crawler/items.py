@@ -11,3 +11,7 @@ class ScenicItem(Item):
     content = Field()
     location = Field()
     pass
+class ImageItem(Item):
+  scenic_name = Field()
+  image_url = Field()
+  pass
