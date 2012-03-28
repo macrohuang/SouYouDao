@@ -78,10 +78,12 @@
 	margin-right: 30px;
 }
 .scenic-image-first {
-	min-height: 207px;
-	min-width: 270px;
+	height: 207px;
+	width: 268px;
+	overflow: hidden;
 }
 .scenic-image-thumb {
-	min-width: 70px;
-	min-width: 55px;
+	width: 70px;
+	height: 55px;
+	overflow: hidden;
 }
