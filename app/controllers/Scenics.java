@@ -20,7 +20,8 @@ public class Scenics extends Controller {
   public static void detail(Long id) {
     Scenic scenic = Scenic.findById(id);
     List<ScenicImage> images = ScenicImage.find("scenic.id = ? order by id desc", id).fetch(21);
-    render(scenic, images);
+    ScenicImage firstImage = images.size() > 0 ? images.get(0) : null;
+    render(scenic, images, firstImage);
   }
 
   public static void search(String keywords, int page) {

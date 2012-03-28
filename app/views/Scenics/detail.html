@@ -22,22 +22,22 @@
 	<div id="overview-left">
 		<ul class="thumbnails">
 		  <li class="span3">
-		    <a href="#" class="thumbnail scenic-image-first">
-		      <img src="/public/images/360268.png" alt="">
+		    <a href="#" class="thumbnail">
+		      #{if firstImage != null}
+		        <img src="/data/scenic/images/${firstImage.imageName}" class="scenic-image-first" alt="">
+		      #{/if}
+		      #{else}
+		        <img src="/public/images/360268.png" class="scenic-image-first" alt="">
+		      #{/else}
 		    </a>
 		  </li>
 		  #{list images,as:'i'}
 		  <li class="span1">
-        <a href="#" class="thumbnail">
+        <a href="#" class="thumbnail scenic-image-thumb">
           <img src="/data/scenic/images/${i.imageName}" alt="">
         </a>
       </li>
       #{/list}
-      <li class="span1">
-        <a href="#" class="thumbnail scenic-image-thumb">
-          <img src="/public/images/160120.png" alt="">
-        </a>
-      </li>
 		</ul>
 	</div>
 </div>
