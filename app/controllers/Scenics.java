@@ -19,7 +19,8 @@ public class Scenics extends Controller {
 
   public static void detail(Long id) {
     Scenic scenic = Scenic.findById(id);
-    render(scenic);
+    List<ScenicImage> images = ScenicImage.find("scenic.id = ? order by id desc", id).fetch(21);
+    render(scenic, images);
   }
 
   public static void search(String keywords, int page) {

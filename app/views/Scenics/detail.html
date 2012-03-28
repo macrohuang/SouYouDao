@@ -13,6 +13,10 @@
 		<span id="scenic-level">${scenic?.level}</span>
 	</div>
 	<div id="scenic-address">地址：河南省 栾川县 潭头镇西南部</div>
+	<div class="scenic-gallery-btn">
+     <button class="btn">添加图片</button>
+     <button class="btn">景区相册</button>
+  </div>
 </div>
 <div id="scenic-overview">
 	<div id="overview-left">
@@ -22,13 +26,13 @@
 		      <img src="/data/360268.png" alt="">
 		    </a>
 		  </li>
-		  
+		  #{list images,as:'i'}
 		  <li class="span1">
         <a href="#" class="thumbnail">
-          <img src="/data/360268.png" alt="">
+          <img src="/data/scenic/images/${i.imageName}" alt="">
         </a>
       </li>
-      
+      #{/list}
 		</ul>
 	</div>
 </div>

@@ -72,3 +72,8 @@
 	margin: 5px;
 	float: left;
 }
+.scenic-gallery-btn {
+	float: right;
+	margin-top: -35px;
+	margin-right: 30px;
+}
