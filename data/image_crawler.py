@@ -3,6 +3,7 @@
 import urllib
 import lxml.html as HTML
 import os
+import socket
 from mechanize import Browser
 
 # A help class to instance a no history Browser
@@ -14,6 +15,7 @@ class NoHistory(object):
 
 br = Browser(history=NoHistory())
 br.set_handle_robots(False)
+socket.setdefaulttimeout(10.0)
 
 def parse_images(html):
     root = HTML.document_fromstring(html)
@@ -55,10 +57,10 @@ def save_image(scenic_id,image_urls):
       file.write(image)
       file.close()
       cursor.execute("insert into T_SCENIC_IMAGE(imageName,scenic_id) values(%s,%s)",[file_name,scenic_id])
-      conn.commit()
       print file_name,' has finished'
     else:
-      print 'image already exist.'
+      cursor.execute("update T_SCENIC set finished = 1 where id = %s",scenic_id)
+      print file_name,' already exist'
 
 if __name__=='__main__':
   import MySQLdb
@@ -70,18 +72,21 @@ if __name__=='__main__':
   conn = MySQLdb.connect(host='localhost', user='root',passwd=passwd,db='syd')
   cursor = conn.cursor()
   cursor.execute("SET NAMES 'utf8'")
-  cursor.execute("select id,name from T_SCENIC where id not in (select distinct scenic_id from T_SCENIC_IMAGE) order by id limit "+limit_base+","+limit_length)
+  cursor.execute("select id,name from T_SCENIC where id not in (select distinct scenic_id from T_SCENIC_IMAGE) and finished = 0 order by id limit "+limit_base+","+limit_length)
   result = cursor.fetchall()
-  count = 1
   p = re.compile('\[[\s\S]+\]')
   for r in result:
     try:
       id = r[0]
       name = p.sub('',r[1])
       image_urls = search(name)
+      print 'begin to parse images ',name
       if len(image_urls) > 0:
         print 'begin to download ',name
         save_image(id,image_urls)
+      else:
+        cursor.execute("update T_SCENIC set finished = 1 where id = %s",id)
+      conn.commit()
     except:
       pass
   conn.commit()
