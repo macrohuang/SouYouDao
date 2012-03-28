@@ -77,3 +77,11 @@
 	margin-top: -35px;
 	margin-right: 30px;
 }
+.scenic-image-first {
+	min-height: 207px;
+	min-width: 270px;
+}
+.scenic-image-thumb {
+	min-width: 70px;
+	min-width: 55px;
+}
