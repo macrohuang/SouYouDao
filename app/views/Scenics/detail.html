@@ -33,8 +33,8 @@
 		  </li>
 		  #{list images,as:'i'}
 		  <li class="span1">
-        <a href="#" class="thumbnail scenic-image-thumb">
-          <img src="/data/scenic/images/${i.imageName}" class="scenic-image-thumb" alt="">
+        <a href="#" class="thumbnail scenic-image-thumb" image="${i.imageName}">
+          <img src="/data/scenic/images/thumbs/${i.imageName}" class="scenic-image-thumb" alt="">
         </a>
       </li>
       #{/list}
