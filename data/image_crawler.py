@@ -58,8 +58,8 @@ def save_image(scenic_id,image_urls):
       file.close()
       cursor.execute("insert into T_SCENIC_IMAGE(imageName,scenic_id) values(%s,%s)",[file_name,scenic_id])
       print file_name,' has finished'
-    else:
-      cursor.execute("update T_SCENIC set finished = 1 where id = %s",scenic_id)
+    elif os.path.exists(path) and os.path.isfile(path):
+      cursor.execute("insert into T_SCENIC_IMAGE(imageName,scenic_id) values(%s,%s)",[file_name,scenic_id])
       print file_name,' already exist'
 
 if __name__=='__main__':
@@ -72,7 +72,7 @@ if __name__=='__main__':
   conn = MySQLdb.connect(host='localhost', user='root',passwd=passwd,db='syd')
   cursor = conn.cursor()
   cursor.execute("SET NAMES 'utf8'")
-  cursor.execute("select id,name from T_SCENIC where id not in (select distinct scenic_id from T_SCENIC_IMAGE) and finished = 0 order by id limit "+limit_base+","+limit_length)
+  cursor.execute("select id,name from T_SCENIC where id not in (select distinct scenic_id from T_SCENIC_IMAGE) and finished != 2 order by id limit "+limit_base+","+limit_length)
   result = cursor.fetchall()
   p = re.compile('\[[\s\S]+\]')
   for r in result:
@@ -85,7 +85,7 @@ if __name__=='__main__':
         print 'begin to download ',name
         save_image(id,image_urls)
       else:
-        cursor.execute("update T_SCENIC set finished = 1 where id = %s",id)
+        cursor.execute("update T_SCENIC set finished = 2 where id = %s",id)
       conn.commit()
     except:
       pass
