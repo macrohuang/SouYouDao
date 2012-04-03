@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import models.comments.ScenicComment;
 import models.images.ScenicImage;
 import models.roadmaps.ScenicInnerRoadmap;
+import models.utils.area.City;
+import models.utils.area.Province;
 import models.utils.area.Region;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -30,9 +32,16 @@ public class Scenic extends Model {
   // 详细地址
   @Required(message = "请输入景点地址")
   public String address;
-  @Required(message = "请选择景点所在县区")
+  @ManyToOne
+  public Province province;
+  @ManyToOne
+  public City city;
   @ManyToOne
   public Region region;
+  // 人均消费(RMB)
+  public int consume;
+  // 建议游玩时间(天)
+  public int days;
   // 联系电话
   public String tel;
   // 景点介绍
@@ -44,6 +53,8 @@ public class Scenic extends Model {
   // 评级
   @Required(message = "请选择景点评级")
   public String level;
+  // 适宜游玩月份(1,2,3,4,6,7,8)
+  public String months;
   // 景区地图位置
   public String location;
   // 景点门票（RMB/人)
