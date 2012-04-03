@@ -98,7 +98,10 @@ public class Scenic extends Model {
     }
     return s;
   }
-
+  public String getThumb(){
+    ScenicImage image = ScenicImage.find("scenic.id = ?", this.id).first();
+    return image.imageName;
+  }
   public static List<Scenic> getAuthorized(Long adminId) {
     return Scenic.find("authorizer.id = ? order by authorizeDate desc", adminId).fetch();
   }
