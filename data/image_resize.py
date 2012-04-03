@@ -5,6 +5,10 @@ import Image
 
 count = 1;
 for name in glob.glob('scenic/images/*'):
+  if count <= 22062:
+    print count
+    count = count + 1
+    continue
   try:
     i = Image.open(name)
     box = i.getbbox()
