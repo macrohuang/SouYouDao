@@ -1,20 +1,31 @@
 package controllers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Scenic;
 import models.images.ScenicImage;
+
+import org.apache.lucene.document.Document;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.Directory;
+import org.wltea.analyzer.lucene.IKQueryParser;
+import org.wltea.analyzer.lucene.IKSimilarity;
+
 import play.Logger;
 import play.mvc.Controller;
 import utils.Constants;
 import utils.FileUtil;
-import utils.QuerySpliter;
 
 public class Scenics extends Controller {
 
   public static void index() {
-    render();
+    List<Scenic> scenics = Scenic.all().fetch(4);
+    render(scenics);
   }
 
   public static void detail(Long id) {
@@ -23,23 +34,53 @@ public class Scenics extends Controller {
     ScenicImage firstImage = images.size() > 0 ? images.get(0) : null;
     render(scenic, images, firstImage);
   }
-
+  /**
+   * @param keywords
+   * @param page start at 1
+   */
   public static void search(String keywords, int page) {
+    int total = 0;
+    if (page < 1) page = 1;
+    List<Scenic> scenics = new ArrayList<Scenic>();
     Logger.info("搜索景区：" + keywords);
-    String[] words = QuerySpliter.splite(keywords);
-    StringBuilder query = new StringBuilder();
-    for (int i = 0; i < words.length; i++) {
-      query.append("(name like '%" + words[i] + "%' or description like '%" + words[i] + "%')");
-      if (i < words.length - 1) {
-        query.append(" and ");
+    Directory directory = null;
+    IndexSearcher searcher = null;
+    try{
+      directory = Constants.OPEN_SCENIC_INDEX_DIR();
+      searcher = Constants.CREATE_INDEX_SEARCHER(directory);
+
+      Query query = IKQueryParser.parseMultiField(new String[]{"name","description","address","tel","province.name","city.name"},keywords);
+      searcher.setSimilarity(new IKSimilarity());
+      //检索所有结果集的索引 (第一次搜索,总体结果集)
+      TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
+      //上一页的最后一个document索引
+      int index=(page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
+      //分页开始点的doc
+      ScoreDoc afterDoc=null;
+      if(index > 0 ){
+        afterDoc = results1.scoreDocs[index-1];
+      }
+      //检索所有结果集的索引 (第二次搜索,最终结果集)
+      TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
+      total = results2.totalHits;
+      ScoreDoc[] scoreDocs = results2.scoreDocs;
+      for (int i = 0; i < scoreDocs.length; i++) {
+        Document document = searcher.doc(scoreDocs[i].doc);
+        Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
+        if(scenic != null){
+          scenics.add(scenic);
+        }
+      }
+    }catch(Exception e){
+      e.printStackTrace();
+    }finally{
+      try{
+        if(searcher != null) searcher.close();
+      }catch(Exception e){
+        e.printStackTrace();
       }
     }
-    int totalPage = Integer.parseInt(Scenic.count(query + " order by name asc") + "");
-    if (page < 1) page = 1;
-    if (page > totalPage) page = totalPage;
-    List<Scenic> scenics =
-        Scenic.find(query + "order by name asc").fetch(page, Constants.SCENIC_SEARCH_PAGE_SIZE);
-    render("Scenics/list.html", scenics, keywords);
+    render("Scenics/list.html", scenics, keywords, total, page);
   }
 
   /**

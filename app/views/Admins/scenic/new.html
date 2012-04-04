@@ -27,7 +27,8 @@
     <div class="span2">
       <ul class="nav nav-pills nav-stacked" id="scenic-menus">
       	<li class="active"><a href="@{Admins.newScenic()}">添加新景点</a></li>
-        <li><a href="@{Admins.editScenic()}">完善景点基本信息</a></li>
+      	<li><a href="@{Admins.reIndexScenic()}">景点索引</a></li>
+        <!-- <li><a href="@{Admins.editScenic()}">完善景点基本信息</a></li> -->
       </ul>
     </div>
     <!-- 右侧内容栏 -->
@@ -71,8 +72,6 @@
     </div>
   </div>
 </div>
-
-
 
 #{include 'Application/error.html'/}
 

@@ -17,6 +17,7 @@ import models.utils.area.Province;
 import models.utils.area.Region;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import utils.StringUtils;
 
 /**
  * 景区
@@ -48,8 +49,6 @@ public class Scenic extends Model {
   @Required(message = "请输入景点描述")
   @Column(length = 60000)
   public String description;
-  @Column(length = 100)
-  public String briefDesc;
   // 评级
   @Required(message = "请选择景点评级")
   public String level;
@@ -105,6 +104,13 @@ public class Scenic extends Model {
   public String getThumb(){
     ScenicImage image = ScenicImage.find("scenic.id = ?", this.id).first();
     return image == null ? null : image.imageName;
+  }
+  /**
+   * 获得简略的介绍(list页面显示,40个汉字)
+   * @return
+   */
+  public String getBriefDesc(){
+    return StringUtils.subWithoutHtml(this.description, 40);
   }
   public static List<Scenic> getAuthorized(Long adminId) {
     return Scenic.find("authorizer.id = ? order by authorizeDate desc", adminId).fetch();

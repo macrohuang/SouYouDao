@@ -1,0 +1,46 @@
+#{extends 'Admins/main.html' /}
+#{set title:'重建索引' /}
+<script>
+	$(document).ready(function(){
+		$("#reIndexBtn").click(function(){
+			$("#reIndexBtn").attr("disabled","disabled");
+			$.get("/Admins/reIndexScenicOK");
+		});
+	});
+</script>
+<div class="container-fluid">
+  <!-- 左侧导航栏 -->
+  <div class="row-fluid">
+    <div class="span2">
+      <ul class="nav nav-pills nav-stacked" id="scenic-menus">
+      	<li><a href="@{Admins.newScenic()}">添加新景点</a></li>
+      	<li class="active"><a href="@{Admins.reIndexScenic()}">景点索引</a></li>
+      </ul>
+    </div>
+    <!-- 右侧内容栏 -->
+    <div class="span10">
+      <div class="well">
+      	#{if status==-1}
+      		<div class="alert alert-info">没有景点需要补充数据，你可以创建新景点</div>
+      	#{/if}
+      	#{elseif status==1}
+      		<div class="alert alert-info">保存成功，可以继续添加</div>
+      	#{/elseif}
+      	#{else}
+      	#{/else}
+      	<div id="tips" class="tips"></div>
+	      	<form class="form-horizontal" action="javascript:void()">
+	      		<p align="left">上次索引时间: ${indexDate?.value}</p>
+				<p align="center">
+			    	<button id="reIndexBtn" class="btn btn-primary btn-large" type="submit">重建索引</button>
+				</p>
+			</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+#{include 'Application/error.html'/}
+
