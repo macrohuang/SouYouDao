@@ -26,11 +26,12 @@
 			  dataType: 'html'
 		 });
 	 });
+  }
  $.fn.scrollPagination.defaults = {
       	 'contentPage' : null,	//data source URL
      	 'contentData' : {},	//post request parameters
 		 'beforeLoad': null,
-		 'afterLoad': null	,
+		 'afterLoad': null,
 		 'clickButton': null	  
- };	
+ };
 })( jQuery );
