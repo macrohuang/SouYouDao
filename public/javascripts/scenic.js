@@ -11,9 +11,12 @@ $(function() {
 		'scrollTarget': $(window),
 		'heightOffset': 140, 
 		'beforeLoad': function(){
+			console.log("before:" + this.contentData.page);
 //			$('#loading').fadeIn();
 		},
 		'afterLoad': function(elementsLoaded){
+			console.log("after1:" + this.contentData.page);
+			console.log("after2:" + elementsLoaded.length);
 			if(elementsLoaded.length > 0){
 				this.contentData.page = this.contentData.page + 1;
 			}
