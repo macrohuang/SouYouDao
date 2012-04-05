@@ -6,10 +6,8 @@ $(function() {
 	});
 	//分页
 	$('#scenic-thumb-recommend').scrollPagination({
-		'contentPage': "/Scenics/query", // the page where you are searching for results
+		'contentPage': "/Scenics/query",
 		'contentData': {keywords:$("#keywords").val(),page:2},
-		'scrollTarget': $(window),
-		'heightOffset': 100,
 		'clickButton': "loadMore",
 		'beforeLoad': function(){
 			$('#loading').fadeIn();
