@@ -54,21 +54,18 @@ public class Scenics extends Controller {
           IKQueryParser.parseMultiField(new String[] {"name", "description", "address", "tel",
               "province.name", "city.name"}, keywords);
       searcher.setSimilarity(new IKSimilarity());
-      // 检索所有结果集的索引 (第一次搜索,总体结果集)
-      TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      total = results1.totalHits;
-      // 上一页的最后一个document索引
+      // 执行检索操作，根据每次查询的页数取topN
+      TopDocs results = searcher.search(query, page * Constants.SCENIC_SEARCH_PAGE_SIZE);
+      total = results.totalHits;
+      // 当前页面起点
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
-      // 分页开始点的doc
-      ScoreDoc afterDoc = null;
-      if (index > 0) {
-        afterDoc = results1.scoreDocs[index - 1];
-      }
-      // 检索所有结果集的索引 (第二次搜索,当页结果集)
-      TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      ScoreDoc[] scoreDocs = results2.scoreDocs;
-      for (int i = 0; i < scoreDocs.length; i++) {
-        Document document = searcher.doc(scoreDocs[i].doc);
+      for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
+        //超过总结果集数目跳出循环
+        if(index + i > results.scoreDocs.length){
+          break;
+        }
+        ScoreDoc scoreDoc = results.scoreDocs[index + i];
+        Document document = searcher.doc(scoreDoc.doc);
         Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
         if (scenic != null) {
           scenics.add(scenic);
@@ -125,28 +122,17 @@ public class Scenics extends Controller {
           IKQueryParser.parseMultiField(new String[] {"name", "description", "address", "tel",
               "province.name", "city.name"}, keywords);
       searcher.setSimilarity(new IKSimilarity());
-      // 检索所有结果集的索引 (第一次搜索,总体结果集)
-      TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      // 上一页的最后一个document索引
+      // 执行检索操作，根据每次查询的页数取topN
+      TopDocs results = searcher.search(query, page * Constants.SCENIC_SEARCH_PAGE_SIZE);
+      // 当前页面起点
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
-      // 如果请求的数据超出索引范围，则停止查询
-      if (index > results1.scoreDocs.length) {
-        Logger.info("return :" + index + " ," + results1.scoreDocs.length);
-        return;
-      }
-      // 分页开始点的doc
-      ScoreDoc afterDoc = null;
-      if (index > 0) {
-        afterDoc = results1.scoreDocs[index - 1];
-      }
-      // 检索所有结果集的索引 (第二次搜索,当页的结果集)
-      TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      ScoreDoc[] scoreDocs = results2.scoreDocs;
-      Logger.info("result2.totalHits :" + results2.totalHits);
-      Logger.info("scoreDocs.length :" + scoreDocs.length);
-      Logger.info("index :" + index);
-      for (int i = 0; i < scoreDocs.length; i++) {
-        Document document = searcher.doc(scoreDocs[i].doc);
+      for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
+        //超过总结果集数目跳出循环
+        if(index + i > results.scoreDocs.length){
+          break;
+        }
+        ScoreDoc scoreDoc = results.scoreDocs[index + i];
+        Document document = searcher.doc(scoreDoc.doc);
         Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
         if (scenic != null) {
           scenics.add(scenic);

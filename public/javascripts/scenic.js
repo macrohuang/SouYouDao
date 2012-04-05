@@ -9,7 +9,7 @@ $(function() {
 		'contentPage': "/Scenics/query", // the page where you are searching for results
 		'contentData': {keywords:$("#keywords").val(),page:2},
 		'scrollTarget': $(window),
-		'heightOffset': 20, 
+		'heightOffset': 20,
 		'beforeLoad': function(){
 //			$('#loading').fadeIn();
 		},

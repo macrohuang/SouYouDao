@@ -10,18 +10,6 @@ import models.Scenic;
 import models.roadmaps.ScenicInnerRoadmap;
 import models.utils.SystemState;
 import models.utils.area.Region;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.Directory;
-import org.wltea.analyzer.lucene.IKQueryParser;
-import org.wltea.analyzer.lucene.IKSimilarity;
-
 import play.data.validation.Required;
 import play.data.validation.Valid;
 import utils.Constants;
@@ -153,10 +141,12 @@ public class Admins extends Application {
     session.remove(Constants.ADMIN_ID_IN_SESSION);
     login();
   }
+  /*
   public static void main(String[] args) throws Exception{
-    Directory directory = Constants.OPEN_SCENIC_INDEX_DIR();
-    IndexWriter writer = Constants.CREATE_INDEX_WRITER(directory);
-    IndexSearcher searcher = Constants.CREATE_INDEX_SEARCHER(directory);
+    Analyzer analyzer = new IKAnalyzer();
+    Directory directory = new RAMDirectory();
+    IndexWriter writer = new IndexWriter(directory,analyzer,true,IndexWriter.MaxFieldLength.LIMITED);
+
 
     Long id = 123l;
     String title = "石家庄石壁";
@@ -169,13 +159,27 @@ public class Admins extends Application {
     "<p>&nbsp;&nbsp;&nbsp; 三明客家祖地──石壁最佳旅游季节：<br>&nbsp; <br>&nbsp;&nbsp;&nbsp; 去三明客家祖地──石壁最佳旅游季节是在每年的秋季. <br>&nbsp;<br>　&nbsp; 三明客家祖地──石壁交通：<br>&nbsp; <br>&nbsp;&nbsp;&nbsp; 石壁位于闽赣两省交界处.交通便利.<br>&nbsp;&nbsp;&nbsp; 福州、厦门---火车---到三明，转乘中巴（半小时有一部）到宁化后坐车到石壁只需20分钟。 江西的赣州、瑞金等地均有车经过石壁。<br>&nbsp; <br>　&nbsp; 三明客家祖地──石壁住宿：<br>&nbsp; <br>&nbsp;&nbsp;&nbsp; 去石壁游玩可以在当地居民家住宿,以便体验客家人的热情与淳朴.<br>&nbsp;&nbsp;&nbsp; 如果需要宾馆,那可以到宁化城关的客家宾馆(宁化境内最好的).&nbsp; </p>" +
     "<p>　&nbsp; 三明客家祖地──石壁美食：<br>&nbsp; <br>&nbsp;&nbsp;&nbsp; 甘甜可口的“客家擂茶”和远近闻名的“烧卖”是这里的主打特色地方小吃。特别是当地居民家里做的擂茶或烧卖，那个味道呀，简直要流口水了。快去尝尝吧！ </p>" +
     "</div>";
+    Long id2 = 12313l;
+    String title2 = "石家庄";
+    String content2 = "<div><p>&nbsp;&nbsp;&nbsp; 明客家祖地──石壁是客家祖地，现为宁化县西部的一个镇，位于武夷山东麓。古之石壁，土地肥沃、地势平坦、森林茂密，有“玉屏”美称。</p>" +
+    "<p>　　石壁是客家民系形成的重要地域。许多专家论证，自晋永嘉开始，中原许多汉人为避战乱（经历代五次大迁徙），离开河洛祖地，一路向南流亡，他们翻越武夷山脉，来到宁化石壁繁衍生息，从石壁播衍的客家人地广人多。</p>" +
+    "<p>　　石壁人的品性富有客家人坚韧不拔、刻苦耐劳、守礼节、重道义、好学问、论伦理的特点。同时，石壁人在漫长历史的演变中，逐渐形成了较独特的客家文化及民俗风情。</p>" +
+    "<p>　　“北有大槐树，南有石壁村”。石壁这一客家人的发源地，吸引着许多专家、学者慕名前来采风、调查、考证。随着客家学研究的深入开展，石壁在客家史上的重要地位被进一步确立，众多海内外客家后裔纷来沓至、寻根祭祖、投资开发、观光旅游。</p>" +
+    "</div>";
     try{
-      Document doc = new Document();
-      doc.add(new Field("id", id+"",Field.Store.YES,Field.Index.NO));
-      doc.add(new Field("title", title,Field.Store.YES,Field.Index.ANALYZED));
-      doc.add(new Field("content", content,Field.Store.YES,Field.Index.ANALYZED));
-      writer.addDocument(doc);
+      Document doc1 = new Document();
+      doc1.add(new Field("id", id+"",Field.Store.YES,Field.Index.NO));
+      doc1.add(new Field("title", title,Field.Store.YES,Field.Index.ANALYZED));
+      doc1.add(new Field("content", content,Field.Store.YES,Field.Index.ANALYZED));
+      Document doc2 = new Document();
+      doc2.add(new Field("id", id2+"",Field.Store.YES,Field.Index.NO));
+      doc2.add(new Field("title", title2,Field.Store.YES,Field.Index.ANALYZED));
+      doc2.add(new Field("content", content2,Field.Store.YES,Field.Index.ANALYZED));
+      writer.addDocument(doc1);
+      writer.addDocument(doc2);
+      writer.close();
 
+      IndexSearcher searcher = new IndexSearcher(directory);
       String queryWords = "石壁后裔";
       Query query = IKQueryParser.parseMultiField(new String[]{"content","title"},queryWords);
       searcher.setSimilarity(new IKSimilarity());
@@ -189,4 +193,5 @@ public class Admins extends Application {
       e.printStackTrace();
     }
   }
+  */
 }
