@@ -5,6 +5,7 @@ $(function() {
 		});
 	});
 	//分页
+	$("#loading").fadeOut();
 	$('#scenic-thumb-recommend').scrollPagination({
 		'contentPage': "/Scenics/query",
 		'contentData': {keywords:$("#keywords").val(),page:2},
@@ -15,13 +16,14 @@ $(function() {
 		'afterLoad': function(elementsLoaded){
 			if(elementsLoaded.length > 0){
 				this.contentData.page = this.contentData.page + 1;
+			}else{
+				$("#loadMore").fadeOut();
 			}
 			$('#loading').fadeOut();
 			var i = 0;
 			$(elementsLoaded).fadeInWithDelay();
 		}
 	});
-	
 	// code for fade in element by element with delay
 	$.fn.fadeInWithDelay = function(){
 		var delay = 0;

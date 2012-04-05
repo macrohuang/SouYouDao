@@ -1,45 +1,14 @@
-/*
-**	Anderson Ferminiano
-**	contato@andersonferminiano.com -- feel free to contact me for bugs or new implementations.
-**	jQuery ScrollPagination
-**	28th/March/2011
-**	http://andersonferminiano.com/jqueryscrollpagination/
-**	You may use this script for free, but keep my credits.
-**	Thank you.
-*/
-
+/**
+ * ROY GUO(royguo1988@gmail.com)
+ * You can use this plugin anywhere you want.
+ */
 (function($){
  $.fn.scrollPagination = function(options) {
 		var opts = $.extend($.fn.scrollPagination.defaults, options);  
-//		var target = opts.scrollTarget;
-//		if (target == null){
-//			target = obj; 
-//	 	}
-//		opts.scrollTarget = target;
 		return this.each(function() {
 		  $.fn.scrollPagination.init($(this), opts);
 		});
   };
-  
-//  $.fn.stopScrollPagination = function(){
-//	  return this.each(function() {
-//	 	$(this).attr('scrollPagination', 'disabled');
-//	  });
-//	  
-//  };
-  
-//  $.fn.scrollPagination.loadContent = function(obj, opts){
-//	 var target = opts.scrollTarget;
-//	 var mayLoadContent = $(target).scrollTop()+opts.heightOffset >= $(document).height() - $(target).height();
-//	 if (mayLoadContent){
-//		 if (opts.beforeLoad != null){
-//			opts.beforeLoad();
-//		 }
-//		 $(obj).children().attr('rel', 'loaded');
-//	 }
-//	 
-//  };
-  
   $.fn.scrollPagination.init = function(obj, opts){
 	 $("#"+opts.clickButton).click(function(){
 		 opts.beforeLoad();
@@ -57,26 +26,11 @@
 			  dataType: 'html'
 		 });
 	 });
-//	 var target = opts.scrollTarget;
-//	 $(obj).attr('scrollPagination', 'enabled');
-//	
-//	 $(target).scroll(function(event){
-//		if ($(obj).attr('scrollPagination') == 'enabled'){
-//	 		$.fn.scrollPagination.loadContent(obj, opts);		
-//		}
-//		else {
-//			event.stopPropagation();	
-//		}
-//	 });
-//	 $.fn.scrollPagination.loadContent(obj, opts);
- };
  $.fn.scrollPagination.defaults = {
-      	 'contentPage' : null,
-     	 'contentData' : {},
+      	 'contentPage' : null,	//data source URL
+     	 'contentData' : {},	//post request parameters
 		 'beforeLoad': null,
 		 'afterLoad': null	,
-//		 'scrollTarget': null,
-		 'clickButton': null
-//		 'heightOffset': 0		  
+		 'clickButton': null	  
  };	
 })( jQuery );
