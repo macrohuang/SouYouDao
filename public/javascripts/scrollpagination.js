@@ -36,29 +36,44 @@
 	 var mayLoadContent = $(target).scrollTop()+opts.heightOffset >= $(document).height() - $(target).height();
 	 if (mayLoadContent){
 		 if (opts.beforeLoad != null){
-			opts.beforeLoad(); 
+			opts.beforeLoad();
 		 }
 		 $(obj).children().attr('rel', 'loaded');
+//		 $.ajax({
+//			  type: 'POST',
+//			  url: opts.contentPage,
+//			  data: opts.contentData,
+//			  success: function(data){
+//				$(obj).append(data); 
+//				var objectsRendered = $(obj).children('[rel!=loaded]');
+//				
+//				if (opts.afterLoad != null){
+//					opts.afterLoad(objectsRendered);	
+//				}
+//			  },
+//			  dataType: 'html'
+//		 });
+	 }
+	 
+  };
+  
+  $.fn.scrollPagination.init = function(obj, opts){
+	 $("#"+opts.clickButton).click(function(){
+		 opts.beforeLoad();
 		 $.ajax({
 			  type: 'POST',
 			  url: opts.contentPage,
 			  data: opts.contentData,
-//			  async: false,
 			  success: function(data){
 				$(obj).append(data); 
 				var objectsRendered = $(obj).children('[rel!=loaded]');
-				
 				if (opts.afterLoad != null){
 					opts.afterLoad(objectsRendered);	
 				}
 			  },
 			  dataType: 'html'
 		 });
-	 }
-	 
-  };
-  
-  $.fn.scrollPagination.init = function(obj, opts){
+	 });
 	 var target = opts.scrollTarget;
 	 $(obj).attr('scrollPagination', 'enabled');
 	
@@ -78,6 +93,7 @@
 		 'beforeLoad': null,
 		 'afterLoad': null	,
 		 'scrollTarget': null,
+		 'clickButton': null,
 		 'heightOffset': 0		  
  };	
 })( jQuery );

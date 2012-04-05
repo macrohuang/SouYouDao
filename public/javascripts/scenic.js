@@ -10,6 +10,7 @@ $(function() {
 		'contentData': {keywords:$("#keywords").val(),page:2},
 		'scrollTarget': $(window),
 		'heightOffset': 100,
+		'clickButton': "loadMore",
 		'beforeLoad': function(){
 			$('#loading').fadeIn();
 		},

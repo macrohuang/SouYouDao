@@ -108,6 +108,7 @@ public class Scenics extends Controller {
    * @param template (default = "Scenics/page.html")
    */
   public static void query(String keywords, int page, String template) {
+    Logger.info("Query Scenics : " + keywords + ", page : " + page);
     if (template == null || template.equals("")) {
       template = "Scenics/page.html";
     }
