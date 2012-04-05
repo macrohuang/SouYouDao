@@ -45,6 +45,7 @@
 			  type: 'POST',
 			  url: opts.contentPage,
 			  data: opts.contentData,
+			  async: false,
 			  success: function(data){
 				$(obj).append(data); 
 				var objectsRendered = $(obj).children('[rel!=loaded]');
