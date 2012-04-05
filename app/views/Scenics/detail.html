@@ -12,7 +12,7 @@
 		<span>${scenic?.name}</span>
 		<span id="scenic-level">${scenic?.level}</span>
 	</div>
-	<div id="scenic-address">地址：河南省 栾川县 潭头镇西南部</div>
+	<div id="scenic-address">地址：${scenic?.address}</div>
 	<div class="scenic-gallery-btn">
      <button class="btn">添加图片</button>
      <button class="btn">景区相册</button>
@@ -58,14 +58,18 @@
 	<div id="detail-right">
          <div class="right-side-box">
            <div class="right-side-top">
-                <div class="tab-btn">景点介绍</div>
-                <div class="tab-btn">附近设施</div>
-                <div class="tab-btn">周边交通</div>
-                <div class="tab-btn">游客点评</div>
-                <div class="tab-btn">旅行社推荐</div>
-           </div> 
-           <div class="right-side-middle">
-                <div>#{verbatim}${scenic?.description}#{/verbatim}</div>
+                <div class="tab-btn active" href="#description" data-toggle="tab">景点介绍</div>
+                <div class="tab-btn" href="#maps" data-toggle="tab">景点地图</div>
+                <div class="tab-btn" href="#traffic" data-toggle="tab">周边交通</div>
+                <div class="tab-btn" href="#comments" data-toggle="tab">游客点评</div>
+                <div class="tab-btn" href="#trips" data-toggle="tab">旅行社推荐</div>
+           </div>
+           <div class="right-side-middle tab-content">
+	            <div class="tab-pane active" id="description">#{verbatim}${scenic?.description}#{/verbatim}</div>
+	            <div class="tab-pane" id="maps">maps</div>
+	            <div class="tab-pane" id="traffic">traffic</div>
+	            <div class="tab-pane" id="comments">comments</div>
+	            <div class="tab-pane" id="trips">trips</div>
            </div> 
            <div class="right-side-bottom"></div> 
         </div>
