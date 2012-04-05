@@ -9,17 +9,17 @@ $(function() {
 		'contentPage': "/Scenics/query", // the page where you are searching for results
 		'contentData': {keywords:$("#keywords").val(),page:2},
 		'scrollTarget': $(window),
-		'heightOffset': 20,
+		'heightOffset': 100,
 		'beforeLoad': function(){
-//			$('#loading').fadeIn();
+			$('#loading').fadeIn();
 		},
 		'afterLoad': function(elementsLoaded){
 			if(elementsLoaded.length > 0){
 				this.contentData.page = this.contentData.page + 1;
 			}
-//			 $('#loading').fadeOut();
-			 var i = 0;
-			 $(elementsLoaded).fadeInWithDelay();
+			$('#loading').fadeOut();
+			var i = 0;
+			$(elementsLoaded).fadeInWithDelay();
 		}
 	});
 	

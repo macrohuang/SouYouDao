@@ -8,9 +8,7 @@
 **	Thank you.
 */
 
-(function( $ ){
-	 
-		 
+(function($){
  $.fn.scrollPagination = function(options) {
   	
 		var opts = $.extend($.fn.scrollPagination.defaults, options);  
@@ -19,7 +17,7 @@
 			target = obj; 
 	 	}
 		opts.scrollTarget = target;
-	 
+
 		return this.each(function() {
 		  $.fn.scrollPagination.init($(this), opts);
 		});
@@ -45,7 +43,7 @@
 			  type: 'POST',
 			  url: opts.contentPage,
 			  data: opts.contentData,
-			  async: false,
+//			  async: false,
 			  success: function(data){
 				$(obj).append(data); 
 				var objectsRendered = $(obj).children('[rel!=loaded]');
@@ -72,11 +70,8 @@
 			event.stopPropagation();	
 		}
 	 });
-	 
 	 $.fn.scrollPagination.loadContent(obj, opts);
-	 
  };
-	
  $.fn.scrollPagination.defaults = {
       	 'contentPage' : null,
      	 'contentData' : {},

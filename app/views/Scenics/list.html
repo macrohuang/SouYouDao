@@ -35,22 +35,23 @@
 	    <!-- 推荐景区列表 -->
 	    <ul class="thumbnails" id="scenic-thumb-recommend">
 	      #{list scenics,as: 's'}
-			  <li class="span2">
-			    <div class="thumbnail">
-			      <a href="@{Scenics.detail(s.id)}" target="_blank">
-			      	#{if s.thumb == null}
-			      		<img src="/public/images/160120.png" alt="${s.name}"/>
-			      	#{/if}
-			      	#{if s.thumb != null}
-			      		<img style="height: 120px" src="/data/scenic/images/thumbs/${s.thumb }" alt="${s.name}"/>
-			      	#{/if}
-			      </a>
-			      <h5>${s.name}</h5>
-			      <p>${s.briefDesc }</p>
-			    </div>
-			  </li>
-			  #{/list}
-			</ul>
+		  <li class="span2">
+		    <div class="thumbnail">
+		      <a href="@{Scenics.detail(s.id)}" target="_blank">
+		      	#{if s.thumb == null}
+		      		<img src="/public/images/160120.png" alt="${s.name}"/>
+		      	#{/if}
+		      	#{if s.thumb != null}
+		      		<img style="height: 120px" src="/data/scenic/images/thumbs/${s.thumb }" alt="${s.name}"/>
+		      	#{/if}
+		      </a>
+		      <h5>${s.name}</h5>
+		      <p>${s.briefDesc }</p>
+		    </div>
+		  </li>
+		  #{/list}
+		</ul>
+		<div id="loading" class="well span8">载入更多......</div>
     </div>
   </div>
 </div>
