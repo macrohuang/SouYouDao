@@ -34,7 +34,9 @@ public class Scenics extends Controller {
     ScenicImage firstImage = images.size() > 0 ? images.get(0) : null;
     render(scenic, images, firstImage);
   }
+
   /**
+   * Search后进入列表页面
    * @param keywords
    * @param page start at 1
    */
@@ -45,38 +47,39 @@ public class Scenics extends Controller {
     Logger.info("搜索景区：" + keywords);
     Directory directory = null;
     IndexSearcher searcher = null;
-    try{
+    try {
       directory = Constants.OPEN_SCENIC_INDEX_DIR();
       searcher = Constants.CREATE_INDEX_SEARCHER(directory);
-
-      Query query = IKQueryParser.parseMultiField(new String[]{"name","description","address","tel","province.name","city.name"},keywords);
+      Query query =
+          IKQueryParser.parseMultiField(new String[] {"name", "description", "address", "tel",
+              "province.name", "city.name"}, keywords);
       searcher.setSimilarity(new IKSimilarity());
-      //检索所有结果集的索引 (第一次搜索,总体结果集)
+      // 检索所有结果集的索引 (第一次搜索,总体结果集)
       TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      //上一页的最后一个document索引
-      int index=(page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
-      //分页开始点的doc
-      ScoreDoc afterDoc=null;
-      if(index > 0 ){
-        afterDoc = results1.scoreDocs[index-1];
+      // 上一页的最后一个document索引
+      int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
+      // 分页开始点的doc
+      ScoreDoc afterDoc = null;
+      if (index > 0) {
+        afterDoc = results1.scoreDocs[index - 1];
       }
-      //检索所有结果集的索引 (第二次搜索,最终结果集)
+      // 检索所有结果集的索引 (第二次搜索,最终结果集)
       TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
       total = results2.totalHits;
       ScoreDoc[] scoreDocs = results2.scoreDocs;
       for (int i = 0; i < scoreDocs.length; i++) {
         Document document = searcher.doc(scoreDocs[i].doc);
         Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
-        if(scenic != null){
+        if (scenic != null) {
           scenics.add(scenic);
         }
       }
-    }catch(Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
-    }finally{
-      try{
-        if(searcher != null) searcher.close();
-      }catch(Exception e){
+    } finally {
+      try {
+        if (searcher != null) searcher.close();
+      } catch (Exception e) {
         e.printStackTrace();
       }
     }
@@ -99,5 +102,61 @@ public class Scenics extends Controller {
         .delete();
     scenic.roadmapImage = null;
     scenic.save();
+  }
+
+  /**
+   * AJAX分页使用的query.
+   * @param keywords
+   * @param page start at 1
+   * @param template (default = "Scenics/page.html")
+   */
+  public static void query(String keywords, int page, String template) {
+    if (template == null || template.equals("")) {
+      template = "Scenics/page.html";
+    }
+    if (page < 1) page = 1;
+    List<Scenic> scenics = new ArrayList<Scenic>();
+    Directory directory = null;
+    IndexSearcher searcher = null;
+    try {
+      directory = Constants.OPEN_SCENIC_INDEX_DIR();
+      searcher = Constants.CREATE_INDEX_SEARCHER(directory);
+      Query query =
+          IKQueryParser.parseMultiField(new String[] {"name", "description", "address", "tel",
+              "province.name", "city.name"}, keywords);
+      searcher.setSimilarity(new IKSimilarity());
+      // 检索所有结果集的索引 (第一次搜索,总体结果集)
+      TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
+      // 上一页的最后一个document索引
+      int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
+      // 如果请求的数据超出索引范围，则停止查询
+      if (index > results1.scoreDocs.length) {
+        return;
+      }
+      // 分页开始点的doc
+      ScoreDoc afterDoc = null;
+      if (index > 0) {
+        afterDoc = results1.scoreDocs[index - 1];
+      }
+      // 检索所有结果集的索引 (第二次搜索,最终结果集)
+      TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
+      ScoreDoc[] scoreDocs = results2.scoreDocs;
+      for (int i = 0; i < scoreDocs.length; i++) {
+        Document document = searcher.doc(scoreDocs[i].doc);
+        Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
+        if (scenic != null) {
+          scenics.add(scenic);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (searcher != null) searcher.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    renderTemplate(template, scenics);
   }
 }
