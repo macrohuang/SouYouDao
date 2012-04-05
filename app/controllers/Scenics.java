@@ -56,6 +56,7 @@ public class Scenics extends Controller {
       searcher.setSimilarity(new IKSimilarity());
       // 检索所有结果集的索引 (第一次搜索,总体结果集)
       TopDocs results1 = searcher.search(query, Constants.SCENIC_SEARCH_PAGE_SIZE);
+      total = results1.totalHits;
       // 上一页的最后一个document索引
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       // 分页开始点的doc
@@ -63,9 +64,8 @@ public class Scenics extends Controller {
       if (index > 0) {
         afterDoc = results1.scoreDocs[index - 1];
       }
-      // 检索所有结果集的索引 (第二次搜索,最终结果集)
+      // 检索所有结果集的索引 (第二次搜索,当页结果集)
       TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
-      total = results2.totalHits;
       ScoreDoc[] scoreDocs = results2.scoreDocs;
       for (int i = 0; i < scoreDocs.length; i++) {
         Document document = searcher.doc(scoreDocs[i].doc);
@@ -131,6 +131,7 @@ public class Scenics extends Controller {
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       // 如果请求的数据超出索引范围，则停止查询
       if (index > results1.scoreDocs.length) {
+        Logger.info("return :" + index + " ," + results1.scoreDocs.length);
         return;
       }
       // 分页开始点的doc
@@ -138,9 +139,12 @@ public class Scenics extends Controller {
       if (index > 0) {
         afterDoc = results1.scoreDocs[index - 1];
       }
-      // 检索所有结果集的索引 (第二次搜索,最终结果集)
+      // 检索所有结果集的索引 (第二次搜索,当页的结果集)
       TopDocs results2 = searcher.searchAfter(afterDoc, query, Constants.SCENIC_SEARCH_PAGE_SIZE);
       ScoreDoc[] scoreDocs = results2.scoreDocs;
+      Logger.info("result2.totalHits :" + results2.totalHits);
+      Logger.info("scoreDocs.length :" + scoreDocs.length);
+      Logger.info("index :" + index);
       for (int i = 0; i < scoreDocs.length; i++) {
         Document document = searcher.doc(scoreDocs[i].doc);
         Scenic scenic = Scenic.findById(Long.parseLong(document.get("id")));
