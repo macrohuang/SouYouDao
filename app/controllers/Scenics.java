@@ -61,7 +61,7 @@ public class Scenics extends Controller {
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
         //超过总结果集数目跳出循环
-        if(index + i > results.scoreDocs.length){
+        if(index + i >= results.scoreDocs.length){
           break;
         }
         ScoreDoc scoreDoc = results.scoreDocs[index + i];
@@ -128,7 +128,7 @@ public class Scenics extends Controller {
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
         //超过总结果集数目跳出循环
-        if(index + i > results.scoreDocs.length){
+        if(index + i >= results.scoreDocs.length){
           break;
         }
         ScoreDoc scoreDoc = results.scoreDocs[index + i];
