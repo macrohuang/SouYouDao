@@ -1,7 +1,3 @@
-/**
- * ROY GUO(royguo1988@gmail.com)
- * You can use this plugin anywhere you want.
- */
 (function($){
  $.fn.scrollPagination = function(options) {
 		var opts = $.extend($.fn.scrollPagination.defaults, options);  
@@ -18,9 +14,8 @@
 			  data: opts.contentData,
 			  success: function(data){
 				$(obj).append(data); 
-				var objectsRendered = $(obj).children('[rel!=loaded]');
 				if (opts.afterLoad != null){
-					opts.afterLoad(objectsRendered);	
+					opts.afterLoad(data);	
 				}
 			  },
 			  dataType: 'html'
@@ -34,4 +29,4 @@
 		 'afterLoad': null,
 		 'clickButton': null	  
  };
-})( jQuery );
+})(jQuery);
