@@ -90,6 +90,9 @@ body {
 }
 .footer-left p a {
 	color: black;
+	width: 80px;
+	display: inline-block;
+	text-align: left;
 }
 .footer-right {
 	float: right;

@@ -1,9 +1,26 @@
 #topN-scenics li div{
-    height: 190px;
+    height: 170px;
     text-align:center;
     overflow: hidden;
 }
 #topN-scenics h5{
     white-space: nowrap;
     overflow: hidden;
+}
+#topN-scenics li{
+	margin-left: 25px;
+}
+.full-web-result {
+	border-bottom: 1px #E6E6E6 solid;
+	margin-bottom: 20px;
+}
+.full-web-result a {
+	font-size: 14px;
+}
+.description {
+	height: 35px;
+	overflow: hidden;
+}
+.url {
+	color: #888;
 }
