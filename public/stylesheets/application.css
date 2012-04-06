@@ -1,0 +1,9 @@
+#topN-scenics li div{
+    height: 190px;
+    text-align:center;
+    overflow: hidden;
+}
+#topN-scenics h5{
+    white-space: nowrap;
+    overflow: hidden;
+}

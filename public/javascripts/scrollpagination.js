@@ -15,7 +15,7 @@
 			  success: function(data){
 				$(obj).append(data); 
 				if (opts.afterLoad != null){
-					opts.afterLoad(data);	
+					opts.afterLoad(data);
 				}
 			  },
 			  dataType: 'html'

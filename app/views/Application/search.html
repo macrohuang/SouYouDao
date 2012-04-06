@@ -1,5 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'搜游岛' /}
+#{set 'moreStyles'}
+     #{stylesheet 'application.css'/}
+#{/set}
+#{set 'moreScripts'}
+     #{script 'application.js'/}
+#{/set}
 <div>
 	<div>
 		<div align="center">
@@ -16,16 +22,37 @@
 		</div>
 		<div class="well">
 			<ul class="nav nav-pills">
-			  <li class="active"><a href="#home" data-toggle="tab">景区</a></li>
+			  <li class="active"><a href="#full-web" data-toggle="tab">全网搜索</a></li>
+			  <li><a href="#scenic-list" data-toggle="tab">景点</a></li>
 			  <li><a href="#profile" data-toggle="tab">路线</a></li>
 			  <li><a href="#messages" data-toggle="tab">住宿</a></li>
 			  <li><a href="#settings" data-toggle="tab">计划</a></li>
 			</ul>
 			<div class="tab-content">
-			  <div class="tab-pane active" id="home">111</div>
-			  <div class="tab-pane" id="profile">222</div>
-			  <div class="tab-pane" id="messages">333</div>
-			  <div class="tab-pane" id="settings">444</div>
+			  <div class="tab-pane active" id="full-web">
+			     <!-- 首先列出得分最高的几个景点 -->
+			     <div id="topN-scenics">
+			       <ul class="thumbnails">
+              <li class="span2">
+				       <div class="thumbnail">
+			          <a href="#" target="_blank">
+			              <img src="/public/images/160120.png" alt=""/>
+			          </a>
+			          <h5>测试景点测试景点</h5>
+			          <p>测试景点测试景点测试景点测试景点测试景点测试景点测试景点测试景点测试景点测试景点</p>
+	             </div>
+	             </li>
+	             </ul>
+			     </div>
+			     <!-- 再列出全网搜索的结果 -->
+			     <div id="full-web-results">
+			       
+			     </div>
+			  </div>
+			  <div class="tab-pane" id="scenic-list">景点列表</div>
+			  <div class="tab-pane" id="profile">火热开发中，敬请期待</div>
+			  <div class="tab-pane" id="messages">火热开发中，敬请期待</div>
+			  <div class="tab-pane" id="settings">火热开发中，敬请期待</div>
 			</div>
 		</div>
 	</div>
