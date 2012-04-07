@@ -4,10 +4,16 @@
 	$(document).ready(function(){
 		$("#search-box").focus();
 	});
+	function checkSearhBox(){
+		if($("#search-box").val()==''){
+			$("#search-box").focus();
+			return false;
+		}
+	}
 </script>
 <div style="height: 400px">
 	<div align="center" style="padding-top: 150px">
-		<form action="@{Application.search()}" method="get">
+		<form action="@{Application.search()}" method="get" onsubmit="return checkSearhBox()">
 			<input type="text" class="input-xlarge search-query" id="search-box" name="keywords" placeholder="输入景点名、游玩风格等进行搜索">
 	  		<button type="submit" class="btn btn-large btn-primary" id="search-btn">
 	  			<i class="icon-search icon-white"></i>

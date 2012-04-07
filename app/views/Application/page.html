@@ -1,0 +1,8 @@
+<!-- 全网搜索结果使用的分页项模板 -->
+#{list searchResults,as:'r'}
+<div class="full-web-result">
+  <div><a href="${r.url}" target="_blank">#{verbatim}${r.title}#{/verbatim}</a></div>
+  <div class="description">#{verbatim}${r.highlighting}#{/verbatim}</div>
+  <div class="url">来自:${r.url}</div>
+</div>
+#{/list}

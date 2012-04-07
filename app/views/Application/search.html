@@ -11,6 +11,7 @@
 		<div align="center">
 		<form action="@{Application.search()}" method="get">
 			<input value="${keywords}" type="text" class="input-xlarge search-query" name="keywords" id="search-box" placeholder="输入景点名、游玩风格等进行搜索"/>
+			<input type="hidden" value="${keywords}" id="keywords"/>
 		  	<button type="submit" class="btn btn-large btn-primary" id="search-btn">
 		  		<i class="icon-search icon-white"></i>
 		  		<span>旅游搜索</span>
@@ -25,7 +26,6 @@
 			  <li class="active"><a href="#full-web" data-toggle="tab">全网搜索</a></li>
 			  <li><a href="#scenic-list" data-toggle="tab">景点</a></li>
 			  <li><a href="#profile" data-toggle="tab">路线</a></li>
-			  <li><a href="#messages" data-toggle="tab">住宿</a></li>
 			  <li><a href="#settings" data-toggle="tab">计划</a></li>
 			</ul>
 			<div class="tab-content">
@@ -41,7 +41,7 @@
 			              <img src="/public/images/160120.png" alt="${s.name}"/>
 			            #{/if}
 			            #{if s.thumb != null}
-			              <img style="height: 120px" src="/data/scenic/images/thumbs/${s.thumb }" alt="${s.name}"/>
+			              <img style="height: 120px;" src="/data/scenic/images/thumbs/${s.thumb }" alt="${s.name}"/>
 			            #{/if}
 			          </a>
 			          <h5>${s.name}</h5>
@@ -52,28 +52,16 @@
 	           </ul>
 			     </div>
 			     <!-- 再列出全网搜索的结果 -->
-			     <div id="full-web-results" class="span7">
-			       <div class="full-web-result">
-			         <div><a href="#" target="_blank">苏黎世休闲游</a></div>
-			         <div class="description">难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。
-			           难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。
-			           难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。</div>
-			         <div class="url">来自:http://www.baidu.com/xxx/xxx/index.html</div>
-			       </div>
-			       <div class="full-web-result">
-               <div><a href="#" target="_blank">苏黎世休闲游</a></div>
-               <div class="description">难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。
-                 难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。
-                 难得半天时间抽身，但所到几个景点足够让我领略苏黎世最美的景致了。</div>
-               <div class="url">
-                  来自:http://www.baidu.com/xxx/xxx/index.html &nbsp;&nbsp; 2012-12-12 10:10:10
-               </div>
-             </div>
+			     <div id="full-web-results" class="span7"></div>
+			     <div id="web-search-loading" class="span7 alert alert-info" align="center">
+			     	数据加载中......
+			     </div>
+			     <div class="span7 alert alert-info" align="center" id="web-search-read-more">
+			     	点击加载更多
 			     </div>
 			  </div>
 			  <div class="tab-pane" id="scenic-list">景点列表</div>
 			  <div class="tab-pane" id="profile">火热开发中，敬请期待</div>
-			  <div class="tab-pane" id="messages">火热开发中，敬请期待</div>
 			  <div class="tab-pane" id="settings">火热开发中，敬请期待</div>
 			</div>
 		</div>

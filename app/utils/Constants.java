@@ -13,7 +13,10 @@ public class Constants {
   public static final String USER_ID_IN_SESSION = "USER_ID_IN_SESSION";
   public static final String ADMIN_ID_IN_SESSION = "ADMIN_ID_IN_SESSION";
 
+  //各种查询的分页数量
   public static final int SCENIC_SEARCH_PAGE_SIZE = 24;
+  public static final int WEB_SEARCH_PAGE_SIZE = 24;
+
   public static final String SCENIC_INDEX_STATUS = "SCENIC_INDEX_STATUS";
   //全局分词器
   public static final Analyzer analyzer = new IKAnalyzer();
