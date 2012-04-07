@@ -21,5 +21,10 @@ $(function(){
 	$.post("/WebSearch/search",{keywords:$("#keywords").val(),page:1},function(data){
 		$("#full-web-results").append(data);
 	});
-	
 });
+function checkSearhBox(){
+	if($("#search-box").val()==''){
+		$("#search-box").focus();
+		return false;
+	}
+}
