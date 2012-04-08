@@ -1,23 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'搜游岛' /}
-#{set 'moreStyles'}
-     #{stylesheet 'application.css'/}
-     #{stylesheet 'jquery-ui-slider.css'/}
-#{/set}
-#{set 'moreScripts'}
-     #{script 'application.js'/}
-     #{script 'jquery-ui-slider.js'/}
-#{/set}
 <script>
 	$(document).ready(function(){
 		$("#search-box").focus();
-		//搜索框滑动按钮
-		$('#slider').slider({
-			range: true,
-			values: [17, 67]
-		});
 	});
-	
+	function checkSearhBox(){
+		if($("#search-box").val()==''){
+			$("#search-box").focus();
+			return false;
+		}
+	}
 </script>
 <div style="height: 400px">
 	<div align="center" style="padding-top: 150px">
@@ -28,6 +20,5 @@
 		  		<span>旅游搜索</span>
 		  	</button>
 	  	</form>
-	  	<div id="slider"></div>
 	</div>
 </div>

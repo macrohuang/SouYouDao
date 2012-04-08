@@ -22,9 +22,3 @@ $(function(){
 		$("#full-web-results").append(data);
 	});
 });
-function checkSearhBox(){
-	if($("#search-box").val()==''){
-		$("#search-box").focus();
-		return false;
-	}
-}

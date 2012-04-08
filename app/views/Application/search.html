@@ -38,7 +38,7 @@
 			        #{list scenics,as:'s'}
               <li class="span2">
 				       <div class="thumbnail">
-			          <a href="#" target="_blank">
+			          <a href="@{Scenics.detail(s.id)}" target="_blank">
 			            #{if s.thumb == null}
 			              <img src="/public/images/160120.png" alt="${s.name}"/>
 			            #{/if}
