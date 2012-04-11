@@ -1,0 +1,46 @@
+#days-nav-container {
+	margin-left: 140px;
+	margin-top: 80px;
+	width: 120px;
+	text-align: right;
+}
+.days-nav {
+	border-right: 5px #DDD solid;
+	font-size: 20px;
+	text-decoration: none;
+	padding: 0 15px 17px 16px;
+}
+.days-nav a:HOVER {
+	text-decoration: none;
+}
+.days-active {
+	border-right: 5px #3C8DC5 solid;
+}
+#days-plan-container {
+	margin-left: 140px;
+	float: right;
+	width: 850px;
+	margin-left: 20px;
+}
+.day-date {
+	width: 100px;
+	height: 30px;
+	font-size: 20px;
+	line-height: 30px;
+	text-align: center;
+}
+.day-plan {
+	border-bottom: 1px #DDD solid;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+.day-plan-map {
+	margin: 5px 0;
+}
+.day-time-plan {
+	margin-bottom: 10px;
+}
+.day-time {
+	font-size: 18px;
+	line-height: 30px;
+}
