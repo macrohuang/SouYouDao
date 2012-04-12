@@ -151,3 +151,8 @@ body {
 .tab-btn-on {
    background: #E1E1E1; 
 }
+#login-btn {
+	float: right;
+	line-height: 55px;
+	font-size: 14px;
+}
