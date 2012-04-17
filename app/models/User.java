@@ -2,9 +2,12 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import play.data.validation.Equals;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.libs.Codec;
 
 /**
  * 用户
@@ -13,12 +16,21 @@ import play.db.jpa.Model;
 @Entity
 @Table(name = "T_USER")
 public class User extends Model {
-  @Required(message="请填写账号")
+  @Required(message = "请填写账号")
   public String username;
-  @Required(message="请填写密码")
+  @Required(message = "请填写密码")
+  @Equals(value = "passwordConfirm", message = "密码输入不一致")
   public String password;
+  @Transient
+  public String passwordConfirm;
 
   public User() {
+  }
+
+  public User save() {
+    this.password = Codec.hexMD5(this.password);
+    _save();
+    return this;
   }
 
   public User(String username, String password) {

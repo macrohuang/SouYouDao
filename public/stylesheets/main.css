@@ -156,3 +156,8 @@ body {
 	line-height: 55px;
 	font-size: 14px;
 }
+#user-info {
+	float: right;
+	line-height: 55px;
+	font-size: 14px;
+}

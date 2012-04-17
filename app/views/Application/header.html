@@ -9,7 +9,13 @@
 				</ul>
 			</div>
 			<div id="login-btn">
-				<a href="@{Users.login()}" class="badge">登录/注册</a></div>
+			   #{if session.USER_ID_IN_SESSION}
+			     ${session.USERNAME_IN_SESSION}
+			     <a href="@{Users.logout()}" class="badge">退出</a></div>
+			   #{/if}
+			   #{else}
+			     <a href="@{Users.login()}" class="badge">登录/注册</a></div>
+			   #{/else}
 		</div>
 	</div>
 </div>

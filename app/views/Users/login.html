@@ -1,13 +1,67 @@
 #{extends 'main.html' /}
 #{set title:'用户登录' /}
-
 #{set 'moreStyles'}
      #{stylesheet 'user.css'/}
 #{/set}
-<div class="submitForm well">
-	
+#{set 'moreScripts'}
+     #{script 'jquery.validate.js'/}
+     #{script 'user.js'/}
+#{/set}
+#{include 'Application/error.html'/}
+<div class="loginForm well">
+	<form class="form-horizontal" action="@{Users.doLogin()}" id="loginForm" method="post">
+	  <fieldset>
+	    <legend>已有账号？</legend>
+	      <div class="control-group">
+            <label class="control-label" for="username">账&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+            <div class="controls">
+              <input class="required input-large focused" name="username" id="username" type="text" placeholder="请输入您的账号">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+            <div class="controls">
+              <input class="required input-large focused" name="password" id="password" type="password" placeholder="请输入您的密码"/>
+            </div>
+        </div>
+        <div align="center">
+            <a onclick="$('#loginForm').submit();" class="btn btn-primary">登&nbsp;&nbsp;&nbsp;&nbsp;陆</a>
+        </div>
+        <!-- //TODO -->
+        <div align="center" style="line-height: 45px">
+          <span>新浪微博登陆</span>
+          <span>QQ账号登陆</span>
+          <span>人人账号登陆</span>
+        </div>
+	  </fieldset>
+	</form>
 </div>
 
-<div class="loginForm well">
-	
+<div class="regForm well">
+	<form class="form-horizontal" action="@{Users.save()}" id="regForm" method="post">
+    <fieldset>
+      <legend>还没有账号？</legend>
+        <div class="control-group">
+            <label class="control-label" for="sign_username">账&nbsp;&nbsp;&nbsp;&nbsp;号</label>
+            <div class="controls">
+              <input class="required input-large focused" name="user.username" id="sign_username" type="text" placeholder="输入您要注册的账号"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="sign_password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+            <div class="controls">
+              <input class="required input-large focused" name="user.password" id="sign_password" type="password" placeholder="设置您的密码"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="sign_password_confirm">重复密码</label>
+            <div class="controls">
+              <input class="required input-large focused" name="user.passwordConfirm" id="sign_password_confirm" type="password" placeholder="再次输入密码"/>
+            </div>
+        </div>
+        <div align="center">
+            <a onclick="$('#regForm').submit();" class="btn btn-primary">注&nbsp;&nbsp;&nbsp;&nbsp;册</a>
+        </div>
+    </fieldset>
+  </form>
 </div>

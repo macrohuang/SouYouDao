@@ -1,8 +1,11 @@
-.submitForm {
+.regForm {
 	width: 450px;
-	float: left;
+	float: right;
 }
 .loginForm {
 	width: 450px;
-	float: right;
+	float: left;
+}
+.regForm label{
+	word-spacing: 10px;
 }

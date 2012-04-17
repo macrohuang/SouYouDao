@@ -6,50 +6,28 @@
 #{set 'moreStyles'}
      #{stylesheet 'plan.css'/}
 #{/set}
-<div id="days-nav-container" class="navbar navbar-fixed-top">
-	<div class="days-nav days-active"><a href="#">8月31日</a></div>
-	<div class="days-nav"><a href="#">9月1日</a></div>
-	<div class="days-nav"><a href="#">9月2日</a></div>
-	<div class="days-nav"><a href="#">9月3日</a></div>
-	<div class="days-nav"><a href="#">9月4日</a></div>
-</div>
-<div id="days-plan-container">
-	<!-- 每一天的计划 -->
-	<div class="day-plan">
-		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
-		<!-- 当天计划内容 -->
-		<div class="day-content">
-			<div class="day-plan-map">
-				<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=zh-CN&amp;geocode=&amp;q=%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%B8%82%E5%8C%97%E4%BA%AC&amp;aq=0&amp;oq=beijing&amp;sll=37.0625,-95.677068&amp;sspn=39.916234,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%B8%82&amp;ll=39.904214,116.407413&amp;spn=0.302837,0.617294&amp;t=m&amp;z=8&amp;output=embed"></iframe>
-			</div>
-			<!-- 当天计划的时间表 -->
-			<div class="day-time-plan">
-				<div class="day-time">08:00 ~ 09:30</div>
-				<div class="day-time-content">
-					吃早饭，打车到动物园
-				</div>
-			</div>
-			<div class="day-time-plan">
-				<div class="day-time">09:30 ~ 13:00</div>
-				<div class="day-time-content">
-					游玩西半部分，吃午饭
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="day-plan">
-		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
-		<!-- 当天计划内容 -->
-		<div class="day-content">内容</div>
-	</div>
-	
-	<div class="day-plan">
-		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
-		<!-- 当天计划内容 -->
-		<div class="day-content">内容</div>
-	</div>
+<div>
+  <div class="hero-unit">
+     <h2>出来混 ,</h2>
+     <h2>总是需要一个计划什么的 !</h2>
+     <p/>
+     <p><a href="@{Plans.edit()}" class="btn btn-primary btn-large">创建新计划 »</a></p>
+   </div>
+   <div class="row-fluid">
+       <div class="span4">
+         <h2>ROY的北京三日游</h2>
+         <p>这是一个测试,这是一个测试,这是一个测试,这是一个测试</p>
+         <p><a class="btn" href="#">View detail »</a></p>
+       </div>
+       <div class="span4">
+         <h2>鲁迅故居一日游</h2>
+         <p>Testing,Testing</p>
+         <p><a class="btn" href="#">View detail »</a></p>
+       </div>
+       <div class="span4">
+         <h2>十天穷游山西</h2>
+         <p>十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西</p>
+         <p><a class="btn" href="#">View detail »</a></p>
+       </div>
+     </div>
 </div>
