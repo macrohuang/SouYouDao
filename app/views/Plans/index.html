@@ -11,7 +11,22 @@
      <h2>出来混 ,</h2>
      <h2>总是需要一个计划什么的 !</h2>
      <p/>
-     <p><a href="@{Plans.edit()}" class="btn btn-primary btn-large">创建新计划 »</a></p>
+     <p><a class="btn btn-primary btn-large" data-toggle="modal" href="#newPlan">创建新计划 »</a></p>
+     <!-- 新计划第一步 modal start -->
+     <div class="modal fade" id="newPlan">
+		  <div class="modal-header">
+		    <a class="close" data-dismiss="modal">×</a>
+		    <h3>请输入计划名称:</h3>
+		  </div>
+		  <div class="modal-body">
+		    <p><input type="text" class="input-xxlarge"/></p>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn" data-dismiss="modal">取消</a>
+		    <a href="@{Plans.edit()}" class="btn btn-primary">下一步</a>
+		  </div>
+		</div>
+		<!-- 新计划第一步 modal end -->
    </div>
    <div class="row-fluid">
        <div class="span4">

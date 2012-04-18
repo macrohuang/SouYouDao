@@ -15,9 +15,9 @@
 </div>
 <div id="days-plan-container">
   <div class="well">
-	    <div class="span6"><input class="input-xxlarge" type="text"/></div>
+	    <div class="span6"><input onfocus="editPlanName()" class="input-xxlarge" type="text" id="planName"/></div>
 	    <div class="span2">
-	     <a class="btn btn-primary" href="#">保存标题</a>
+	     <a class="btn btn-primary" href="#" onclick="savePlanName(this)" id="savePlanNameBtn">保存标题</a>
 	     <a class="btn btn-success" href="#">添加一天</a>
 	    </div>
   </div>

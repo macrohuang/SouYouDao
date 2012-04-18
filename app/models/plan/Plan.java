@@ -17,5 +17,5 @@ import play.db.jpa.Model;
 public class Plan extends Model {
   public String name;
   @OneToMany(mappedBy = "plan")
-  public List<Plan> plans;
+  public List<PlanDay> planDays;
 }
