@@ -1,4 +1,4 @@
-package models;
+package models.roadmap;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

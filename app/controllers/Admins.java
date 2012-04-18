@@ -7,7 +7,7 @@ import jobs.ScenicImageDownloader;
 import jobs.ScenicIndexer;
 import models.Admin;
 import models.Scenic;
-import models.roadmaps.ScenicInnerRoadmap;
+import models.roadmap.ScenicInnerRoadmap;
 import models.utils.SystemState;
 import models.utils.area.Region;
 import play.data.validation.Required;

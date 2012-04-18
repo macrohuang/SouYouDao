@@ -23,6 +23,7 @@
 	margin-left: 20px;
 }
 .day-date {
+	float: left;
 	width: 100px;
 	height: 30px;
 	font-size: 20px;
@@ -39,6 +40,7 @@
 }
 .day-time-plan {
 	margin-bottom: 10px;
+	clear: both;
 }
 .day-time {
 	font-size: 18px;

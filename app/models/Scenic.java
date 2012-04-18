@@ -10,8 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import models.comments.ScenicComment;
-import models.images.ScenicImage;
-import models.roadmaps.ScenicInnerRoadmap;
+import models.image.ScenicImage;
+import models.roadmap.ScenicInnerRoadmap;
 import models.utils.area.City;
 import models.utils.area.Province;
 import models.utils.area.Region;

@@ -1,4 +1,4 @@
-package models.images;
+package models.image;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

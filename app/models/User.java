@@ -7,7 +7,6 @@ import javax.persistence.Transient;
 import play.data.validation.Equals;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.libs.Codec;
 
 /**
  * 用户
@@ -25,12 +24,6 @@ public class User extends Model {
   public String passwordConfirm;
 
   public User() {
-  }
-
-  public User save() {
-    this.password = Codec.hexMD5(this.password);
-    _save();
-    return this;
   }
 
   public User(String username, String password) {

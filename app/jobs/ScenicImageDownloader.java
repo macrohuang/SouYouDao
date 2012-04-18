@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.net.URL;
 
 import models.Scenic;
-import models.images.ScenicImage;
+import models.image.ScenicImage;
 import play.Logger;
 import play.jobs.Job;
 import play.libs.Codec;

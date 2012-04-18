@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Scenic;
-import models.images.ScenicImage;
+import models.image.ScenicImage;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.IndexSearcher;

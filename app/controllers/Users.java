@@ -37,6 +37,7 @@ public class Users extends Application {
       validation.keep();
       login();
     }
+    user.password = Codec.hexMD5(user.password);
     user.save();
     loginSession(user);
     Plans.index();
