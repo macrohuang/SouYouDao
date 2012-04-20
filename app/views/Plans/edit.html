@@ -9,16 +9,13 @@
 <div id="days-nav-container" class="navbar navbar-fixed-top">
 	<div class="days-nav days-active"><a href="#">8月31日</a></div>
 	<div class="days-nav"><a href="#">9月1日</a></div>
-	<div class="days-nav"><a href="#">9月2日</a></div>
-	<div class="days-nav"><a href="#">9月3日</a></div>
-	<div class="days-nav"><a href="#">9月4日</a></div>
 </div>
 <div id="days-plan-container">
   <div class="well">
-	    <div class="span6"><input onfocus="editPlanName()" class="input-xxlarge" type="text" id="planName"/></div>
+	    <div class="span6"><input onfocus="editPlanName()" class="input-xxlarge" type="text" id="planName" name="planName" value="${plan.name}"/></div>
 	    <div class="span2">
-	     <a class="btn btn-primary" href="#" onclick="savePlanName(this)" id="savePlanNameBtn">保存标题</a>
-	     <a class="btn btn-success" href="#">添加一天</a>
+	     <a class="btn btn-primary" onclick="savePlanName(${plan.id})" id="savePlanNameBtn">保存标题</a>
+	     <a class="btn btn-success" onclick="addDayPlan()">添加一天</a>
 	    </div>
   </div>
 	<!-- 每一天的计划 -->
@@ -31,6 +28,7 @@
 			    <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu">
+			      <li><a onclick="addDayTime(this)">添加时间段</a></li>
             <li><a href="#">添加图片</a></li>
             <li><a href="#">添加地图</a></li>
             <li><a href="#">删除本日计划</a></li>
@@ -40,9 +38,8 @@
 		
 		<!-- 当天计划内容 -->
 		<div class="day-content">
-			<div class="day-plan-map">
-				IMAGES
-			</div>
+			<div id="day-plan-maps"></div>
+			<div id="day-plan-images"></div>
 			<!-- 当天计划的时间表 -->
 			<div class="day-time-plan">
 				<div class="day-time">08:00 ~ 09:30</div>
@@ -50,13 +47,8 @@
 					吃早饭，打车到动物园
 				</div>
 			</div>
-			<div class="day-time-plan">
-				<div class="day-time">09:30 ~ 13:00</div>
-				<div class="day-time-content">
-					游玩西半部分，吃午饭
-				</div>
-			</div>
 		</div>
+		<!-- 当天计划内容 end -->
+		
 	</div>
-	
 </div>
