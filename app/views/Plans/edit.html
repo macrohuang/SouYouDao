@@ -2,10 +2,13 @@
 #{set title:'计划' /}
 #{set 'moreScripts'}
      #{script 'plan.js'/}
+     #{script 'jquery.ptTimeSelect.js'/}
 #{/set}
 #{set 'moreStyles'}
      #{stylesheet 'plan.css'/}
+     #{stylesheet 'jquery.ptTimeSelect.css'/}
 #{/set}
+<input type="hidden" id="planId" value="${plan.id}"/>
 <div id="days-nav-container" class="navbar navbar-fixed-top">
 	<div class="days-nav days-active"><a href="#">8月31日</a></div>
 	<div class="days-nav"><a href="#">9月1日</a></div>
@@ -18,12 +21,16 @@
 	     <a class="btn btn-success" onclick="addDayPlan()">添加一天</a>
 	    </div>
   </div>
+  #{list planDays,as:'d'}
 	<!-- 每一天的计划 -->
-	<div class="day-plan">
+	<div class="day-plan" planDayId="${d.id}">
 		<!-- 当天日期 -->
 		<div class="day-label">
 		  <div class="btn-group">
-		    <button class="btn btn-info">8月31日</button>
+		    <button class="btn btn-info datepick" data-date-format="yyyy-mm-dd" data-date="${d.date}">
+		      #{if d.date == null}选择日期#{/if}
+		      #{else}${d.date}#{/else}
+		    </button>
 			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 			    <span class="caret"></span>
 			  </button>
@@ -34,21 +41,26 @@
             <li><a href="#">删除本日计划</a></li>
          </ul>
       </div>
+      <div id="day-plan-maps">MAPS</div>
+      <div id="day-plan-images">IMAGES</div>
 		</div>
-		
 		<!-- 当天计划内容 -->
 		<div class="day-content">
-			<div id="day-plan-maps"></div>
-			<div id="day-plan-images"></div>
+			#{list d.planTimes,as:'t'}
 			<!-- 当天计划的时间表 -->
 			<div class="day-time-plan">
-				<div class="day-time">08:00 ~ 09:30</div>
+				<div class="day-time">
+				  <input type="text" class="timepick input-small" planTimeId="${t.id}" name="startTime" value="${t.startTime}"/>
+				  到
+				  <input type="text" class="timepick input-small" name="endTime" planTimeId="${t.id}" value="${t.endTime}"/>
+				</div>
 				<div class="day-time-content">
 					吃早饭，打车到动物园
 				</div>
 			</div>
+			#{/list}
 		</div>
 		<!-- 当天计划内容 end -->
-		
 	</div>
+	#{/list}
 </div>

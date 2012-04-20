@@ -1,6 +1,5 @@
 package models.plan;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,7 +16,8 @@ import play.db.jpa.Model;
 @Entity
 @Table(name = "T_PLAN_DAY")
 public class PlanDay extends Model {
-  public Date date;
+  // “天”只需要 YYYY-MM-DD 格式即可
+  public String date;
 
   @ManyToOne
   public Plan plan;

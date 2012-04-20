@@ -1,7 +1,5 @@
 package models.plan;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,7 +13,10 @@ import play.db.jpa.Model;
 @Entity
 @Table(name = "T_PLAN_TIME")
 public class PlanTime extends Model {
-  public Date date;
+  // 13:30
+  public String startTime;
+  // 14:30
+  public String endTime;
   @ManyToOne
   public PlanDay planDay;
 }
