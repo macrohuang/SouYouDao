@@ -1,7 +1,7 @@
 #days-nav-container {
 	margin-left: 140px;
 	margin-top: 80px;
-	width: 120px;
+	width: 140px;
 	text-align: right;
 }
 .days-nav {
@@ -13,14 +13,10 @@
 .days-nav a:HOVER {
 	text-decoration: none;
 }
-.days-active {
-	border-right: 5px #3C8DC5 solid;
-}
 #days-plan-container {
 	margin-left: 140px;
 	float: right;
-	width: 850px;
-	margin-left: 20px;
+	width: 840px;
 }
 .day-date {
 	float: left;
@@ -38,6 +34,10 @@
 .day-plan-map,.day-plan-image {
 	margin: 5px 0;
 }
+.day-plan-image {
+	max-height: 300px;
+	text-align: center;
+}
 .day-time-plan {
 	margin-bottom: 10px;
 	clear: both;
@@ -48,4 +48,17 @@
 }
 .plan-name-saved {
 	background-color: transparent;
+}
+.day-time-content {
+	font-size: 14px;
+	line-height: 16px;
+	margin-top: 10px;
+}
+.day-time-content textarea {
+	background: transparent;
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.05)
+}
+#imgPreview {
+	max-height: 200px;
 }

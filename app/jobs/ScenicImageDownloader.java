@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
-import models.Scenic;
-import models.image.ScenicImage;
+import models.scenic.Scenic;
+import models.scenic.ScenicImage;
 import play.Logger;
 import play.jobs.Job;
 import play.libs.Codec;

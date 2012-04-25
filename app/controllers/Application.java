@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Admin;
-import models.Scenic;
+import models.scenic.Scenic;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.IndexSearcher;

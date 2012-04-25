@@ -10,10 +10,14 @@ import org.apache.lucene.store.FSDirectory;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 public class Constants {
+  // SESSION 中的常量
   public static final String USER_ID_IN_SESSION = "USER_ID_IN_SESSION";
   public static final String USERNAME_IN_SESSION = "USERNAME_IN_SESSION";
   public static final String ADMIN_ID_IN_SESSION = "ADMIN_ID_IN_SESSION";
 
+  // 常用文件夹位置,如 /ROOT/TEST_DIR/
+  public static final String PLAN_DAY_IMAGE_PATH = FileUtil.getApplicationPath("data", "plan",
+      "images");
   // 各种查询的分页数量
   public static final int SCENIC_SEARCH_PAGE_SIZE = 24;
   public static final int WEB_SEARCH_PAGE_SIZE = 24;

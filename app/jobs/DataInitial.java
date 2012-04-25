@@ -1,8 +1,8 @@
 package jobs;
 
 import models.Admin;
-import models.Scenic;
 import models.User;
+import models.scenic.Scenic;
 import models.utils.area.City;
 import models.utils.area.Province;
 import models.utils.area.Region;

@@ -1,4 +1,4 @@
-package models;
+package models.scenic;
 
 import java.util.Date;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import models.Admin;
 import models.comments.ScenicComment;
-import models.image.ScenicImage;
 import models.roadmap.ScenicInnerRoadmap;
 import models.utils.area.City;
 import models.utils.area.Province;

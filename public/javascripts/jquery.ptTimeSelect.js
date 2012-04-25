@@ -45,19 +45,9 @@
  * |	<link rel="stylesheet" type="text/css" href="jquery.ptTimeSelect.css" />
  * |	<script type="text/javascript" src="jquery.ptTimeSelect.js"></script>
  * |
- * 
  * USAGE:
  * 
  * 	-	See <$(ele).ptTimeSelect()>
- * 
- * 
- * 
- * LAST UPDATED:
- * 
- * 		- $Date: 2011/10/16 16:42:30 $
- * 		- $Author: paulinho4u $
- * 		- $Revision: 1.7 $
- * 
  * 
  **********************************************************************/
 
@@ -69,10 +59,6 @@ jQuery.ptTimeSelect = {
  * PROPERTY: jQuery.ptTimeSelect.options
  * 		The default options for all timeselect attached elements. Can be
  * 		overwriten wiht <jQuery.fn.ptTimeSelect()>
- * 
- * 	containerClass	-	
- * 
- * 
  */
 jQuery.ptTimeSelect.options = {
 		containerClass: undefined,
@@ -121,9 +107,9 @@ jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 					+	'				</a>'
 					+	'			</div>'
 					+	'			<div id="ptTimeSelectUserTime" style="float: left;">'
-					+	'				<span id="ptTimeSelectUserSelHr">1</span> : '
+					+	'				<span id="ptTimeSelectUserSelHr">01</span> : '
 					+	'				<span id="ptTimeSelectUserSelMin">00</span> '
-					+	'				<span id="ptTimeSelectUserSelAmPm">上午</span>'
+//					+	'				<span id="ptTimeSelectUserSelAmPm">上午</span>'
 					+	'			</div>'
 					+	'			<br style="clear: both;" /><div></div>'
 					+	'		</div>'
@@ -136,26 +122,38 @@ jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 					+	'				<div>'
 					+	'					<div style="float: left; width: 50%;">'
 					+	'						<div class="ui-widget-content ptTimeSelectLeftPane">'
-					+	'							<div class="ptTimeSelectHrAmPmCntr">'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
-					+	'										style="display: block; width: 45%; float: left;">上午</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
-					+	'										style="display: block; width: 45%; float: left;">下午</a>'
-					+	'								<br style="clear: left;" /><div></div>'
-					+	'							</div>'
+//					+	'							<div class="ptTimeSelectHrAmPmCntr">'
+//					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
+//					+	'										style="display: block; width: 45%; float: left;">上午</a>'
+//					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
+//					+	'										style="display: block; width: 45%; float: left;">下午</a>'
+//					+	'								<br style="clear: left;" /><div></div>'
+//					+	'							</div>'
 					+	'							<div class="ptTimeSelectHrCntr">'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">1</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">2</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">3</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">4</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">5</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">6</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">7</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">8</a>'
-					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">9</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">01</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">02</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">03</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">04</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">05</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">06</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">07</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">08</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">09</a>'
 					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">10</a>'
 					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">11</a>'
 					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">12</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">13</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">14</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">15</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">16</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">17</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">18</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">19</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">20</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">21</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">22</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">23</a>'
+					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">00</a>'
 					+	'								<br style="clear: left;" /><div></div>'
 					+	'							</div>'
 					+	'						</div>'
@@ -268,16 +266,6 @@ jQuery.ptTimeSelect.setMin = function(m) {
  * METHOD: jQuery.ptTimeSelect.setTime()
  * 		Takes the time defined by the user and sets it to the input
  * 		element that the popup is currently opened for.
- * 
- * 
- * PARAMS:
- * 
- * 		none.
- * 
- * 
- * RETURN:
- * 
- * 		none
  */
 jQuery.ptTimeSelect.setTime = function() {
 	var tSel = jQuery('#ptTimeSelectUserSelHr').text()
@@ -296,17 +284,6 @@ jQuery.ptTimeSelect.setTime = function() {
  * 		the input field.  Also sets the custom colors/css on the
  * 		displayed area to what ever the input element options were
  * 		set with.
- * 
- * PARAMS:
- * 
- * 		uId	-	STRING. Id of the element for whom the area will
- * 				be displayed. This ID was created when the 
- * 				ptTimeSelect() method was called.
- * 
- * RETURN:
- * 
- * 		nothing.
- * 
  */
 jQuery.ptTimeSelect.openCntr = function (ele) {
 	jQuery.ptTimeSelect.closeCntr()
@@ -324,7 +301,7 @@ jQuery.ptTimeSelect.openCntr = function (ele) {
 		cntr.addClass(opt.containerClass);
 	}
 	cntr.css(style);
-	var hr	= 1;
+	var hr	= '01';
 	var min	= '00';
 	var tm	= '上午';
 	if (i.val()) {
@@ -439,18 +416,7 @@ jQuery.ptTimeSelect._doCheckMouseClick = function(ev){
  * 						popup widget. Function is passed 1 argument: the input
  * 						field as a jquery object.
  * 	onFocusDisplay	-	Boolean. True or False indicating if popup is auto
- * 						displayed upon focus of the input field. (default:true)
- * 
- * 
- * RETURNS:
- * 
- * 		- @return {object} jQuery
- * 
- * 
- * EXAMPLE:
- * 
- * 	|		$('#fooTime').ptTimeSelect();
- * 
+ * 						displayed upon focus of the input field. (default:true) 
  */
 jQuery.fn.ptTimeSelect = function (opt) {
 	return this.each(function(){
@@ -462,7 +428,6 @@ jQuery.fn.ptTimeSelect = function (opt) {
 		var thisOpt = {};
 		thisOpt = $.extend(thisOpt, jQuery.ptTimeSelect.options, opt);
 		e.addClass('hasPtTimeSelect').data("ptTimeSelectOptions", thisOpt);
-		
 		//Wrap the input field in a <div> element with
 		// a unique id for later referencing.
 		if (thisOpt.popupImage || !thisOpt.onFocusDisplay) {
@@ -482,14 +447,3 @@ jQuery.fn.ptTimeSelect = function (opt) {
 		return this;
 	});
 }/* End of jQuery.fn.timeSelect */
-
-
-/***********************************************************************
- * SECTION: HTML INSERTED INTO DOM
- * 	The only html created on the page is the popup window widget. For
- * 	details on the structure of this element see
- * 	<jQuery.ptTimeSelect._ptTimeSelectInit()>
- * 
- */
-
-

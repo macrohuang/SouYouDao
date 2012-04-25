@@ -3,15 +3,18 @@
 #{set 'moreScripts'}
      #{script 'plan.js'/}
      #{script 'jquery.ptTimeSelect.js'/}
+     #{script 'datepicker.js'/}
 #{/set}
 #{set 'moreStyles'}
      #{stylesheet 'plan.css'/}
      #{stylesheet 'jquery.ptTimeSelect.css'/}
+     #{stylesheet 'datepicker.css'/}
 #{/set}
 <input type="hidden" id="planId" value="${plan.id}"/>
 <div id="days-nav-container" class="navbar navbar-fixed-top">
-	<div class="days-nav days-active"><a href="#">8月31日</a></div>
-	<div class="days-nav"><a href="#">9月1日</a></div>
+  #{list planDays,as:'d'}
+	 <div class="days-nav"><a href="#dayId-${d.id}">${d.date}</a></div>
+	#{/list}
 </div>
 <div id="days-plan-container">
   <div class="well">
@@ -23,39 +26,40 @@
   </div>
   #{list planDays,as:'d'}
 	<!-- 每一天的计划 -->
-	<div class="day-plan" planDayId="${d.id}">
+	<div class="day-plan" planDayId="${d.id}" id="dayId-${d.id}">
 		<!-- 当天日期 -->
 		<div class="day-label">
-		  <div class="btn-group">
-		    <button class="btn btn-info datepick" data-date-format="yyyy-mm-dd" data-date="${d.date}">
-		      #{if d.date == null}选择日期#{/if}
-		      #{else}${d.date}#{/else}
-		    </button>
-			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu">
-			      <li><a onclick="addDayTime(this)">添加时间段</a></li>
-            <li><a href="#">添加图片</a></li>
-            <li><a href="#">添加地图</a></li>
-            <li><a href="#">删除本日计划</a></li>
-         </ul>
+		  <div>
+		    <input class="btn btn-info datepick input-small" data-date-format="yyyy-mm-dd" data-date="${d.date}" value="${d.date}"/>
+        <a class="btn btn-success" onclick="addDayTime(this)">添加时间段</a>
+        <a class="btn btn-success" onclick="showImgModal(${d.id})">添加图片</a>
+        <a class="btn btn-danger" onclick="deletePlanDay(this)"><i class="icon-trash icon-white"></i></a>
       </div>
-      <div id="day-plan-maps">MAPS</div>
-      <div id="day-plan-images">IMAGES</div>
+      <div class="day-plan-maps"></div>
+      #{if d.planDayImages}
+      <div class="day-plan-images well">
+        #{list d.planDayImages,as:'i'}
+          <div>
+            <a class="close" data-dismiss="alert" onclick="deletePlanDayImg(${i.id})"><i class="icon-remove icon-black"></i></a>
+            <img class="day-plan-image" src="/data/plan/images/${i.name}"/>
+          </div>
+        #{/list}
+      </div>
+      #{/if}
 		</div>
 		<!-- 当天计划内容 -->
 		<div class="day-content">
 			#{list d.planTimes,as:'t'}
 			<!-- 当天计划的时间表 -->
 			<div class="day-time-plan">
-				<div class="day-time">
-				  <input type="text" class="timepick input-small" planTimeId="${t.id}" name="startTime" value="${t.startTime}"/>
-				  到
-				  <input type="text" class="timepick input-small" name="endTime" planTimeId="${t.id}" value="${t.endTime}"/>
-				</div>
-				<div class="day-time-content">
-					吃早饭，打车到动物园
+				<div class="day-time form-inline well">
+				  <input type="text" class="timepick input-small" name="startTime" planTimeId="${t.id}" placeholder="选择时间" value="${t.startTime}"/>
+				  ~
+				  <input type="text" class="timepick input-small" name="endTime" planTimeId="${t.id}" placeholder="选择时间" value="${t.endTime}"/>
+          <a class="btn btn-danger" onclick="deleteDayTime(this,${t.id})"><i class="icon-trash icon-white"></i></a>
+          <div class="day-time-content">
+	          <textarea rows="2" planTimeId="${t.id}">${t.content}</textarea>
+	        </div>
 				</div>
 			</div>
 			#{/list}
@@ -63,4 +67,33 @@
 		<!-- 当天计划内容 end -->
 	</div>
 	#{/list}
+	<!-- 添加图片 Modal start -->
+   <form action="@{Plans.savePlanDayImage()}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="imgSrc" id="imgSrc" value="local"/>
+      <input type="hidden" name="planDayId" id="planDayId"/>
+      <div class="modal fade" id="newImg">
+       <div class="modal-body">
+        <!-- Tabs -->
+         <ul class="nav nav-tabs">
+				  <li class="active"><a data-toggle="tab" href="#local-img" onclick="changeImg('local')">本地图片</a></li>
+				  <li><a data-toggle="tab" href="#web-imng" onclick="changeImg('web')">网络图片</a></li>
+				</ul>
+				<div class="tab-content">
+				  <div class="tab-pane active" id="local-img">
+				    <input type="file" name="localImg" id="localImg"/>
+				  </div>
+				  <div class="tab-pane" id="web-imng">
+				    <div><input type="text" name="webImg" id="webImg" onchange="preUploadImg(this)" class="input-xxlarge" placeholder="后缀名必须为jpg、png等图片格式"/></div>
+				    <div>网络图片根据网络速度，可能需要刷新网页才能看到</div>
+				  </div>
+				</div>
+				<div align="center"><img id="imgPreview" alt="" src=""/></div>
+       </div>
+       <div class="modal-footer">
+         <a href="#" class="btn" data-dismiss="modal">取消</a>
+         <button type="submit" class="btn btn-primary">保存</button>
+       </div>
+     </div>
+   </form>
+   <!-- 添加图片 Modal end -->
 </div>

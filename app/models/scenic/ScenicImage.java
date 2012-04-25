@@ -1,10 +1,9 @@
-package models.image;
+package models.scenic;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import models.Scenic;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 

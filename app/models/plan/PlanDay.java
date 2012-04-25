@@ -2,6 +2,7 @@ package models.plan;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,6 +22,12 @@ public class PlanDay extends Model {
 
   @ManyToOne
   public Plan plan;
-  @OneToMany(mappedBy = "planDay")
+  @OneToMany(mappedBy = "planDay", cascade = CascadeType.ALL)
   public List<PlanTime> planTimes;
+  @OneToMany(mappedBy = "planDay", cascade = CascadeType.ALL)
+  public List<PlanDayImage> planDayImages;
+
+  public List<PlanTime> getPlanTimes() {
+    return PlanTime.find("planDay.id = ? order by startTime asc", this.id).fetch();
+  }
 }

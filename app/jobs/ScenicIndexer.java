@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import models.Scenic;
+import models.scenic.Scenic;
 import models.utils.SystemState;
 
 import org.apache.lucene.document.Document;
