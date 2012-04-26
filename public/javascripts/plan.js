@@ -145,7 +145,6 @@ function dateFormat(date){
 	val.dd = (val.dd < 10 ? '0' : '') + val.dd;
 	val.mm = (val.mm < 10 ? '0' : '') + val.mm;
 	var date = [val.yyyy,val.mm,val.dd];
-	console.log(date.join("-"));
 	return date.join("-");
 }
 function preUploadImg(_node){

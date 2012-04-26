@@ -26,6 +26,33 @@ $(function(){
 	if($("#search-box").length > 0){
 		$("#search-box").focus();
 	}
+	//search-box的slider
+	if($(".search-option").length > 0){
+		//天数
+		$( "#slider-days" ).slider({
+			range: true,
+			min: 1,
+			max: 15,
+			values: [ 2, 5 ],
+			slide: function( event, ui ) {
+				$( "#amount-days" ).val( ui.values[ 0 ] + "天 - " + ui.values[ 1 ] + "天" );
+			}
+		});
+		$( "#amount-days" ).val($( "#slider-days" ).slider( "values", 0 ) +
+			"天 - " + $( "#slider-days" ).slider( "values", 1 ) + "天" );
+		//人均消费
+		$( "#slider-consume" ).slider({
+			range: true,
+			min: 0,
+			max: 20000,
+			values: [ 500, 2000 ],
+			slide: function( event, ui ) {
+				$( "#amount-consume" ).val("￥" + ui.values[ 0 ] + " - ￥" + ui.values[ 1 ] );
+			}
+		});
+		$( "#amount-consume" ).val("￥" + $( "#slider-consume" ).slider( "values", 0 ) +
+			" - ￥" + $( "#slider-consume" ).slider( "values", 1 ) );
+	}
 });
 //检查搜索框是否为空
 function checkSearhBox(){

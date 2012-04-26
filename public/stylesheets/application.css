@@ -27,5 +27,13 @@
 .search-options {
 	height: 100px;
 	width: 550px;
-	background-color: gray;
+}
+.search-opt-left {
+	float: left;
+	width: 250px;
+}
+.search-opt-right {
+	float: left;
+	margin-left: 20px;
+	overflow: visible;
 }

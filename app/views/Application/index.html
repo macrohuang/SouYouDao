@@ -1,12 +1,12 @@
 #{extends 'main.html' /}
 #{set title:'搜游岛' /}
 #{set 'moreStyles'}
-     #{stylesheet 'application.css'/}
-     #{stylesheet 'jquery-ui-slider.css'/}
+	#{stylesheet 'jquery-ui-slider.css'/}
+    #{stylesheet 'application.css'/}
 #{/set}
 #{set 'moreScripts'}
-     #{script 'application.js'/}
      #{script 'jquery-ui-slider.js'/}
+     #{script 'application.js'/}
 #{/set}
 <div style="height: 400px">
 	<div align="center" style="padding-top: 150px">
@@ -18,7 +18,14 @@
 	  	</button>
   	</form>
   	<div class="search-options">
-  	
+  		<div class="search-option">
+			<div id="slider-days" class="search-opt-left"></div>
+			<input type="text" id="amount-days" class="search-opt-right input-small"/>
+		</div>
+		<div class="search-option">
+			<div id="slider-consume" class="search-opt-left"></div>
+			<input type="text" id="amount-consume" class="search-opt-right input-small"/>
+		</div>
   	</div>
 	</div>
 </div>

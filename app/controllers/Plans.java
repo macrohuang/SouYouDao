@@ -74,7 +74,6 @@ public class Plans extends Controller {
   }
 
   public static long savePlanDay(long planDayId, long planId, String date) {
-    Logger.info("Plans.savePlanDay() -- date = " + date);
     PlanDay pd = null;
     if (planDayId == 0) {
       pd = new PlanDay();
