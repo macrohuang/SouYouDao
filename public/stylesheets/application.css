@@ -24,3 +24,8 @@
 .url {
 	color: #888;
 }
+.search-options {
+	height: 100px;
+	width: 550px;
+	background-color: gray;
+}

@@ -1,24 +1,24 @@
 #{extends 'main.html' /}
 #{set title:'搜游岛' /}
-<script>
-	$(document).ready(function(){
-		$("#search-box").focus();
-	});
-	function checkSearhBox(){
-		if($("#search-box").val()==''){
-			$("#search-box").focus();
-			return false;
-		}
-	}
-</script>
+#{set 'moreStyles'}
+     #{stylesheet 'application.css'/}
+     #{stylesheet 'jquery-ui-slider.css'/}
+#{/set}
+#{set 'moreScripts'}
+     #{script 'application.js'/}
+     #{script 'jquery-ui-slider.js'/}
+#{/set}
 <div style="height: 400px">
 	<div align="center" style="padding-top: 150px">
 		<form action="@{Application.search()}" method="get" onsubmit="return checkSearhBox()">
 			<input type="text" class="input-xlarge search-query" id="search-box" name="keywords" placeholder="输入景点名、游玩风格等进行搜索">
-	  		<button type="submit" class="btn btn-large btn-primary" id="search-btn">
-	  			<i class="icon-search icon-white"></i>
-		  		<span>旅游搜索</span>
-		  	</button>
-	  	</form>
+	 		<button type="submit" class="btn btn-large btn-primary" id="search-btn">
+	 			<i class="icon-search icon-white"></i>
+	  		<span>旅游搜索</span>
+	  	</button>
+  	</form>
+  	<div class="search-options">
+  	
+  	</div>
 	</div>
 </div>
