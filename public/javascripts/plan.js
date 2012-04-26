@@ -3,11 +3,15 @@ $(function(){
 		$("#planNameForm").validate();
 	}
 	//date-pickers
-	$(".datepick").datepicker().on('changeDate', function(ev){
-		datepickerCallback(ev,$(this));
-	});
+	if($(".datepick").length > 0){
+		$(".datepick").datepicker().on('changeDate', function(ev){
+			datepickerCallback(ev,$(this));
+		});
+	}
 	//time-pickers
-	$('.timepick').ptTimeSelect({onClose:timepickerCallback});
+	if($(".timepick").length > 0){
+		$('.timepick').ptTimeSelect({onClose:timepickerCallback});
+	}
 	//PlanTime content
 	if($(".day-time-content textarea").length > 0){
 		$(".day-time-content textarea").each(function(){
@@ -78,13 +82,24 @@ function addDayTime(_node){
 					'<input type="text" planTimeId="'+planTimeId+'" name="startTime" class="timepick input-small" placeholder="开始时间"/> ~ ' + 
 					'<input type="text" planTimeId="'+planTimeId+'" name="endTime" class="timepick input-small" placeholder="结束时间"/>' +
 					'<a class="btn btn-danger" onclick="deleteDayTime(this,'+planTimeId+')"><i class="icon-trash icon-white"></i></a>' +
-					'<div class="day-time-content"><textarea rows="2" planTimeId="${t.id}"></textarea></div>' +
+					'<div class="day-time-content"><textarea rows="2" planTimeId="'+planTimeId+'"></textarea></div>' +
 					'</div>' + 
 				'</div>' + 
 			'</div>';
 		$(_node).closest(".day-plan").append(html);
 		// 添加新的HTML元素后重新设置时间选择事件
 		$('.timepick').ptTimeSelect({onClose:timepickerCallback});
+		//添加新元素后重新设置textarea编辑事件
+		$(".day-time-content textarea").each(function(){
+			$(this).focus(function(){
+				$(this).css("background","#FFF");
+			});
+			$(this).focusout(function(){
+				$(this).css("background","transparent");
+				//保存当前content到数据库
+				$.post("/Plans/savePlanTimeContent",{planTimeId:$(this).attr("planTimeId"),content:$(this).val()},function(){});
+			});
+		});
 	});
 }
 function deleteDayTime(_node,planTimeId){

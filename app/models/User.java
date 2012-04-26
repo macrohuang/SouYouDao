@@ -1,9 +1,13 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import models.plan.Plan;
 import play.data.validation.Equals;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -22,6 +26,8 @@ public class User extends Model {
   public String password;
   @Transient
   public String passwordConfirm;
+  @OneToMany(mappedBy = "user")
+  public List<Plan> plans;
 
   public User() {
   }

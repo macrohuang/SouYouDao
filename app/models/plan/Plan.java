@@ -3,9 +3,11 @@ package models.plan;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import models.User;
 import play.db.jpa.Model;
 
 /**
@@ -15,6 +17,8 @@ import play.db.jpa.Model;
 @Entity
 @Table(name = "T_PLAN")
 public class Plan extends Model {
+  @ManyToOne
+  public User user;
   public String name;
   @OneToMany(mappedBy = "plan")
   public List<PlanDay> planDays;

@@ -18,10 +18,10 @@
 </div>
 <div id="days-plan-container">
   <div class="well">
-	    <div class="span6"><input onfocus="editPlanName()" class="input-xxlarge" type="text" id="planName" name="planName" value="${plan.name}"/></div>
-	    <div class="span2">
-	     <a class="btn btn-primary" onclick="savePlanName(${plan.id})" id="savePlanNameBtn">保存标题</a>
+	    <div class="span6"><input onblur="savePlanName(${plan.id})" onfocus="editPlanName()" class="input-xxlarge" type="text" id="planName" name="planName" value="${plan.name}"/></div>
+	    <div class="span">
 	     <a class="btn btn-success" onclick="addDayPlan()">添加一天</a>
+	     <a class="btn btn-primary" href="@{Plans.detail(plan.id)}">完成</a>
 	    </div>
   </div>
   #{list planDays,as:'d'}
@@ -31,7 +31,7 @@
 		<div class="day-label">
 		  <div>
 		    <input class="btn btn-info datepick input-small" data-date-format="yyyy-mm-dd" data-date="${d.date}" value="${d.date}"/>
-        <a class="btn btn-success" onclick="addDayTime(this)">添加时间段</a>
+        <a class="btn btn-success" onclick="addDayTime(this)">添加时间计划</a>
         <a class="btn btn-success" onclick="showImgModal(${d.id})">添加图片</a>
         <a class="btn btn-danger" onclick="deletePlanDay(this)"><i class="icon-trash icon-white"></i></a>
       </div>

@@ -8,44 +8,48 @@
      #{stylesheet 'plan.css'/}
 #{/set}
 <div>
-  <div class="hero-unit">
-     <h2>出来混 ,</h2>
-     <h2>总是需要一个计划什么的 !</h2>
-     <p/>
-     <p><a class="btn btn-primary btn-large" data-toggle="modal" href="#newPlan">创建新计划 »</a></p>
-     <!-- 新计划第一步 modal start -->
-     <form action="@{Plans.save()}" method="post" id="planNameForm">
-	     <div class="modal fade" id="newPlan">
-			  <div class="modal-header">
-			    <a class="close" data-dismiss="modal">×</a>
-			    <h3>请输入计划名称:</h3>
-			  </div>
-			  <div class="modal-body">
-			    <p><input type="text" class="required input-xxlarge" name="planName"/></p>
-			  </div>
-			  <div class="modal-footer">
-			    <a href="#" class="btn" data-dismiss="modal">取消</a>
-			    <button type="submit" class="btn btn-primary">下一步</button>
-			  </div>
-			</div>
-		</form>
-		<!-- 新计划第一步 modal end -->
-   </div>
-   <div class="row-fluid">
-       <div class="span4">
-         <h2>ROY的北京三日游</h2>
-         <p>这是一个测试,这是一个测试,这是一个测试,这是一个测试</p>
-         <p><a class="btn" href="#">View detail »</a></p>
-       </div>
-       <div class="span4">
-         <h2>鲁迅故居一日游</h2>
-         <p>Testing,Testing</p>
-         <p><a class="btn" href="#">View detail »</a></p>
-       </div>
-       <div class="span4">
-         <h2>十天穷游山西</h2>
-         <p>十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西,十天穷游山西</p>
-         <p><a class="btn" href="#">View detail »</a></p>
-       </div>
-     </div>
+  <div class="well">
+     <div id="newPlanBtn"><a class="btn btn-primary" data-toggle="modal" href="#newPlan">创建新计划 »</a></div>
+     <ul class="nav nav-pills" id="myTab">
+      <li class="active"><a data-toggle="tab" href="#allPlan">大家的计划</a></li>
+		  <li><a data-toggle="tab" href="#myPlan">我的计划</a></li>
+		</ul>
+		<div class="tab-content">
+		  <div class="tab-pane active" id="allPlan">
+		    #{list plans,as:'p'}
+		      <div class="plan-list">
+		         <div class="total-days">2天</div>
+		         <div class="plan-desc">
+		            <div class="plan-desc-title"><a href="@{Plans.detail(p.id)}">${p.name}</a></div>
+		            <div class="plan-desc-content">苏黎世休闲游苏黎世休闲游苏黎世休闲游</div>
+		            <div class="plan-desc-scenics">包含景点:<a href="#">云台山</a><a href="#">九寨沟</a></div>
+		            <div class="plan-desc-date">出发日期: 2011-11-11</div>
+		         </div>
+          </div>
+		    #{/list}
+		  </div>
+		  <div class="tab-pane" id="myPlan">
+		    #{if USER_ID_IN_SESSION==null}
+		      您还没有注册账号，请<a href="@{Users.login()}">点此注册</a>
+		    #{/if}
+		  </div>
+		</div>
+  </div>
 </div>
+<!-- 新计划第一步 modal start -->
+<form action="@{Plans.save()}" method="post" id="planNameForm">
+   <div class="modal fade" id="newPlan">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>请输入计划名称:</h3>
+    </div>
+    <div class="modal-body">
+      <p><input type="text" class="required input-xxlarge" name="planName"/></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">取消</a>
+      <button type="submit" class="btn btn-primary">下一步</button>
+    </div>
+  </div>
+</form>
+<!-- 新计划第一步 modal end -->

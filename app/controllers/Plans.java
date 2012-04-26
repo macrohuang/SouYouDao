@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import jobs.PlanDayImageDownloader;
@@ -17,7 +18,14 @@ import utils.FileUtil;
 public class Plans extends Controller {
 
   public static void index() {
-    render();
+    List<Plan> myPlans = new ArrayList<Plan>();
+    List<Plan> plans = Plan.find("order by id desc").fetch();
+    // 我的计划
+    if (session.get(Constants.USER_ID_IN_SESSION) != null) {
+      long userId = Long.parseLong(session.get(Constants.USER_ID_IN_SESSION));
+      myPlans = Plan.find("user.id = ?", userId).fetch();
+    }
+    render(myPlans, plans);
   }
 
   /**
@@ -40,6 +48,16 @@ public class Plans extends Controller {
     if (plan == null) {
       index();
     }
+    List<PlanDay> planDays = PlanDay.find("plan.id = ? order by date asc", planId).fetch();
+    render(plan, planDays);
+  }
+
+  /**
+   * 进入计划查看页面
+   * @param planId
+   */
+  public static void detail(long planId) {
+    Plan plan = Plan.findById(planId);
     List<PlanDay> planDays = PlanDay.find("plan.id = ? order by date asc", planId).fetch();
     render(plan, planDays);
   }
@@ -105,8 +123,8 @@ public class Plans extends Controller {
   }
 
   public static void savePlanDayImage(long planDayId, String webImg, File localImg, String imgSrc) {
+    PlanDay pd = PlanDay.findById(planDayId);
     if ("local".equals(imgSrc)) {// 本地图片
-      PlanDay pd = PlanDay.findById(planDayId);
       PlanDayImage pdi = new PlanDayImage();
       File image =
           new File(Constants.PLAN_DAY_IMAGE_PATH + Codec.UUID() + "."
@@ -121,7 +139,7 @@ public class Plans extends Controller {
       PlanDayImageDownloader downloader = new PlanDayImageDownloader(webImg, planDayId);
       downloader.now();
     }
-    edit(planDayId);
+    edit(pd.plan.id);
   }
 
   public static void deletePlanDayImg(long imageId) {

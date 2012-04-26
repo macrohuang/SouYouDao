@@ -2,54 +2,86 @@
 #{set title:'计划' /}
 #{set 'moreScripts'}
      #{script 'plan.js'/}
+     #{script 'jquery.ptTimeSelect.js'/}
+     #{script 'datepicker.js'/}
 #{/set}
 #{set 'moreStyles'}
      #{stylesheet 'plan.css'/}
+     #{stylesheet 'jquery.ptTimeSelect.css'/}
+     #{stylesheet 'datepicker.css'/}
 #{/set}
+<input type="hidden" id="planId" value="${plan.id}"/>
 <div id="days-nav-container" class="navbar navbar-fixed-top">
-	<div class="days-nav days-active"><a href="#">8月31日</a></div>
-	<div class="days-nav"><a href="#">9月1日</a></div>
-	<div class="days-nav"><a href="#">9月2日</a></div>
-	<div class="days-nav"><a href="#">9月3日</a></div>
-	<div class="days-nav"><a href="#">9月4日</a></div>
+  #{list planDays,as:'d'}
+	 <div class="days-nav"><a href="#dayId-${d.id}">${d.date}</a></div>
+	#{/list}
 </div>
 <div id="days-plan-container">
+  <div class="well form-inline">
+	    <div class="span6 plan-name">${plan.name}</div>
+	    <div class="span">
+	     <a class="btn btn-success" href="@{Plans.edit(plan.id)}">编辑计划</a>
+	    </div>
+  </div>
+  #{list planDays,as:'d'}
 	<!-- 每一天的计划 -->
-	<div class="day-plan">
+	<div class="day-plan" planDayId="${d.id}" id="dayId-${d.id}">
 		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
+		<div class="day-label">
+		  <div>
+		    <span class="btn btn-info input-small">${d.date}</span>
+      </div>
+      <div class="day-plan-maps"></div>
+      #{if d.planDayImages}
+      <div class="day-plan-images well">
+        #{list d.planDayImages,as:'i'}
+          <div><img class="day-plan-image" src="/data/plan/images/${i.name}"/></div>
+        #{/list}
+      </div>
+      #{/if}
+		</div>
 		<!-- 当天计划内容 -->
 		<div class="day-content">
-			<div class="day-plan-map">
-				<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=zh-CN&amp;geocode=&amp;q=%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%B8%82%E5%8C%97%E4%BA%AC&amp;aq=0&amp;oq=beijing&amp;sll=37.0625,-95.677068&amp;sspn=39.916234,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=%E4%B8%AD%E5%9B%BD%E5%8C%97%E4%BA%AC%E5%B8%82&amp;ll=39.904214,116.407413&amp;spn=0.302837,0.617294&amp;t=m&amp;z=8&amp;output=embed"></iframe>
-			</div>
+			#{list d.planTimes,as:'t'}
 			<!-- 当天计划的时间表 -->
 			<div class="day-time-plan">
-				<div class="day-time">08:00 ~ 09:30</div>
-				<div class="day-time-content">
-					吃早饭，打车到动物园
+				<div class="day-time form-inline well">
+				  <span>${t.startTime}</span> ~ <span>${t.endTime}</span>
+          <div class="day-time-content">${t.content}</div>
 				</div>
 			</div>
-			<div class="day-time-plan">
-				<div class="day-time">09:30 ~ 13:00</div>
-				<div class="day-time-content">
-					游玩西半部分，吃午饭
-				</div>
-			</div>
+			#{/list}
 		</div>
+		<!-- 当天计划内容 end -->
 	</div>
-	
-	<div class="day-plan">
-		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
-		<!-- 当天计划内容 -->
-		<div class="day-content">内容</div>
-	</div>
-	
-	<div class="day-plan">
-		<!-- 当天日期 -->
-		<div class="day-date label label-info">8月31日</div>
-		<!-- 当天计划内容 -->
-		<div class="day-content">内容</div>
-	</div>
+	#{/list}
+	<!-- 添加图片 Modal start -->
+   <form action="@{Plans.savePlanDayImage()}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="imgSrc" id="imgSrc" value="local"/>
+      <input type="hidden" name="planDayId" id="planDayId"/>
+      <div class="modal fade" id="newImg">
+       <div class="modal-body">
+        <!-- Tabs -->
+         <ul class="nav nav-tabs">
+				  <li class="active"><a data-toggle="tab" href="#local-img" onclick="changeImg('local')">本地图片</a></li>
+				  <li><a data-toggle="tab" href="#web-imng" onclick="changeImg('web')">网络图片</a></li>
+				</ul>
+				<div class="tab-content">
+				  <div class="tab-pane active" id="local-img">
+				    <input type="file" name="localImg" id="localImg"/>
+				  </div>
+				  <div class="tab-pane" id="web-imng">
+				    <div><input type="text" name="webImg" id="webImg" onchange="preUploadImg(this)" class="input-xxlarge" placeholder="后缀名必须为jpg、png等图片格式"/></div>
+				    <div>网络图片根据网络速度，可能需要刷新网页才能看到</div>
+				  </div>
+				</div>
+				<div align="center"><img id="imgPreview" alt="" src=""/></div>
+       </div>
+       <div class="modal-footer">
+         <a href="#" class="btn" data-dismiss="modal">取消</a>
+         <button type="submit" class="btn btn-primary">保存</button>
+       </div>
+     </div>
+   </form>
+   <!-- 添加图片 Modal end -->
 </div>
