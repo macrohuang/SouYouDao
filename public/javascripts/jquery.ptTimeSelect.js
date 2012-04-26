@@ -1,52 +1,14 @@
 /***********************************************************************
  * FILE: jquery.ptTimeSelect.js
  * 
- * 		jQuery plug in for displaying a popup that allows a user
- * 		to define a time and set that time back to a form's input
- * 		field.
- * 
- * 
- * VERSION:  
- * 
- *      - Version 0.7.3
- * 
  * AUTHOR:
- * 
  * 		*Paul T.*
- * 
  * 		- <http://www.purtuga.com>
  * 		- <http://pttimeselect.sourceforge.net>
- * 
- * 
- * DEPENDECIES:
- * 
- * 		-	jQuery.js
- * 			<http://docs.jquery.com/Downloading_jQuery>
- * 
- * 
- * LICENSE:
- * 
- * 		Copyright (c) 2007 Paul T. (purtuga.com)
- *		Dual licensed under the:
- *
- * 		-	MIT
- * 			<http://www.opensource.org/licenses/mit-license.php>
- * 
- * 		-	GPL
- * 			<http://www.opensource.org/licenses/gpl-license.php>
- * 
- * INSTALLATION:
- * 
- * There are two files (.css and .js) delivered with this plugin and
- * that must be incluced in your html page after the jquery.js library,
- * and prior to making any attempts at using it. Both of these are to
- * be included inside of the 'head' element of the document.
- * |
- * |	<link rel="stylesheet" type="text/css" href="jquery.ptTimeSelect.css" />
- * |	<script type="text/javascript" src="jquery.ptTimeSelect.js"></script>
- * |
+ * MODIFIED By:
+ * 		royguo1988@gmail.com
+ * 		remove ap/pm selection and make it no need to click the "SelectTime" label.
  * USAGE:
- * 
  * 	-	See <$(ele).ptTimeSelect()>
  * 
  **********************************************************************/
@@ -78,16 +40,6 @@ jQuery.ptTimeSelect.options = {
  * METHOD: jQuery.ptTimeSelect._ptTimeSelectInit()
  * 		Internal method. Called when page is initalized to add the time
  * 		selection area to the DOM.
- * 
- * PARAMS:
- * 
- * 		none.
- * 
- * RETURNS:
- * 
- * 		nothing.
- * 
- * 
  */
 jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 	jQuery(document).ready(
@@ -109,7 +61,6 @@ jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 					+	'			<div id="ptTimeSelectUserTime" style="float: left;">'
 					+	'				<span id="ptTimeSelectUserSelHr">01</span> : '
 					+	'				<span id="ptTimeSelectUserSelMin">00</span> '
-//					+	'				<span id="ptTimeSelectUserSelAmPm">上午</span>'
 					+	'			</div>'
 					+	'			<br style="clear: both;" /><div></div>'
 					+	'		</div>'
@@ -122,13 +73,6 @@ jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 					+	'				<div>'
 					+	'					<div style="float: left; width: 50%;">'
 					+	'						<div class="ui-widget-content ptTimeSelectLeftPane">'
-//					+	'							<div class="ptTimeSelectHrAmPmCntr">'
-//					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
-//					+	'										style="display: block; width: 45%; float: left;">上午</a>'
-//					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);" '
-//					+	'										style="display: block; width: 45%; float: left;">下午</a>'
-//					+	'								<br style="clear: left;" /><div></div>'
-//					+	'							</div>'
 					+	'							<div class="ptTimeSelectHrCntr">'
 					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">01</a>'
 					+	'								<a class="ptTimeSelectHr ui-state-default" href="javascript: void(0);">02</a>'
@@ -203,11 +147,17 @@ jQuery.ptTimeSelect._ptTimeSelectInit = function () {
 				e.find('.ptTimeSelectMin')
 					.bind("click", function(){
 						jQuery.ptTimeSelect.setMin($(this).text());
+						// Added by royguo1988@gmail.com
+						// set time when choose minute
+						jQuery.ptTimeSelect.setTimeWithoutClose();
 	 				});
 				
 				e.find('.ptTimeSelectHr')
 					.bind("click", function(){
 						jQuery.ptTimeSelect.setHr($(this).text());
+						// Added by royguo1988@gmail.com
+						// set time when choose hour
+						jQuery.ptTimeSelect.setTimeWithoutClose();
 	 				});
 				
 				$(document).mousedown(jQuery.ptTimeSelect._doCheckMouseClick);			
@@ -246,18 +196,13 @@ jQuery.ptTimeSelect.setHr = function(h) {
 /***********************************************************************
  * METHOD: jQuery.ptTimeSelect.setMin(m)
  * 		Sets the minutes selected by the user on the popup.
- * 
- * 
  * PARAMS:
- * 
  * 		m -	[int] interger indicating the minutes. This value is the same
  * 			as the text value displayed on the popup under the minutes.
- * 
- * 
  * RETURN:
- * 
  * 		none
  */
+
 jQuery.ptTimeSelect.setMin = function(m) {
 	jQuery('#ptTimeSelectUserSelMin').empty().append(m);
 }/* END setMin() function */
@@ -270,13 +215,17 @@ jQuery.ptTimeSelect.setMin = function(m) {
 jQuery.ptTimeSelect.setTime = function() {
 	var tSel = jQuery('#ptTimeSelectUserSelHr').text()
 				+ ":"
-				+ jQuery('#ptTimeSelectUserSelMin').text()
-				+ " "
-				+ jQuery('#ptTimeSelectUserSelAmPm').text()
+				+ jQuery('#ptTimeSelectUserSelMin').text();
 	jQuery(".isPtTimeSelectActive").val(tSel);
 	this.closeCntr();
-	
-}/* END setTime() function */
+}
+jQuery.ptTimeSelect.setTimeWithoutClose = function() {
+	var tSel = jQuery('#ptTimeSelectUserSelHr').text()
+				+ ":"
+				+ jQuery('#ptTimeSelectUserSelMin').text();
+	jQuery(".isPtTimeSelectActive").val(tSel);
+}
+/* END setTime() function */
 	
 /***********************************************************************
  * METHOD: jQuery.ptTimeSelect.openCntr()
@@ -286,6 +235,7 @@ jQuery.ptTimeSelect.setTime = function() {
  * 		set with.
  */
 jQuery.ptTimeSelect.openCntr = function (ele) {
+	var current = $(ele).val();
 	jQuery.ptTimeSelect.closeCntr()
 	jQuery(".isPtTimeSelectActive").removeClass("isPtTimeSelectActive");
 	var cntr			= jQuery("#ptTimeSelectCntr");
@@ -301,8 +251,13 @@ jQuery.ptTimeSelect.openCntr = function (ele) {
 		cntr.addClass(opt.containerClass);
 	}
 	cntr.css(style);
-	var hr	= '01';
-	var min	= '00';
+	var date = new Date();
+	var hr	= (date.getHours() < 10 ? '0' : '') + date.getHours();
+	var min	= (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+	if(current.indexOf(":")>-1){
+		hr = current.split(":")[0];
+		min = current.split(":")[1];
+	}
 	var tm	= '上午';
 	if (i.val()) {
 		var re = /([0-9]{1,2}).*:.*([0-9]{2}).*(下午|上午)/i;

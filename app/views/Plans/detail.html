@@ -46,7 +46,12 @@
 			<!-- 当天计划的时间表 -->
 			<div class="day-time-plan">
 				<div class="day-time form-inline well">
-				  <span>${t.startTime}</span> ~ <span>${t.endTime}</span>
+				  #{if !t.startTime}
+				    <span>未设定时间</span>
+				  #{/if}
+				  #{else}
+				    <span>${t.startTime}</span> ~ <span>${t.endTime}</span> 
+				  #{/else}
           <div class="day-time-content">${t.content}</div>
 				</div>
 			</div>

@@ -253,6 +253,8 @@
 								type: 'changeDate',
 								date: this.date
 							});
+							// Added by royguo1988@gmail.com
+							this.hide();
 						}
 						break;
 				}
