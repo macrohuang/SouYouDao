@@ -87,3 +87,11 @@
 	height: 45px;
 	overflow: hidden;
 }
+.update-link {
+	color: #999;
+	font-size: 12px;
+	font-weight: lighter;
+}
+.update-link:HOVER{
+  color: #999;
+}

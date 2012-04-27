@@ -23,3 +23,8 @@ $(function() {
 		}
 	});
 });
+function saveScenicName(nodeId,scenicId){
+	$.post("/Scenics/saveName",{name:$("#"+nodeId).val(),id:scenicId},function(){
+		$(".modal").modal('hide');
+	});
+}

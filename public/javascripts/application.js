@@ -44,10 +44,13 @@ $(function(){
 		$( "#slider-consume" ).slider({
 			range: true,
 			min: 0,
-			max: 20000,
-			values: [ 500, 2000 ],
+			max: 2000,
+			values: [ 200, 500 ],
 			slide: function( event, ui ) {
-				$( "#amount-consume" ).val("￥" + ui.values[ 0 ] + " - ￥" + ui.values[ 1 ] );
+				var step = 100;
+				ui.values[0] = ui.values[0] - (ui.values[0]+step) % step;
+				ui.values[1] = ui.values[1] - (ui.values[1]+step) % step;
+				$( "#amount-consume" ).val("￥" + ui.values[0] + " - ￥" + ui.values[1]);
 			}
 		});
 		$( "#amount-consume" ).val("￥" + $( "#slider-consume" ).slider( "values", 0 ) +

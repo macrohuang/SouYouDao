@@ -60,8 +60,8 @@ public class Scenics extends Controller {
       // 当前页面起点
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
-        //超过总结果集数目跳出循环
-        if(index + i >= results.scoreDocs.length){
+        // 超过总结果集数目跳出循环
+        if (index + i >= results.scoreDocs.length) {
           break;
         }
         ScoreDoc scoreDoc = results.scoreDocs[index + i];
@@ -128,8 +128,8 @@ public class Scenics extends Controller {
       // 当前页面起点
       int index = (page - 1) * Constants.SCENIC_SEARCH_PAGE_SIZE;
       for (int i = 0; i < Constants.SCENIC_SEARCH_PAGE_SIZE; i++) {
-        //超过总结果集数目跳出循环
-        if(index + i >= results.scoreDocs.length){
+        // 超过总结果集数目跳出循环
+        if (index + i >= results.scoreDocs.length) {
           break;
         }
         ScoreDoc scoreDoc = results.scoreDocs[index + i];
@@ -149,5 +149,11 @@ public class Scenics extends Controller {
       }
     }
     renderTemplate(template, scenics);
+  }
+
+  public static void saveName(long id, String name) {
+    Scenic s = Scenic.findById(id);
+    s.name = name;
+    s.save();
   }
 }
