@@ -8,8 +8,8 @@
      #{script 'jquery-ui-slider.js'/}
      #{script 'application.js'/}
 #{/set}
-<div style="height: 400px">
-	<div align="center" style="padding-top: 150px">
+<div style="height: 370px">
+	<div align="center" style="padding-top: 100px">
 		<form action="@{Application.search()}" method="get" onsubmit="return checkSearhBox()">
 			<input type="text" class="input-xlarge search-query" id="search-box" name="keywords" placeholder="输入景点名、游玩风格等进行搜索">
 	 		<button type="submit" class="btn btn-large btn-primary" id="search-btn">
@@ -19,13 +19,39 @@
   	</form>
   	<div class="search-options">
   		<div class="search-option">
-			<div id="slider-days" class="search-opt-left"></div>
-			<input type="text" id="amount-days" class="search-opt-right input-small"/>
-		</div>
-		<div class="search-option">
-			<div id="slider-consume" class="search-opt-left"></div>
-			<input type="text" id="amount-consume" class="search-opt-right input-small"/>
-		</div>
+				<table class="form-inline">
+		        <tr>
+		            <td>
+		                <div id="slider-days" class="search-opt-left"></div>
+		            </td>
+		            <td>
+		                <input type="text" id="amount-days" class="search-opt-right" disabled="disabled"/>
+		            </td>
+		        </tr>
+		    </table>
+			</div>
+			<div class="search-option">
+					<table class="form-inline">
+	            <tr>
+	                <td>
+	                    <div id="slider-consume" class="search-opt-left"></div>
+	                </td>
+	                <td>
+	                    <input type="text" id="amount-consume" class="search-opt-right" disabled="disabled"/>
+	                </td>
+	            </tr>
+	        </table>
+			</div>
+			<div class="search-option">
+         <button class="btn" data-toggle="button">海滩</button>
+         <button class="btn" data-toggle="button">历史</button>
+         <button class="btn" data-toggle="button">山水冒险</button>
+         <button class="btn" data-toggle="button">浪漫</button>
+         <button class="btn" data-toggle="button">都市</button>
+         <button class="btn" data-toggle="button">海滩</button>
+         <button class="btn" data-toggle="button">历史</button>
+         <button class="btn" data-toggle="button">山水冒险</button>
+      </div>
   	</div>
 	</div>
 </div>

@@ -28,12 +28,21 @@
 	height: 100px;
 	width: 550px;
 }
+.search-option {
+	clear: both;
+	text-align: left;
+}
+.search-option table {
+	float: left;
+	margin-bottom: 10px;
+}
 .search-opt-left {
 	float: left;
 	width: 250px;
+	vertical-align: middle;
 }
 .search-opt-right {
 	float: left;
 	margin-left: 20px;
-	overflow: visible;
+	width: 110px;
 }
