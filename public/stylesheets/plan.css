@@ -35,7 +35,7 @@
 	margin: 5px 0;
 }
 .day-plan-image {
-	max-height: 300px;
+	max-width: 90%;
 	text-align: center;
 }
 .day-time-plan {

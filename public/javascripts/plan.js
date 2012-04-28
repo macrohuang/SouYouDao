@@ -176,6 +176,7 @@ function changeImg(_type){
 			var reader = new FileReader();
 			reader.onload = function(event){
 				$("#imgPreview").attr("src",event.target.result);
+				$("#pasteImg").val(event.target.result);
 			};
 			//读取剪贴板中的文件，读取完成后调用onload
 			reader.readAsDataURL(blob);

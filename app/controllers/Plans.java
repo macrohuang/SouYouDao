@@ -122,7 +122,15 @@ public class Plans extends Controller {
     pt.save();
   }
 
-  public static void savePlanDayImage(long planDayId, String webImg, File localImg, String imgSrc) {
+  /**
+   * @param planDayId
+   * @param webImg 网络图片
+   * @param localImg 本地图片
+   * @param pasteImg 直接粘贴图片,Base64编码字符串
+   * @param imgSrc 图片源
+   */
+  public static void savePlanDayImage(long planDayId, String webImg, File localImg,
+      String pasteImg, String imgSrc) {
     PlanDay pd = PlanDay.findById(planDayId);
     if ("local".equals(imgSrc)) {// 本地图片
       PlanDayImage pdi = new PlanDayImage();
@@ -138,8 +146,12 @@ public class Plans extends Controller {
       Logger.info("web " + webImg);
       PlanDayImageDownloader downloader = new PlanDayImageDownloader(webImg, planDayId);
       downloader.now();
-    } else if ("paste".equals(imgSrc)) {    // 直接粘贴
-      // TODO
+    } else if ("paste".equals(imgSrc)) {    // 直接粘贴,需要对Base64进行解码
+      PlanDayImage pdi = new PlanDayImage();
+      File image = FileUtil.writeImageFromBase64(Constants.PLAN_DAY_IMAGE_PATH, pasteImg);
+      pdi.name = image.getName();
+      pdi.planDay = pd;
+      pdi.save();
     }
     edit(pd.plan.id);
   }
