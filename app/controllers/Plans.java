@@ -134,10 +134,12 @@ public class Plans extends Controller {
       pdi.name = image.getName();
       pdi.planDay = pd;
       pdi.save();
-    } else {// 网络图片
+    } else if ("web".equals(imgSrc)) {// 网络图片
       Logger.info("web " + webImg);
       PlanDayImageDownloader downloader = new PlanDayImageDownloader(webImg, planDayId);
       downloader.now();
+    } else if ("paste".equals(imgSrc)) {    // 直接粘贴
+      // TODO
     }
     edit(pd.plan.id);
   }

@@ -77,16 +77,21 @@
         <!-- Tabs -->
          <ul class="nav nav-tabs">
 				  <li class="active"><a data-toggle="tab" href="#local-img" onclick="changeImg('local')">本地图片</a></li>
-				  <li><a data-toggle="tab" href="#web-imng" onclick="changeImg('web')">网络图片</a></li>
+				  <li><a data-toggle="tab" href="#web-img" onclick="changeImg('web')">网络图片</a></li>
+				  <li><a data-toggle="tab" href="#paste-img" onclick="changeImg('paste')">直接粘贴</a></li>
 				</ul>
 				<div class="tab-content">
 				  <div class="tab-pane active" id="local-img">
 				    <input type="file" name="localImg" id="localImg"/>
 				  </div>
-				  <div class="tab-pane" id="web-imng">
+				  <div class="tab-pane" id="web-img">
 				    <div><input type="text" name="webImg" id="webImg" onchange="preUploadImg(this)" class="input-xxlarge" placeholder="后缀名必须为jpg、png等图片格式"/></div>
 				    <div>网络图片根据网络速度，可能需要刷新网页才能看到</div>
 				  </div>
+				  <div class="tab-pane" id="paste-img" align="center">
+				    <div>使用QQ截图或直接复制任何一处图片，直接按Ctrl + V 即可粘贴(仅支持Chrome和FireFox浏览器)</div>
+            <input type="hidden" name="pasteImg" id="pasteImg"/>
+          </div>
 				</div>
 				<div align="center"><img id="imgPreview" alt="" src=""/></div>
        </div>
