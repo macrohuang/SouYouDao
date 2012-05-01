@@ -79,6 +79,9 @@ public class Scenic extends Model {
   // 景点评论
   @OneToMany(mappedBy = "scenic")
   public List<ScenicComment> comments;
+	// 景点别名
+	@OneToMany(mappedBy = "scenic")
+	public List<ScenicAlias> alias;
   // 景点图片
   @OneToMany(mappedBy = "scenic")
   public List<ScenicImage> images;
