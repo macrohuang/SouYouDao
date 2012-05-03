@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Admin;
+import models.User;
 import models.scenic.Scenic;
 
 import org.apache.lucene.document.Document;
@@ -63,14 +64,25 @@ public class Application extends Controller {
 
   @Before
   public static void login() {
-
+    Secure secure = getActionAnnotation(Secure.class);
+    Logger.info("login checking");
+    if (secure != null && secure.login()) {
+      if (session.get(Constants.USER_ID_IN_SESSION) == null) {
+        Users.login();
+      }
+      long user_id = Long.parseLong(session.get(Constants.USER_ID_IN_SESSION));
+      User user = User.findById(user_id);
+      if (user == null) {
+        Users.login();
+      }
+    }
   }
 
   @Before
   public static void admin() {
     Secure secure = getActionAnnotation(Secure.class);
     // 如果没有注解或者注解需要登录均需验证登录状态
-    if (secure != null && secure.admin() == true) {
+    if (secure != null && secure.admin()) {
       if (session.get(Constants.ADMIN_ID_IN_SESSION) == null) {
         Admins.login();
       }

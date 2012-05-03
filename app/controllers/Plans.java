@@ -11,11 +11,11 @@ import models.plan.PlanDayImage;
 import models.plan.PlanTime;
 import play.Logger;
 import play.libs.Codec;
-import play.mvc.Controller;
 import utils.Constants;
 import utils.FileUtil;
+import utils.Secure;
 
-public class Plans extends Controller {
+public class Plans extends Application {
 
   public static void index() {
     List<Plan> myPlans = new ArrayList<Plan>();
@@ -32,6 +32,7 @@ public class Plans extends Controller {
    * 创建计划第一步，命名
    * @param planName
    */
+  @Secure(login=true)
   public static void save(String planName) {
     Plan plan = new Plan();
     plan.name = planName;
