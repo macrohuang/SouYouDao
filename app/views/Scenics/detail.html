@@ -1,114 +1,226 @@
-#{extends 'main.html' /}
-#{set title:'景点详情' /}
-#{set 'moreStyles'}
-     #{stylesheet 'scenic.css'/}
-#{/set}
-#{set 'moreScripts'}
-     #{script 'scenic.js'/}
-#{/set}
+#{extends 'main.html' /} #{set title:'景点详情' /} #{set 'moreStyles'}
+#{stylesheet 'scenic.css'/} #{/set} #{set 'moreScripts'} #{script
+'scenic.js'/} #{/set}
 
 <div id="location">
 	<div id="scenic-name">
-		<span>${scenic?.name}<a href="#scenic-name-update" data-toggle="modal" class="update-link">修改</a></span>
-		<span id="scenic-level">${scenic?.level}</span>
+		<span id="scenic-name-span">${scenic?.name}</span>&nbsp;<a href="#scenic-name-update"
+			data-toggle="modal" class="update-link">修改</a> <span
+			id="scenic-level">${scenic?.level}</span>
 	</div>
-	<div id="scenic-address">地址：${scenic?.address}<a href="#scenic-address-update" data-toggle="modal" class="update-link">修改</a></div>
+	<div id="scenic-address">
+		<span id="scenic-address-span">地址：${scenic?.address}</span>&nbsp;<a href="#scenic-address-update"
+			data-toggle="modal" class="update-link">修改</a>
+	</div>
 	<div class="scenic-gallery-btn">
-     <button class="btn">添加图片</button>
-     <button class="btn">景区相册</button>
-  </div>
+		<button class="btn">添加图片</button>
+		<button class="btn">景区相册</button>
+	</div>
 </div>
 <div id="scenic-overview">
 	<div id="overview-left">
 		<ul class="thumbnails">
-		  <li class="span3">
-		    <a href="#" class="thumbnail">
-		      #{if firstImage != null}
-		        <img src="/data/scenic/images/${firstImage.imageName}" class="scenic-image-first" alt="">
-		      #{/if}
-		      #{else}
-		        <img src="/public/images/360268.png" class="scenic-image-first" alt="">
-		      #{/else}
-		    </a>
-		  </li>
-		  #{list images,as:'i'}
-		  <li class="span1">
-        <a href="#" class="thumbnail">
-          <img src="/data/scenic/images/thumbs/${i.imageName}" class="scenic-image-thumb" image="${i.imageName}" alt="">
-        </a>
-      </li>
-      #{/list}
+			<li class="span3"><a href="#" class="thumbnail"> #{if
+					firstImage != null} <img
+					src="/data/scenic/images/${firstImage.imageName}"
+					class="scenic-image-first" alt=""> #{/if} #{else} <img
+					src="/public/images/360268.png" class="scenic-image-first" alt="">
+					#{/else}
+			</a></li> #{list images,as:'i'}
+			<li class="span1"><a href="#" class="thumbnail"> <img
+					src="/data/scenic/images/thumbs/${i.imageName}"
+					class="scenic-image-thumb" image="${i.imageName}" alt="">
+			</a></li> #{/list}
 		</ul>
 	</div>
 </div>
 <div class="clearfix"></div>
 <div id="scenic-detail">
 	<div id="detail-left">
-      <div class="side-box">
-        <div class="side-top">景区基本信息</div>
-        <div class="side-middle">
-            <div class="side-scenic-recommand">
-            	<div class="scenic-editable">${scenic?.name}</div>
-            	<div class="scenic-editable">${scenic?.address}</div>
-            	<div class="scenic-editable">${scenic?.province}-${scenic?.city}</div>
-            	<div class="scenic-editable">${scenic?.consume}</div>
-            	<div class="scenic-editable">${scenic?.tel}</div>
-            	<div class="scenic-editable">${scenic?.days}</div>
-            </div>
-        </div>
-        <div class="side-bottom"></div>
-      </div>
+		<div class="side-box">
+			<div class="side-top">景区基本信息</div>
+			<div class="side-middle">
+				<div class="side-scenic-recommand">
+					<div>
+						所在省份：<span class="scenic-content" id="scenic-province-span">${scenic?.province}</span>&nbsp;<a
+							href="#scenic-province-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+					<div>
+						所在城市：<span class="scenic-content" id="scenic-city-span">${scenic?.city}</span>&nbsp;<a
+							href="#scenic-city-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+					<div>
+						门票：<span class="scenic-content" id="scenic-ticket-span">${scenic?.ticketPrice}</span>&nbsp;<a
+							href="#scenic-ticket-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+					<div>
+						联系方式：<span class="scenic-content" id="scenic-tel-span">${scenic?.tel}</span>&nbsp;<a
+							href="#scenic-tel-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+					<div>
+						建议游玩天数：<span class="scenic-content"  id="scenic-days-span">${scenic?.days}</span>&nbsp;<a
+							href="#scenic-days-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+				</div>
+			</div>
+			<div class="side-bottom"></div>
+		</div>
 	</div>
 	<div id="detail-right">
-         <div class="right-side-box">
-           <div class="right-side-top">
-                <div class="tab-btn active" href="#description" data-toggle="tab">景点介绍</div>
-                <div class="tab-btn" href="#maps" data-toggle="tab">景点地图</div>
-                <div class="tab-btn" href="#traffic" data-toggle="tab">周边交通</div>
-                <div class="tab-btn" href="#comments" data-toggle="tab">游客点评</div>
-                <div class="tab-btn" href="#trips" data-toggle="tab">旅行社推荐</div>
-           </div>
-           <div class="right-side-middle tab-content">
-	            <div class="tab-pane active" id="description">#{verbatim}${scenic?.description}#{/verbatim}<a href="#" class="update-link">修改</a></div>
-	            <div class="tab-pane" id="maps">maps</div>
-	            <div class="tab-pane" id="traffic">traffic</div>
-	            <div class="tab-pane" id="comments">comments</div>
-	            <div class="tab-pane" id="trips">trips</div>
-           </div> 
-           <div class="right-side-bottom"></div> 
-        </div>
+		<div class="right-side-box">
+			<div class="right-side-top">
+				<div class="tab-btn active" href="#description" data-toggle="tab">景点介绍</div>
+				<div class="tab-btn" href="#maps" data-toggle="tab">景点地图</div>
+				<div class="tab-btn" href="#traffic" data-toggle="tab">周边交通</div>
+				<div class="tab-btn" href="#comments" data-toggle="tab">游客点评</div>
+				<div class="tab-btn" href="#trips" data-toggle="tab">旅行社推荐</div>
+			</div>
+			<div class="right-side-middle tab-content">
+				<div class="tab-pane active" id="description">
+					#{verbatim}${scenic?.description}#{/verbatim}<a href="#"
+						class="update-link">修改</a>
+				</div>
+				<div class="tab-pane" id="maps">maps</div>
+				<div class="tab-pane" id="traffic">traffic</div>
+				<div class="tab-pane" id="comments">comments</div>
+				<div class="tab-pane" id="trips">trips</div>
+			</div>
+			<div class="right-side-bottom"></div>
+		</div>
 	</div>
 </div>
 
 <!-- Modals Start -->
-  <!-- 景点名称 Start -->
-   <div class="modal fade" id="scenic-name-update">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>新景点名称:</h3>
-    </div>
-    <div class="modal-body">
-      <p><input type="text" class="required input-xxlarge" value="${scenic?.name}" id="new-scenic-name"/></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">取消</a>
-      <button type="button" class="btn btn-primary" onclick="saveScenicName('new-scenic-name',${scenic?.id})">保存</button>
-    </div>
-  </div>
-  <!-- 景点名称 End -->
-  <!-- 景点地址 Start -->
-   <div class="modal fade" id="scenic-address-update">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>新景点地址:</h3>
-    </div>
-    <div class="modal-body">
-      <p><input type="text" class="required input-xxlarge" name="planName"/></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">取消</a>
-      <button type="submit" class="btn btn-primary">保存</button>
-    </div>
-  </div>
-  <!-- 景点地址 End -->
+<!-- 景点名称 Start -->
+<div class="modal fade" id="scenic-name-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点名称:</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<input type="text" class="required input-xxlarge"
+				value="${scenic?.name}" id="new-scenic-name" />
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="button" class="btn btn-primary"
+			onclick="updateField('scenic-name-update','scenic-name-span','name')">保存</button>
+	</div>
+</div>
+<!-- 景点名称 End -->
+<!-- 景点地址 Start -->
+<div class="modal fade" id="scenic-address-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点地址:</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<input type="text" class="required input-xxlarge"
+				id="new-scenic-address" value="${scenic?.address}" />
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-address-update','scenic-address-span','address')">保存</button>
+	</div>
+</div>
+<!-- 景点地址 End -->
+<!-- 景点省份 Start -->
+<div class="modal fade" id="scenic-province-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点省份:</h3>
+	</div>
+	<div class="modal-body">
+		<select id="scenic-province-dropdown" onchange="changeProvince()"
+			onclick="changeProvince()">
+
+		</select>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-province-update','scenic-province-span','province')">保存</button>
+	</div>
+</div>
+<!-- 景点省份  End -->
+<!-- 景点城市 Start -->
+<div class="modal fade" id="scenic-city-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点城市:</h3>
+	</div>
+	<div class="modal-body">
+		<select id="scenic-city-dropdown">
+			<option>--请先选择省份--</option>
+		</select>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-city-update','scenic-city-span','city')">保存</button>
+	</div>
+</div>
+<!-- 景点城市  End -->
+<!-- 景点省份  End -->
+<!-- 景点门票 Start -->
+<div class="modal fade" id="scenic-ticket-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点门票:</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<input type="text" class="required input-xxlarge"
+				id="new-scenic-ticket" value="${scenic?.ticketPrice}" />
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-ticket-update','scenic-ticket-span','ticketPrice')">保存</button>
+	</div>
+</div>
+<!-- 景点门票  End -->
+<!-- 景点联系方式 Start -->
+<div class="modal fade" id="scenic-tel-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点电话:</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<input type="text" class="required input-xxlarge"
+				id="new-scenic-tel" value="${scenic?.tel}" />
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-tel-update','scenic-tel-span','tel')">保存</button>
+	</div>
+</div>
+<!-- 景点联系方式  End -->
+<!-- 景点游玩天数 Start -->
+<div class="modal fade" id="scenic-days-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点建议游玩天数:</h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<input type="text" class="required input-xxlarge"
+				id="new-scenic-days" value="${scenic?.days}" />
+		</p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-days-update','scenic-days-span','days')">保存</button>
+	</div>
+</div>
+<!-- 景点游玩天数  End -->
 <!-- Modals End -->
