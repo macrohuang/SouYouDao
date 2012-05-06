@@ -150,3 +150,28 @@ function saveEdit(ctl){
 	$(ctl).remove();//移除编辑组件，很重要
 	bindEvent();//重新绑定事件，其实可以重新绑定当前单元格就可以，但是这样的话我现在给的绑定方法要修改，懒得改了，呵呵
 }
+//更改图片上传的类型
+function changeImgType(_type){
+	if(_type=='local'){
+		document.onpaste = function(event){}
+		$("#imgSrc").val('local');//本地图片
+	}else if(_type=='web'){
+		document.onpaste = function(event){}
+		$("#imgSrc").val('web');//网络图片
+	}else if(_type=='paste'){
+		$("#imgSrc").val('paste');//直接粘贴
+		//直接粘贴需要覆写浏览器粘贴事件
+		document.onpaste = function(event){
+			console.log("on paste");
+			var items = event.clipboardData.items;
+			var blob = items[0].getAsFile();
+			var reader = new FileReader();
+			reader.onload = function(event){
+				$("#imgPreview").attr("src",event.target.result);
+				$("#pasteImg").val(event.target.result);
+			};
+			//读取剪贴板中的文件，读取完成后调用onload
+			reader.readAsDataURL(blob);
+		}
+	}
+}

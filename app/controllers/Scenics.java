@@ -156,4 +156,13 @@ public class Scenics extends Controller {
     s.name = name;
     s.save();
   }
+  /**
+   * 从网络下载图片
+   * @param urls
+   */
+  public static void saveImages(long scenicId, String webImg, File localImg,
+      String pasteImg, String imgSrc){
+    Logger.info(webImg);
+    detail(scenicId);
+  }
 }
