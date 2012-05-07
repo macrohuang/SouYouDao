@@ -1,4 +1,4 @@
-var province_cities = {
+/*var province_cities = {
 	"黑龙江" : [ "哈尔滨", "大庆", "齐齐哈尔", "佳木斯", "鸡西", "鹤岗", "双鸭山", "牡丹江", "伊春",
 			"七台河", "黑河", "绥化", "双城", "尚志", "纳河", "虎林", "密山", "铁力", "同江", "富锦",
 			"绥芬河", "海林", "宁安", "穆林", "北安", "五大连池", "肇东", "海伦", "安达" ],
@@ -83,7 +83,7 @@ var province_cities = {
 	"台湾" : [ "台北", "台中", "基隆", "高雄", "台南", "新竹", "嘉义", "板桥市", "宜兰市", "竹北市",
 			"桃园市", "苗栗市", "丰原市", "彰化市", "南投市", "太保市", "斗六市", "新营市", "凤山市",
 			"屏东市", "台东市", "花莲市", "马公市" ]
-};
+};*/
 $(function() {
 	$(".scenic-image-thumb").each(function(){
 		$(this).hover(function(){
@@ -108,10 +108,18 @@ $(function() {
 			$('#loading').fadeOut();
 		}
 	});
-	for (var province in province_cities){
-		$("#scenic-province-dropdown").append("<option>" + province +"</option>");
+	for (var pid in location_map){
+		$("#scenic-province-dropdown").append("<option value='"+pid+"'>" + location_map[pid].name +"</option>");
 	}
-	bindEvent();
+	tinyMCE.init({
+		mode : "textareas",
+		theme : "advanced",
+		theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        theme_advanced_resizing : true
+	});
+	//bindEvent();
 });
 function updateField(cmpId,disSpan,field){
 	nval =$("#" + cmpId + " select").attr("value");
@@ -122,13 +130,30 @@ function updateField(cmpId,disSpan,field){
 	//TODO:往后端发送更新信息
 	$("#"+cmpId).modal('hide');
 }
+function updateLocationField(cmpId,disSpan,field){
+	nval =$("#" + cmpId + " select option:selected").text();
+	$("#" + disSpan).text(nval);
+	//TODO:往后端发送更新信息
+	$("#"+cmpId).modal('hide');
+}
+
 function changeProvince(){
-	var province=$("#scenic-province-dropdown").attr("value");
+	var pid=$("#scenic-province-dropdown").attr("value");
 	$("#scenic-city-dropdown").empty();
-	for (var city in province_cities[province]){
-		$("#scenic-city-dropdown").append("<option>" + province_cities[province][city] +"</option>");
+	for (var cid in location_map[pid].cities){
+		$("#scenic-city-dropdown").append("<option value='"+cid+"'>"+location_map[pid].cities[cid].name+"</option>");
 	}
 }
+
+function changeCity(){
+	var pid=$("#scenic-province-dropdown").attr("value");
+	var cid=$("#scenic-city-dropdown").attr("value");
+	$("#scenic-region-dropdown").empty();
+	for (var rid in location_map[pid].cities[cid].region){
+		$("#scenic-region-dropdown").append("<option value='"+rid+"'>"+location_map[pid].cities[cid].region[rid]+"</option>");
+	}
+}
+
 function saveScenicName(nodeId,scenicId){
 	$.post("/Scenics/saveName",{name:$("#"+nodeId).val(),id:scenicId},function(){
 		$(".modal").modal('hide');
