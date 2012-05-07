@@ -1,6 +1,12 @@
-#{extends 'main.html' /} #{set title:'景点详情' /} #{set 'moreStyles'}
-#{stylesheet 'scenic.css'/} #{/set} #{set 'moreScripts'} #{script
-'scenic.js'/} #{/set}
+#{extends 'main.html' /}
+#{set title:'景点详情' /}
+#{set 'moreStyles'}
+	#{stylesheet 'scenic.css'/} 
+#{/set} 
+#{set 'moreScripts'} 
+	#{script 'scenic.js'/}
+	#{script 'tiny_mce/tiny_mce.js' /} 
+#{/set}
 
 <div id="location">
 	<div id="scenic-name">
@@ -52,6 +58,11 @@
 							class="update-link">修改</a>
 					</div>
 					<div>
+						所在区县：<span class="scenic-content" id="scenic-region-span">${scenic?.region}</span>&nbsp;<a
+							href="#scenic-region-update" data-toggle="modal"
+							class="update-link">修改</a>
+					</div>
+					<div>
 						门票：<span class="scenic-content" id="scenic-ticket-span">${scenic?.ticketPrice}</span>&nbsp;<a
 							href="#scenic-ticket-update" data-toggle="modal"
 							class="update-link">修改</a>
@@ -82,8 +93,9 @@
 			</div>
 			<div class="right-side-middle tab-content">
 				<div class="tab-pane active" id="description">
-					#{verbatim}${scenic?.description}#{/verbatim}<a href="#"
-						class="update-link">修改</a>
+					<div id="scenic-desc-div">#{verbatim}${scenic?.description}#{/verbatim}</div>
+					
+					<a href="#scenic-desc-update" data-toggle="modal" class="update-link">修改</a>
 				</div>
 				<div class="tab-pane" id="maps">maps</div>
 				<div class="tab-pane" id="traffic">traffic</div>
@@ -140,14 +152,13 @@
 		<h3>新景点省份:</h3>
 	</div>
 	<div class="modal-body">
-		<select id="scenic-province-dropdown" onchange="changeProvince()"
-			onclick="changeProvince()">
+		<select id="scenic-province-dropdown" onchange="changeProvince()" onclick="changeProvince()">
 
 		</select>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">取消</a>
-		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-province-update','scenic-province-span','province')">保存</button>
+		<button type="submit" class="btn btn-primary" onclick="updateLocationField('scenic-province-update','scenic-province-span','province')">保存</button>
 	</div>
 </div>
 <!-- 景点省份  End -->
@@ -158,17 +169,33 @@
 		<h3>新景点城市:</h3>
 	</div>
 	<div class="modal-body">
-		<select id="scenic-city-dropdown">
+		<select id="scenic-city-dropdown" onchange="changeCity()" onclick="changeCity()">
 			<option>--请先选择省份--</option>
 		</select>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">取消</a>
-		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-city-update','scenic-city-span','city')">保存</button>
+		<button type="submit" class="btn btn-primary" onclick="updateLocationField('scenic-city-update','scenic-city-span','city')">保存</button>
 	</div>
 </div>
 <!-- 景点城市  End -->
-<!-- 景点省份  End -->
+<!-- 景点区县 Start -->
+<div class="modal fade" id="scenic-region-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点区县:</h3>
+	</div>
+	<div class="modal-body">
+		<select id="scenic-region-dropdown">
+			<option>--请先选择城市--</option>
+		</select>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateLocationField('scenic-region-update','scenic-region-span','city')">保存</button>
+	</div>
+</div>
+<!-- 景点区县  End -->
 <!-- 景点门票 Start -->
 <div class="modal fade" id="scenic-ticket-update">
 	<div class="modal-header">
@@ -223,4 +250,21 @@
 	</div>
 </div>
 <!-- 景点游玩天数  End -->
+<!-- 景点Description Start -->
+<div class="modal fade scenic-desc-modal" id="scenic-desc-update">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+		<h3>新景点介绍:</h3>
+	</div>
+	<div class="modal-body">
+		<textarea class="required input-large" cols="100" id="new-scenic-desc">
+				#{verbatim}${scenic?.description}#{/verbatim}
+		</textarea>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">取消</a>
+		<button type="submit" class="btn btn-primary" onclick="updateField('scenic-desc-update','scenic-desc-div','desc')">保存</button>
+	</div>
+</div>
+<!-- 景点Description  End -->
 <!-- Modals End -->
