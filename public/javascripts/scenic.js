@@ -175,3 +175,9 @@ function changeImgType(_type){
 		}
 	}
 }
+function openGallery(_imageId){
+	$.post("/Scenics/getImage",{imageId:_imageId},function(data){
+		$("#scenic-image-gallery").modal("show");
+		$("#scenic-image").attr("src","/data/scenic/images/"+data.imageName);
+	});
+}

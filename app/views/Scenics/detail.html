@@ -37,7 +37,7 @@
             </li>
             #{list images,as:'i'}
                 <li class="span1">
-                    <a href="#" class="thumbnail">
+                    <a href="#" onclick="openGallery(${i.id})" class="thumbnail">
                         <img src="/data/scenic/images/thumbs/${i.imageName}" class="scenic-image-thumb" image="${i.imageName}" alt=""/>
                     </a>
                 </li>
@@ -232,38 +232,54 @@
 </div>
 <!-- 添加景区图片 Start -->
 <form action="@{Scenics.saveImages()}" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="imgSrc" id="imgSrc" value="local"/>
-      <input type="hidden" name="scenicId" id="scenicId" value="${scenic?.id}"/>
-      <div class="modal fade" id="scenic-images-update">
-       <div class="modal-body">
-        <!-- Tabs -->
-         <ul class="nav nav-tabs">
-           <li class="active"><a data-toggle="tab" href="#local-img" onclick="changeImgType('local')">本地图片</a></li>
-           <li><a data-toggle="tab" href="#web-img" onclick="changeImgType('web')">网络图片</a></li>
-           <li><a data-toggle="tab" href="#paste-img" onclick="changeImgType('paste')">直接粘贴</a></li>
-         </ul>
-         <div class="tab-content">
-           <div class="tab-pane active" id="local-img">
-             <input type="file" name="localImg" id="localImg"/>
-           </div>
-           <div class="tab-pane" id="web-img">
-             <div>
-                <textarea name="webImg" id="webImg" rows="5" placeholder="后缀名必须为jpg、png等图片格式,以换行间隔多个图片"></textarea>
-             </div>
-             <div>网络图片根据网络速度，可能需要刷新网页才能看到</div>
-           </div>
-           <div class="tab-pane" id="paste-img" align="center">
-             <div>使用QQ截图或直接复制任何一处图片，直接按Ctrl + V 即可粘贴(仅支持Chrome和FireFox浏览器)</div>
-		     <input type="hidden" name="pasteImg" id="pasteImg"/>
-		   </div>
-         </div>
-         <div align="center"><img id="imgPreview" alt="" src=""/></div>
-       </div>
-       <div class="modal-footer">
-         <a href="#" class="btn" data-dismiss="modal">取消</a>
-         <button type="submit" class="btn btn-primary">保存</button>
-       </div>
-     </div>
-   </form>
+   <input type="hidden" name="imgSrc" id="imgSrc" value="local"/>
+   <input type="hidden" name="scenicId" id="scenicId" value="${scenic?.id}"/>
+   <div class="modal fade" id="scenic-images-update">
+    <div class="modal-body">
+     <!-- Tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#local-img" onclick="changeImgType('local')">本地图片</a></li>
+        <li><a data-toggle="tab" href="#web-img" onclick="changeImgType('web')">网络图片</a></li>
+        <li><a data-toggle="tab" href="#paste-img" onclick="changeImgType('paste')">直接粘贴</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="local-img">
+          <input type="file" name="localImg" id="localImg"/>
+        </div>
+        <div class="tab-pane" id="web-img">
+          <div>
+             <textarea name="webImg" id="webImg" rows="5" placeholder="后缀名必须为jpg、png等图片格式,以换行间隔多个图片"></textarea>
+          </div>
+          <div>网络图片根据网络速度，可能需要刷新网页才能看到</div>
+        </div>
+        <div class="tab-pane" id="paste-img" align="center">
+          <div>使用QQ截图或直接复制任何一处图片，直接按Ctrl + V 即可粘贴(仅支持Chrome和FireFox浏览器)</div>
+    <input type="hidden" name="pasteImg" id="pasteImg"/>
+  </div>
+      </div>
+      <div align="center"><img id="imgPreview" alt="" src=""/></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">取消</a>
+      <button type="submit" class="btn btn-primary">保存</button>
+    </div>
+  </div>
+</form>
 <!-- 添加景区图片  End -->
 <!-- Modals End -->
+
+<!-- Images Gallery Start -->
+<div class="modal fade" id="scenic-image-gallery">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>景区相册:</h3>
+    </div>
+    <div class="modal-body" align="center">
+        <img id="scenic-image" src="" class="span7"/>
+        <div id="scenic-comments" class="span2">COMMENTS</div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">取消</a>
+    </div>
+</div>
+<!-- Images Gallery End -->

@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 import models.scenic.Scenic;
 import models.scenic.ScenicImage;
+import play.Logger;
 import play.jobs.Job;
 import play.libs.Codec;
 import play.libs.Images;
@@ -49,6 +50,7 @@ public class ScenicImageDownloader extends Job {
           link = link.trim();
           // 根据URL获取图片流，并保存到dir目录下
           try {
+            Logger.info("Image Downloading : " + link);
             String imageName = Codec.UUID() + "." + extension;
             URL url = new URL(link);
             InputStream is = new BufferedInputStream(url.openStream());
@@ -58,6 +60,9 @@ public class ScenicImageDownloader extends Job {
             for (int b; (b = is.read()) != -1;) {
               out.write(b);
             }
+            is.close();
+            out.flush();
+            out.close();
             // 生成缩略图
             File image = new File(Constants.SCENIC_IMAGE_DIR + imageName);
             File thumb = new File(Constants.SCENIC_IMAGE_THUMB_DIR + imageName);

@@ -169,4 +169,15 @@ public class Scenics extends Controller {
     }
     detail(scenicId);
   }
+
+  /**
+   * 获得图片在Gallery中显示
+   * @param imageId
+   */
+  public static void getImage(long imageId) {
+    ScenicImage image = ScenicImage.findById(imageId);
+    String json = "{\"imageName\":\"" + image.imageName + "\"}";
+    // TODO 增加图片评论数据
+    renderJSON(json);
+  }
 }
