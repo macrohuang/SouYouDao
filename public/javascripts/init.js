@@ -20,9 +20,6 @@ $(function() {
     initLocationMap();
 });
 function initLocationMap(){
-	//$.get("/Utils/locationMap", function(json){
-	//	location_map = json;
-	//});
 	$.ajax({
 			"url":"/Utils/locationMap",
 			"async":false,
@@ -33,6 +30,11 @@ function initLocationMap(){
 	});
 }
 //Ajax三级省市区联动菜单，只需传递三个select的id即可
+/**
+ * Ajax三级省市区联动菜单，只需传递三个select标签的id即可
+ * 前三个参数为select标签的id值
+ * 后三个参数为选择默认值
+ */
 function locationSelection(province_id,city_id,region_id,province,city,region){
 	//先读取省数据
 	for (var pid in location_map){

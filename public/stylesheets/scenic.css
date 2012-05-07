@@ -98,4 +98,16 @@
 .scenic-ediable{
 	cursor: pointer;
 }
-
+#webImg {
+    width: 100%;
+}
+#scenic-image-gallery {
+	width: 900px;
+	margin-left:-450px;
+}
+#scenic-image {
+	height: 400px;
+}
+#scenic-comments {
+	text-align: left;
+}

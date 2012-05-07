@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import jobs.ScenicImageDownloader;
 import models.scenic.Scenic;
 import models.scenic.ScenicImage;
 
@@ -155,5 +156,28 @@ public class Scenics extends Controller {
     Scenic s = Scenic.findById(id);
     s.name = name;
     s.save();
+  }
+
+  /**
+   * 从网络下载图片
+   * @param urls
+   */
+  public static void saveImages(long scenicId, String webImg, File localImg, String pasteImg,
+      String imgSrc) {
+    if ("web".equals(imgSrc)) {
+      new ScenicImageDownloader(webImg, scenicId).now();
+    }
+    detail(scenicId);
+  }
+
+  /**
+   * 获得图片在Gallery中显示
+   * @param imageId
+   */
+  public static void getImage(long imageId) {
+    ScenicImage image = ScenicImage.findById(imageId);
+    String json = "{\"imageName\":\"" + image.imageName + "\"}";
+    // TODO 增加图片评论数据
+    renderJSON(json);
   }
 }

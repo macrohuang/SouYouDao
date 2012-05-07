@@ -16,8 +16,8 @@ import play.db.jpa.Model;
 public class ScenicImage extends Model {
   @Required
   public String imageName;
-  @ManyToOne
   @Required
+  @ManyToOne
   public Scenic scenic;
 
   public ScenicImage() {
