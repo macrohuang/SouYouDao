@@ -16,7 +16,11 @@ $(function() {
         }); 
     });
 });
-//Ajax三级省市区联动菜单，只需传递三个select的id即可
+/**
+ * Ajax三级省市区联动菜单，只需传递三个select标签的id即可
+ * 前三个参数为select标签的id值
+ * 后三个参数为选择默认值
+ */
 function locationSelection(province_id,city_id,region_id,province,city,region){
 	//先读取省数据
 	$.get("/Utils/province", function(json){

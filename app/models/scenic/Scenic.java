@@ -3,6 +3,7 @@ package models.scenic;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -79,11 +80,11 @@ public class Scenic extends Model {
   // 景点评论
   @OneToMany(mappedBy = "scenic")
   public List<ScenicComment> comments;
-	// 景点别名
-	@OneToMany(mappedBy = "scenic")
-	public List<ScenicAlias> alias;
-  // 景点图片
+  // 景点别名
   @OneToMany(mappedBy = "scenic")
+  public List<ScenicAlias> alias;
+  // 景点图片
+  @OneToMany(mappedBy = "scenic", cascade = CascadeType.ALL)
   public List<ScenicImage> images;
 
 
@@ -100,21 +101,24 @@ public class Scenic extends Model {
     }
     return s;
   }
+
   /**
    * 第一个缩略图名称
    * @return
    */
-  public String getThumb(){
+  public String getThumb() {
     ScenicImage image = ScenicImage.find("scenic.id = ?", this.id).first();
     return image == null ? null : image.imageName;
   }
+
   /**
    * 获得简略的介绍(list页面显示,40个汉字)
    * @return
    */
-  public String getBriefDesc(){
+  public String getBriefDesc() {
     return StringUtils.subWithoutHtml(this.description, 40);
   }
+
   public static List<Scenic> getAuthorized(Long adminId) {
     return Scenic.find("authorizer.id = ? order by authorizeDate desc", adminId).fetch();
   }

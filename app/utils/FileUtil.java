@@ -25,7 +25,7 @@ public class FileUtil extends FileUtils {
    * @return "jpg/png/NULL"
    */
   public static String getExtension(String fullName) {
-    String extension = null;
+    String extension = "";
     if (fullName != null && fullName.length() > 0) {
       int dotIndex = fullName.lastIndexOf(".");
       if (dotIndex > 0) {
@@ -38,7 +38,7 @@ public class FileUtil extends FileUtils {
   /**
    * 获得系统路径
    * @param dirs "data","scenic","images"
-   * @return "/User/root/test/"
+   * @return 如"/User/root/test/"
    */
   public static String getApplicationPath(String... dirs) {
     String separator = Play.applicationPath.separator;

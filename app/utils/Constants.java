@@ -28,6 +28,15 @@ public class Constants {
   public static final String SCENIC_INDEX_PATH = FileUtil.getApplicationPath("data", "scenic",
       "indexes");
 
+  // 图片后缀名
+  public static final String[] ALLOWED_IMAGES = {"JPEG", "JPG", "PNG", "GIF", "BMP"};
+
+  // 各种图片存储路径
+  public static final String SCENIC_IMAGE_DIR = FileUtil.getApplicationPath("data", "scenic",
+      "images");
+  public static final String SCENIC_IMAGE_THUMB_DIR = FileUtil.getApplicationPath("data", "scenic",
+      "images", "thumbs");
+
   // 打开景点索引目录
   public static final Directory OPEN_SCENIC_INDEX_DIR() throws Exception {
     File file = new File(SCENIC_INDEX_PATH);
