@@ -60,4 +60,10 @@ public class Constants {
     IndexSearcher searcher = new IndexSearcher(directory);
     return searcher;
   }
+
+  // Ajax响应状态码
+  public static final int WEB_RESPONSE_OK = 0;//
+  public static final int WEB_RESPONSE_PARAM_ERROR = 1;//
+  public static final int WEB_RESPONSE_PER = 4;// Permision denied.
+  public static final int WEB_RESPONSE_ERROR = 5;// General error
 }
