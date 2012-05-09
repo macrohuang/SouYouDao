@@ -1,8 +1,11 @@
 package controllers;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jobs.ScenicImageDownloader;
 import models.scenic.Scenic;
@@ -21,8 +24,15 @@ import play.Logger;
 import play.mvc.Controller;
 import utils.Constants;
 import utils.FileUtil;
+import utils.ScenicUpdateHelper;
 
 public class Scenics extends Controller {
+	private static Map<String, Field> fieldMap = new HashMap<String, Field>();
+	static {
+		for (Field field : Scenic.class.getFields()) {
+			fieldMap.put(field.getName(), field);
+		}
+	}
 
   public static void index() {
     List<Scenic> scenics = Scenic.all().fetch(4);
@@ -179,5 +189,23 @@ public class Scenics extends Controller {
     String json = "{\"imageName\":\"" + image.imageName + "\"}";
     // TODO 增加图片评论数据
     renderJSON(json);
+  }
+
+  public static void updateByField(long scenicId, String field, String value) {
+    Map<String, Object> result = new HashMap<String, Object>();
+    if (!fieldMap.containsKey(field)) {
+      result.put("status", Constants.WEB_RESPONSE_PARAM_ERROR);
+      result.put("msg", "所要更新的字段为非法字段");
+    }
+    Scenic scenic = Scenic.findById(scenicId);
+    try {
+      ScenicUpdateHelper.updateByField(scenic, fieldMap.get(field), value);
+      result.put("status", Constants.WEB_RESPONSE_OK);
+    } catch (Exception e) {
+      e.printStackTrace();
+      result.put("status", Constants.WEB_RESPONSE_ERROR);
+      result.put("msg", "服务器忙，请重试");
+    }
+    renderJSON(result);
   }
 }
