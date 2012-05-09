@@ -1,3 +1,5 @@
+//全局的省-市-县映射图，仅在加载首页时初始化一次
+var location_map={};
 $(function() {
 	//所以的search按钮初始化
 	$(".search-btn").each(function(){
@@ -15,7 +17,19 @@ $(function() {
             $(this).attr("class","tab-btn");
         }); 
     });
+    initLocationMap();
 });
+function initLocationMap(){
+	$.ajax({
+			"url":"/Utils/locationMap",
+			"async":false,
+			"dataType":"json",
+			"success":function(data,status){
+				location_map=data;
+			}
+	});
+}
+//Ajax三级省市区联动菜单，只需传递三个select的id即可
 /**
  * Ajax三级省市区联动菜单，只需传递三个select标签的id即可
  * 前三个参数为select标签的id值
@@ -23,44 +37,33 @@ $(function() {
  */
 function locationSelection(province_id,city_id,region_id,province,city,region){
 	//先读取省数据
-	$.get("/Utils/province", function(json){
-		for(var i =0;i<json.length;i++){
-			$("#"+province_id).append("<option value='"+json[i].id+"'>"+json[i].name+"</option>");
-		}
-		if(province!=null){
-			$("#"+province_id+" option[value='"+province+"']").attr("selected","selected")
-		}
-		$("#"+province_id).change();
-	});
-	//选择省联动事件(载入当前省的城市)
-	$("#"+province_id).change(function(){
-		//清空当前省的城市
-		$("#"+city_id).empty();
-		//载入当前省的城市
-		$.get("/Utils/city",{province_id:$(this).val()}, function(json){
-			$("#"+city_id).append("<option value=''>选择城市</option>");
-			for(var i =0;i<json.length;i++){
-				$("#"+city_id).append("<option value='"+json[i].id+"'>"+json[i].name+"</option>");
-			}
-			if(city!=null){
-				$("#"+city_id+" option[value='"+city+"']").attr("selected","selected")
-			}
-			$("#"+city_id).change();
-		});
-	});
-	//选择城市联动事件(载入当前城市的县区)
-	$("#"+city_id).change(function(){
-		//清空当前县区
+	for (var pid in location_map){
+		$("#"+province_id).append("<option value='"+pid+"'>"+ location_map[pid].name+"</option>");
+	}
+	if(province!=null && province!=undefined){
+		$("#"+province_id+" option[value='"+province+"']").attr("selected","selected")
+	}
+	
+	$("#"+city_id).change(function(pid){
 		$("#"+region_id).empty();
-		//载入当前城市的县区
-		$.get("/Utils/region",{city_id:$(this).val()}, function(json){
-			$("#"+region_id).append("<option value=''>选择县区</option>");
-			for(var i =0;i<json.length;i++){
-				$("#"+region_id).append("<option value='"+json[i].id+"'>"+json[i].name+"</option>");
-			}
-			if(region!=null){
-				$("#"+region_id+" option[value='"+region+"']").attr("selected","selected")
-			}
-		});
+		for (var rid in location_map[pid].cities[$(this).val()].region){
+			$("#"+region_id).append("<option value='"+rid+"'>"+location_map[pid].cities[cid].region[rid]+"</option>");
+		}
+		if(region!=null && region != undefined){
+			$("#"+region_id+" option[value='"+region+"']").attr("selected","selected")
+		}
 	});
+	
+	$("#" + province_id).change(function(){
+		$("#"+city_id).empty();
+		for (var cid in location_map[$(this).val()].cities){
+			$("#"+city_id).append("<option value='"+cid+"'>"+location_map[pid].cities[cid].name+"</option>");
+		}
+		if(city!=null && city!=undefined){
+			$("#"+city_id+" option[value='"+city+"']").attr("selected","selected")
+		}
+		$("#"+city_id).change('$(this).val()');
+	});
+	
+	$("#"+province_id).change();
 }

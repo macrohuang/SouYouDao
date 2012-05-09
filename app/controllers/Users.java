@@ -16,8 +16,7 @@ public class Users extends Application {
 
   public static void doLogin(String username, String password) {
     if (username != null && password != null) {
-      User user =
-          User.find("username = ? and password = ?", username, Codec.hexMD5(password)).first();
+			User user = User.find("username = ? and password = ?", username, Codec.hexMD5(password)).first();
       if (user != null) {
         // 登陆成功
         loginSession(user);

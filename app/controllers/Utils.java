@@ -1,7 +1,9 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import models.utils.area.City;
 import models.utils.area.Province;
@@ -55,4 +57,29 @@ public class Utils extends Controller {
     json.append("]");
     renderJSON(json.toString());
   }
+
+	public static void locationMap() {
+		List<Province> provinces = Province.findAll();
+		Map<String, Object> lMap = new HashMap<String, Object>();
+		for (Province province : provinces) {
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			List<City> cities = City.find("province.id = ?", province.id).fetch();
+			Map<String, Object> cMap = new HashMap<String, Object>();
+			for (City city : cities) {
+				Map<String, Object> ccMap = new HashMap<String, Object>();
+				ccMap.put("name", city.name);
+				List<Region> regions = Region.find("city.id = ?", city.id).fetch();
+				Map<String, Object> rMap = new HashMap<String, Object>();
+				for (Region region : regions) {
+					rMap.put("" + region.id, region.name);
+				}
+				ccMap.put("region", rMap);
+				cMap.put("" + city.id, ccMap);
+			}
+			pMap.put("cities", cMap);
+			pMap.put("name", province.name);
+			lMap.put("" + province.id, pMap);
+		}
+		renderJSON(lMap);
+	}
 }
