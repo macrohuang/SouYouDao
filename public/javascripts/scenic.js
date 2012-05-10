@@ -68,9 +68,8 @@ function updateField(cmpId,disSpan,field){
 			},
 			function(data){
 				if (data.status == 0){
-					$("#" + disSpan).text(nval);
+					$("#" + disSpan).text(data.data);
 					changeProvince();
-					alert("更新成功！");
 				}else{
 					alert("更新失败：" + data.msg);
 				}
