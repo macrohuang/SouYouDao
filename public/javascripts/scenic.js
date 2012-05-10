@@ -161,6 +161,14 @@ function changeImgType(_type){
 	}
 }
 function openGallery(_imageId){
+	$('#scenic-image-gallery').on('show', function () {
+		$("#scenic-image-gallery").css({"width":"900px","margin-left":"-450px"});
+		$("#scenic-image").css({"height":"400px"});
+	});
+	$('#scenic-image-gallery').on('hide', function () {
+		$("#scenic-image-gallery").css({"width":"auto","margin-left":"0px"});
+		$("#scenic-image").css({"height":"0px"});
+	});
 	$.post("/Scenics/getImage",{imageId:_imageId},function(data){
 		$("#scenic-image-gallery").modal("show");
 		$("#scenic-image").attr("src","/data/scenic/images/"+data.imageName);
