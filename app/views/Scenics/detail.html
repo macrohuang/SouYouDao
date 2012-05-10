@@ -54,17 +54,17 @@
 			<div class="side-middle">
 				<div class="side-scenic-recommand">
 					<div>
-						所在省份：<span class="scenic-content" id="scenic-province-span">${scenic?.province}</span>&nbsp;<a
+						所在省份：<span class="scenic-content" id="scenic-province-span">${scenic?.province?.name}</span>&nbsp;<a
 							href="#scenic-province-update" data-toggle="modal"
 							class="update-link">修改</a>
 					</div>
 					<div>
-						所在城市：<span class="scenic-content" id="scenic-city-span">${scenic?.city}</span>&nbsp;<a
+						所在城市：<span class="scenic-content" id="scenic-city-span">${scenic?.city?.name}</span>&nbsp;<a
 							href="#scenic-city-update" data-toggle="modal"
 							class="update-link">修改</a>
 					</div>
 					<div>
-						所在区县：<span class="scenic-content" id="scenic-region-span">${scenic?.region}</span>&nbsp;<a
+						所在区县：<span class="scenic-content" id="scenic-region-span">${scenic?.region?.name}</span>&nbsp;<a
 							href="#scenic-region-update" data-toggle="modal"
 							class="update-link">修改</a>
 					</div>
@@ -155,7 +155,7 @@
 		<h3>新景点省份:</h3>
 	</div>
 	<div class="modal-body">
-		<select id="scenic-province-dropdown" onchange="changeProvince()" onclick="changeProvince()">
+		<select id="scenic-province-dropdown">
 
 		</select>
 	</div>
@@ -172,7 +172,7 @@
 		<h3>新景点城市:</h3>
 	</div>
 	<div class="modal-body">
-		<select id="scenic-city-dropdown" onchange="changeCity()" onclick="changeCity()">
+		<select id="scenic-city-dropdown">
 			<option>--请先选择省份--</option>
 		</select>
 	</div>
@@ -195,7 +195,7 @@
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">取消</a>
-		<button type="submit" class="btn btn-primary" onclick="updateLocationField('scenic-region-update','scenic-region-span','city')">保存</button>
+		<button type="submit" class="btn btn-primary" onclick="updateLocationField('scenic-region-update','scenic-region-span','region')">保存</button>
 	</div>
 </div>
 <!-- 景点区县  End -->
@@ -275,6 +275,9 @@
 <form action="@{Scenics.saveImages()}" method="post" enctype="multipart/form-data">
    <input type="hidden" name="imgSrc" id="imgSrc" value="local"/>
    <input type="hidden" name="scenicId" id="scenicId" value="${scenic?.id}"/>
+   <input type="hidden" id="scenic-province-span-id" value="${scenic?.province?.id}"/>
+   <input type="hidden" id="scenic-city-span-id" value="${scenic?.city?.id}"/>
+   <input type="hidden" id="scenic-region-span-id" value="${scenic?.region?.id}"/>
    <div class="modal fade" id="scenic-images-update">
     <div class="modal-body">
      <!-- Tabs -->
