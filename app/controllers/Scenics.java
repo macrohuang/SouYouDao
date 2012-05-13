@@ -21,7 +21,11 @@ import org.wltea.analyzer.lucene.IKQueryParser;
 import org.wltea.analyzer.lucene.IKSimilarity;
 
 import play.Logger;
+import play.libs.Codec;
+import play.libs.Images;
 import play.mvc.Controller;
+import po.WebResponse;
+import po.WebResponse.ResponseStatus;
 import utils.Constants;
 import utils.FileUtil;
 import utils.ScenicUpdateHelper;
@@ -114,10 +118,14 @@ public class Scenics extends Controller {
     }
 
     /**
-     * AJAX分页使用的query.
+     * AJAX分页使用的query. <<<<<<< HEAD
      * @param keywords
      * @param page start at 1
-     * @param template (default = "Scenics/page.html")
+     * @param template (default = "Scenics/page.html") =======
+     * @param keywords
+     * @param page start at 1
+     * @param template (default = "Scenics/page.html") >>>>>>>
+     *            0419e5a87f1970bd3c61179fd42a8eb5fdd95d44
      */
     public static void query(String keywords, int page, String template) {
         Logger.info("Query Scenics : " + keywords + ", page : " + page);
@@ -177,8 +185,67 @@ public class Scenics extends Controller {
             String imgSrc) {
         if ("web".equals(imgSrc)) {
             new ScenicImageDownloader(webImg, scenicId).now();
+        } else if ("local".equals(imgSrc)) {
+            ScenicImage image = new ScenicImage();
+            File file =
+                    new File(Constants.SCENIC_IMAGE_DIR + Codec.UUID() + "."
+                            + FileUtil.getExtension(localImg));
+            // TODO renameTo only works on the same File System.
+            localImg.renameTo(file);
+            image.imageName = file.getName();
+            image.scenic = Scenic.findById(scenicId);
+            image.save();
+            // 生成缩略图
+            File thumb = new File(Constants.SCENIC_IMAGE_THUMB_DIR + file.getName());
+            Images.resize(file, thumb, 160, -1);
         }
         detail(scenicId);
+    }
+
+    /**
+     * 删除景区图片
+     * @param scenicImageId
+     */
+    public static void deleteImage(long scenicImageId) {
+        ScenicImage image = ScenicImage.findById(scenicImageId);
+        File file = new File(Constants.SCENIC_IMAGE_DIR + image.imageName);
+        File thumb = new File(Constants.SCENIC_IMAGE_THUMB_DIR + image.imageName);
+        if (file.exists()) file.delete();
+        if (thumb.exists()) thumb.delete();
+        image.delete();
+        // 获得下一张图片
+        ScenicImage next = ScenicImage.find("id < ? order by id desc", scenicImageId).first();
+        long nextId = 0;
+        if (next != null) nextId = next.id;
+        String json = "{\"nextId\":\"" + nextId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
+    }
+
+    /**
+     * 获取下一张图片
+     * @param scenicImageId
+     */
+    public static void nextImage(long scenicImageId) {
+        ScenicImage next = ScenicImage.find("id < ? order by id desc", scenicImageId).first();
+        long nextId = 0;
+        if (next != null) nextId = next.id;
+        String json = "{\"nextId\":\"" + nextId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
+    }
+
+    /**
+     * 获取上一张图片
+     * @param scenicImageId
+     */
+    public static void prevImage(long scenicImageId) {
+        ScenicImage next = ScenicImage.find("id > ? order by id desc", scenicImageId).first();
+        long prevId = 0;
+        if (next != null) prevId = next.id;
+        String json = "{\"prevId\":\"" + prevId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
     }
 
     /**
@@ -187,26 +254,22 @@ public class Scenics extends Controller {
      */
     public static void getImage(long imageId) {
         ScenicImage image = ScenicImage.findById(imageId);
-        String json = "{\"imageName\":\"" + image.imageName + "\"}";
-        // TODO 增加图片评论数据
-        renderJSON(json);
+        if (image != null) {
+            String json = "{\"imageName\":\"" + image.imageName + "\",\"id\":\"" + image.id + "\"}";
+            // TODO 增加图片评论数据
+            renderJSON(json);
+        }
     }
 
     public static void updateByField(long scenicId, String field, String value) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        WebResponse response = new WebResponse();
         if (!fieldMap.containsKey(field)) {
-            result.put("status", Constants.WEB_RESPONSE_PARAM_ERROR);
-            result.put("msg", "所要更新的字段为非法字段");
+            response.status = ResponseStatus.WEB_RESPONSE_PARAM_ERROR;
+            response.msg = "所要更新的字段为非法字段";
+        } else {
+            Scenic scenic = Scenic.findById(scenicId);
+            ScenicUpdateHelper.updateByField(response, scenic, fieldMap.get(field), value);
         }
-        Scenic scenic = Scenic.findById(scenicId);
-        try {
-            ScenicUpdateHelper.updateByField(scenic, fieldMap.get(field), value);
-            result.put("status", Constants.WEB_RESPONSE_OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.put("status", Constants.WEB_RESPONSE_ERROR);
-            result.put("msg", "服务器忙，请重试");
-        }
-        renderJSON(result);
+        renderJSON(response.toJsonString());
     }
 }

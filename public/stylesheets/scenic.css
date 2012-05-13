@@ -39,7 +39,7 @@
 }
 .side-scenic-recommand {
     width: 180px;
-    height: 70px;
+    height: 95px;
     margin-bottom: 10px;
     color: gray;
     border-bottom: 1px solid #F3F3F3;
@@ -104,4 +104,8 @@
 #scenic-comments {
 	text-align: left;
 	padding-left: 10px;
+}
+#scenicMap {
+	width: 100%;
+	height: 400px;
 }
