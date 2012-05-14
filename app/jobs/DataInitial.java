@@ -22,7 +22,7 @@ public class DataInitial extends Job {
 
 	@Override
 	public void doJob() throws Exception {
-		if (Play.configuration.get("db").equals("mem")) {
+        if (Play.configuration.get("db").equals("mem")) {
 			Logger.info("data initialize ");
 			// Admins
 			Admin.deleteAll();

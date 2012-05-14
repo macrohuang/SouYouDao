@@ -10,6 +10,7 @@ import java.util.Map;
 import jobs.ScenicImageDownloader;
 import models.scenic.Scenic;
 import models.scenic.ScenicImage;
+import models.scenic.ScenicUpdateHelper;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.search.IndexSearcher;
@@ -22,11 +23,10 @@ import org.wltea.analyzer.lucene.IKSimilarity;
 
 import play.Logger;
 import play.mvc.Controller;
-import po.WebResponse;
-import po.WebResponse.ResponseStatus;
 import utils.Constants;
 import utils.FileUtil;
-import utils.ScenicUpdateHelper;
+import utils.WebResponse;
+import utils.WebResponse.ResponseStatus;
 
 public class Scenics extends Controller {
     private static Map<String, Field> fieldMap = new HashMap<String, Field>();
@@ -209,6 +209,22 @@ public class Scenics extends Controller {
         } else {
             Scenic scenic = Scenic.findById(scenicId);
                 ScenicUpdateHelper.updateByField(response, scenic, fieldMap.get(field), value);
+        }
+        renderJSON(response.toJsonString());
+    }
+
+    public static void newScenic(String name) {
+        WebResponse response = new WebResponse();
+        Scenic scenic = Scenic.find("name=?", name).first();
+        if (scenic != null) {
+            response.status = ResponseStatus.WEB_RESPONSE_PARAM_ERROR;
+            response.msg = "该景点已经存在！";
+        } else {
+            scenic = new Scenic();
+            scenic.name = name;
+            scenic.save();
+            response.status = ResponseStatus.WEB_RESPONSE_OK;
+            response.data = scenic.id;
         }
         renderJSON(response.toJsonString());
     }

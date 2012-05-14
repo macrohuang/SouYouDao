@@ -67,7 +67,7 @@ function updateField(cmpId,disSpan,field){
 				"value":nval
 			},
 			function(data){
-				if (data.status == 0){
+				if (data.status == 200){
 					$("#" + disSpan).text(data.data);
 					changeProvince();
 				}else{
@@ -85,7 +85,7 @@ function updateLocationField(cmpId,disSpan,field){
 			"value":$("#" + cmpId + " select option:selected").attr("value")
 		},
 		function(data){
-			if (data.status == 0){
+			if (data.status == 200){
 				$("#" + disSpan).text($("#" + cmpId + " select option:selected").text());
 				$("#" + disSpan+"-id").attr("value",$("#" + cmpId + " select option:selected").attr("value"));
 				initDropdown();
@@ -172,4 +172,20 @@ function openGallery(_imageId){
 		$("#scenic-image-gallery").modal("show");
 		$("#scenic-image").attr("src","/data/scenic/images/"+data.imageName);
 	});
+}
+
+function newScenic(cpmId){
+	$("#scenic-new").modal('hide');
+	$.post("/Scenics/newScenic",
+		{
+			"name":$("#scenic-name").attr("value")
+		},
+		function(data){
+			if (data.status == 200){
+				window.location.href="/scenics/detail/" + data.data;
+			}else{
+				alert("添加失败：" + data.msg);
+			}
+		}
+	);	
 }

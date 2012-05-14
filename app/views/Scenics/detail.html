@@ -79,6 +79,11 @@
 							class="update-link">修改</a>
 					</div>
 					<div>
+						人均消费：<span class="scenic-content"  id="scenic-consume-span">${scenic?.consume}</span>&nbsp;<a
+							href="#scenic-consume-update" data-toggle="modal"
+							class="update-link">我的消费</a>
+					</div>
+					<div>
 						建议游玩天数：<span class="scenic-content"  id="scenic-days-span">${scenic?.days}</span>&nbsp;<a
 							href="#scenic-days-update" data-toggle="modal"
 							class="update-link">我的建议</a>
@@ -253,6 +258,24 @@
     </div>
 </div>
 <!-- 景点游玩天数  End -->
+<!-- 景点人均消费 Start -->
+<div class="modal fade" id="scenic-consume-update">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>我的消费:</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <input type="text" class="required input-xxlarge"
+                id="new-scenic-consume" value="${scenic?.consume}" />
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">取消</a>
+        <button type="submit" class="btn btn-primary" onclick="updateField('scenic-consume-update','scenic-consume-span','consume')">保存</button>
+    </div>
+</div>
+<!-- 景点人均消费  End -->
 <!-- 景点Description Start -->
 <div class="modal fade scenic-desc-modal" id="scenic-desc-update">
 	<div class="modal-header">

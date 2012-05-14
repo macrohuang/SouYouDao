@@ -5,6 +5,7 @@
 #{/set}
 #{set 'moreScripts'}
      #{script 'scenic.js'/}
+     #{script 'tiny_mce/tiny_mce.js' /} 
 #{/set}
 <div class="container-fluid">
   <div class="row-fluid">
@@ -30,7 +31,8 @@
     <div class="span9">
 			<!-- 推荐景区 -->
 			<div class="bottom-line-bold">
-	      <div>搜索结果(${total}个结果)</div>
+	      <div>搜索结果(${total}个结果)&nbsp;<a	href="#scenic-new" data-toggle="modal"
+							class="update-link">添加景点</a></div>
 	    </div>
 	    <!-- 推荐景区列表 -->
 	    <ul class="thumbnails" id="scenic-thumb-recommend">
@@ -56,4 +58,19 @@
     </div>
   </div>
 </div>
-
+<!-- new 景点 Start -->
+<div class="modal fade" id="scenic-new">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>景点名称:</h3>
+    </div>
+    <div class="modal-body">
+       <p><input type="text" class="required input-xxlarge" value="" id="scenic-name" /></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">取消</a>
+        <button type="button" class="btn btn-primary"
+            onclick="newScenic('scenic-name')">保存</button>
+    </div>
+</div>
+<!-- new 景点 End -->
