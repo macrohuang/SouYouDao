@@ -92,6 +92,10 @@ public class Scenic extends Model {
     @OneToOne(cascade = CascadeType.ALL)
     public Period period;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    public Consume consume2;
+
+
     /**
      * 获取count条未审核数据
      * 
