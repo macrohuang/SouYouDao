@@ -1,4 +1,5 @@
 $(function() {
+	//初始化页面缩略图
 	$(".scenic-image-thumb").each(function(){
 		$(this).hover(function(){
 			$(".scenic-image-first:first").attr("src","/data/scenic/images/"+$(this).attr("image"));
@@ -22,6 +23,13 @@ $(function() {
 			$('#loading').fadeOut();
 		}
 	});
+	//初始化景区详情地图数据
+	if($("#scenicMap").length > 0){
+		var script = document.createElement("script");
+		script.src = "http://api.map.baidu.com/api?v=1.3&callback=initScenicMap";
+		document.body.appendChild(script);
+		initScenicMap();
+	}
 	$("#scenic-province-dropdown").empty();
 	for (var pid in location_map){
 		$("#scenic-province-dropdown").append("<option value='"+pid+"'>" + location_map[pid].name +"</option>");
@@ -159,6 +167,9 @@ function changeImgType(_type){
 		}
 	}
 }
+/**
+ * 打开景区相册modal
+ */
 function openGallery(_imageId){
 	$('#scenic-image-gallery').on('show', function () {
 		$("#scenic-image-gallery").css({"width":"900px","margin-left":"-450px"});
@@ -171,6 +182,17 @@ function openGallery(_imageId){
 	$.post("/Scenics/getImage",{imageId:_imageId},function(data){
 		$("#scenic-image-gallery").modal("show");
 		$("#scenic-image").attr("src","/data/scenic/images/"+data.imageName);
+		$("#delImageBtn").attr("onclick","deleteImage("+data.id+")");
+		$("#nextImageBtn").attr("onclick","nextImage("+data.id+")");
+		$("#prevImageBtn").attr("onclick","prevImage("+data.id+")");
+	});
+}
+//删除图片
+function deleteImage(imageId){
+	$.post("/Scenics/deleteImage",{scenicImageId:imageId},function(data){
+		if(data.nextId!="0"){
+			openGallery(data.nextId);
+		}
 	});
 }
 
@@ -205,4 +227,27 @@ function addAlias(cmpId,inpId){
 				}
 			}
 		);	
+//获取下一个图片
+function nextImage(imageId){
+	$.post("/Scenics/nextImage",{scenicImageId:imageId},function(data){
+		if(data.nextId!="0"){
+			openGallery(data.nextId);	
+		}
+	});
+}
+//获取上一个图片
+function prevImage(imageId){
+	$.post("/Scenics/prevImage",{scenicImageId:imageId},function(data){
+		if(data.prevId!="0"){
+			openGallery(data.prevId);
+		}
+	});
+}
+//初始化景区详情页面的地图数据
+function initScenicMap(){
+	var map = new BMap.Map("scenicMap");
+	var point = new BMap.Point(116.404, 39.915);
+	var opts = {type: BMAP_NAVIGATION_CONTROL_LARGE};
+	map.centerAndZoom(point, 15);
+	map.addControl(new BMap.NavigationControl(opts));
 }

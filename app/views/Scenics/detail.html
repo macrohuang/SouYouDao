@@ -5,9 +5,8 @@
 #{/set} 
 #{set 'moreScripts'} 
 	#{script 'scenic.js'/}
-	#{script 'tiny_mce/tiny_mce.js' /} 
+	#{script 'tiny_mce/tiny_mce.js' /}
 #{/set}
-
 <div id="location">
     <div id="scenic-name">
         <span id="scenic-name-span">${scenic?.name}</span>&nbsp;
@@ -106,17 +105,19 @@
 			<div class="right-side-top">
 				<div class="tab-btn active" href="#description" data-toggle="tab">景点介绍</div>
 				<div class="tab-btn" href="#maps" data-toggle="tab">景点地图</div>
-				<div class="tab-btn" href="#traffic" data-toggle="tab">周边交通</div>
+				<div class="tab-btn" href="#traffic" data-toggle="tab">游玩路线</div>
 				<div class="tab-btn" href="#comments" data-toggle="tab">游客点评</div>
 				<div class="tab-btn" href="#trips" data-toggle="tab">旅行社推荐</div>
 			</div>
 			<div class="right-side-middle tab-content">
 				<div class="tab-pane active" id="description">
 					<div id="scenic-desc-div">#{verbatim}${scenic?.description}#{/verbatim}</div>
-					
 					<a href="#scenic-desc-update" data-toggle="modal" class="update-link">修改</a>
 				</div>
-				<div class="tab-pane" id="maps">maps</div>
+				<div class="tab-pane" id="maps">
+				    <div id="scenicMap"></div>
+				    <div><button class="btn" type="button">添加地图图片</button></div>
+				</div>
 				<div class="tab-pane" id="traffic">traffic</div>
 				<div class="tab-pane" id="comments">comments</div>
 				<div class="tab-pane" id="trips">trips</div>
@@ -372,8 +373,9 @@
         <div id="scenic-comments" class="span2">COMMENTS</div>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">删除图片</a>
-        <a href="#" class="btn" data-dismiss="modal">下一张</a>
+        <a href="#" class="btn" id="delImageBtn">删除图片</a>
+        <a href="#" class="btn" id="prevImageBtn">上一张</a>
+        <a href="#" class="btn" id="nextImageBtn">下一张</a>
     </div>
 </div>
 <!-- Images Gallery End -->

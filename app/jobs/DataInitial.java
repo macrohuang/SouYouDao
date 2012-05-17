@@ -14,7 +14,6 @@ import play.libs.Codec;
 
 /**
  * 测试环境初始化系统所需数据
- * 
  * @author royguo1988@gmail.com
  */
 @OnApplicationStart

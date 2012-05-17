@@ -23,6 +23,8 @@ import org.wltea.analyzer.lucene.IKQueryParser;
 import org.wltea.analyzer.lucene.IKSimilarity;
 
 import play.Logger;
+import play.libs.Codec;
+import play.libs.Images;
 import play.mvc.Controller;
 import utils.Constants;
 import utils.FileUtil;
@@ -51,15 +53,12 @@ public class Scenics extends Controller {
 
     /**
      * Search后进入列表页面
-     * 
      * @param keywords
-     * @param page
-     *            start at 1
+     * @param page start at 1
      */
     public static void search(String keywords, int page) {
         int total = 0;
-        if (page < 1)
-            page = 1;
+        if (page < 1) page = 1;
         List<Scenic> scenics = new ArrayList<Scenic>();
         Logger.info("搜索景区：" + keywords);
         Directory directory = null;
@@ -67,8 +66,9 @@ public class Scenics extends Controller {
         try {
             directory = Constants.OPEN_SCENIC_INDEX_DIR();
             searcher = Constants.CREATE_INDEX_SEARCHER(directory);
-            Query query = IKQueryParser.parseMultiField(new String[] { "name", "description", "address", "tel", "province.name", "city.name" },
-                    keywords);
+            Query query =
+                    IKQueryParser.parseMultiField(new String[] {"name", "description", "address",
+                            "tel", "province.name", "city.name"}, keywords);
             searcher.setSimilarity(new IKSimilarity());
             // 执行检索操作，根据每次查询的页数取topN
             TopDocs results = searcher.search(query, page * Constants.SCENIC_SEARCH_PAGE_SIZE);
@@ -91,8 +91,7 @@ public class Scenics extends Controller {
             e.printStackTrace();
         } finally {
             try {
-                if (searcher != null)
-                    searcher.close();
+                if (searcher != null) searcher.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,46 +101,48 @@ public class Scenics extends Controller {
 
     /**
      * 删除景区内的图片一张
-     * 
      * @param imageId
      */
     public static void deleteImage(Long imageId) {
         ScenicImage image = ScenicImage.findById(imageId);
-        new File(FileUtil.getApplicationPath("data", "scenic", "images") + image.imageName).delete();
+        new File(FileUtil.getApplicationPath("data", "scenic", "images") + image.imageName)
+                .delete();
         image.delete();
     }
 
     public static void deleteRoadmap(Long scenicId) {
         Scenic scenic = Scenic.findById(scenicId);
-        new File(FileUtil.getApplicationPath("data", "scenic", "roadmaps") + scenic.roadmapImage).delete();
+        new File(FileUtil.getApplicationPath("data", "scenic", "roadmaps") + scenic.roadmapImage)
+                .delete();
         scenic.roadmapImage = null;
         scenic.save();
     }
 
     /**
-     * AJAX分页使用的query.
-     * 
+     * AJAX分页使用的query. <<<<<<< HEAD
      * @param keywords
-     * @param page
-     *            start at 1
-     * @param template
-     *            (default = "Scenics/page.html")
+     * @param page start at 1
+     * @param template (default = "Scenics/page.html") =======
+     * @param keywords
+     * @param page start at 1
+     * @param template (default = "Scenics/page.html") >>>>>>>
+     *            0419e5a87f1970bd3c61179fd42a8eb5fdd95d44
      */
     public static void query(String keywords, int page, String template) {
         Logger.info("Query Scenics : " + keywords + ", page : " + page);
         if (template == null || template.equals("")) {
             template = "Scenics/page.html";
         }
-        if (page < 1)
-            page = 1;
+        if (page < 1) page = 1;
         List<Scenic> scenics = new ArrayList<Scenic>();
         Directory directory = null;
         IndexSearcher searcher = null;
         try {
             directory = Constants.OPEN_SCENIC_INDEX_DIR();
             searcher = Constants.CREATE_INDEX_SEARCHER(directory);
-            Query query = IKQueryParser.parseMultiField(new String[] { "name", "description", "address", "tel", "province.name", "city.name" },
-                    keywords);
+            Query query =
+                    IKQueryParser.parseMultiField(new String[] {"name", "description", "address",
+                            "tel", "province.name", "city.name"}, keywords);
             searcher.setSimilarity(new IKSimilarity());
             // 执行检索操作，根据每次查询的页数取topN
             TopDocs results = searcher.search(query, page * Constants.SCENIC_SEARCH_PAGE_SIZE);
@@ -163,8 +164,7 @@ public class Scenics extends Controller {
             e.printStackTrace();
         } finally {
             try {
-                if (searcher != null)
-                    searcher.close();
+                if (searcher != null) searcher.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -180,26 +180,86 @@ public class Scenics extends Controller {
 
     /**
      * 从网络下载图片
-     * 
      * @param urls
      */
-    public static void saveImages(long scenicId, String webImg, File localImg, String pasteImg, String imgSrc) {
+    public static void saveImages(long scenicId, String webImg, File localImg, String pasteImg,
+            String imgSrc) {
         if ("web".equals(imgSrc)) {
             new ScenicImageDownloader(webImg, scenicId).now();
+        } else if ("local".equals(imgSrc)) {
+            ScenicImage image = new ScenicImage();
+            File file =
+                    new File(Constants.SCENIC_IMAGE_DIR + Codec.UUID() + "."
+                            + FileUtil.getExtension(localImg));
+            // TODO renameTo only works on the same File System.
+            localImg.renameTo(file);
+            image.imageName = file.getName();
+            image.scenic = Scenic.findById(scenicId);
+            image.save();
+            // 生成缩略图
+            File thumb = new File(Constants.SCENIC_IMAGE_THUMB_DIR + file.getName());
+            Images.resize(file, thumb, 160, -1);
         }
         detail(scenicId);
     }
 
     /**
+     * 删除景区图片
+     * @param scenicImageId
+     */
+    public static void deleteImage(long scenicImageId) {
+        ScenicImage image = ScenicImage.findById(scenicImageId);
+        File file = new File(Constants.SCENIC_IMAGE_DIR + image.imageName);
+        File thumb = new File(Constants.SCENIC_IMAGE_THUMB_DIR + image.imageName);
+        if (file.exists()) file.delete();
+        if (thumb.exists()) thumb.delete();
+        image.delete();
+        // 获得下一张图片
+        ScenicImage next = ScenicImage.find("id < ? order by id desc", scenicImageId).first();
+        long nextId = 0;
+        if (next != null) nextId = next.id;
+        String json = "{\"nextId\":\"" + nextId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
+    }
+
+    /**
+     * 获取下一张图片
+     * @param scenicImageId
+     */
+    public static void nextImage(long scenicImageId) {
+        ScenicImage next = ScenicImage.find("id < ? order by id desc", scenicImageId).first();
+        long nextId = 0;
+        if (next != null) nextId = next.id;
+        String json = "{\"nextId\":\"" + nextId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
+    }
+
+    /**
+     * 获取上一张图片
+     * @param scenicImageId
+     */
+    public static void prevImage(long scenicImageId) {
+        ScenicImage next = ScenicImage.find("id > ? order by id desc", scenicImageId).first();
+        long prevId = 0;
+        if (next != null) prevId = next.id;
+        String json = "{\"prevId\":\"" + prevId + "\"}";
+        // TODO 增加图片评论数据
+        renderJSON(json);
+    }
+
+    /**
      * 获得图片在Gallery中显示
-     * 
      * @param imageId
      */
     public static void getImage(long imageId) {
         ScenicImage image = ScenicImage.findById(imageId);
-        String json = "{\"imageName\":\"" + image.imageName + "\"}";
-        // TODO 增加图片评论数据
-        renderJSON(json);
+        if (image != null) {
+            String json = "{\"imageName\":\"" + image.imageName + "\",\"id\":\"" + image.id + "\"}";
+            // TODO 增加图片评论数据
+            renderJSON(json);
+        }
     }
 
     public static void updateByField(long scenicId, String field, String value) {
@@ -209,7 +269,7 @@ public class Scenics extends Controller {
             response.msg = "所要更新的字段为非法字段";
         } else {
             Scenic scenic = Scenic.findById(scenicId);
-                ScenicUpdateHelper.updateByField(response, scenic, fieldMap.get(field), value);
+            ScenicUpdateHelper.updateByField(response, scenic, fieldMap.get(field), value);
         }
         renderJSON(response.toJsonString());
     }
