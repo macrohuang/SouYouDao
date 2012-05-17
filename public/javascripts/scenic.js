@@ -189,3 +189,20 @@ function newScenic(cpmId){
 		}
 	);	
 }
+
+function addAlias(cmpId,inpId){
+	$("#" + cmpId).modal('hide');
+	$.post("/Scenics/addAlias",
+			{
+				"scenicId":$("#scenicId").attr("value"),
+				"alias":$("#scenic-alias").attr("value")
+			},
+			function(data){
+				if (data.status == 200){
+					$("#scenic-alias-span").append("&nbsp;" + data.data);
+				}else{
+					alert("添加失败：" + data.msg);
+				}
+			}
+		);	
+}

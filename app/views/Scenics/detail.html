@@ -14,6 +14,14 @@
         <a href="#scenic-name-update" data-toggle="modal" class="update-link">修改</a>
         <span id="scenic-level">${scenic?.level}</span>
     </div>
+    <div id="scenic-alias-div">
+    	<span id="scenic-alias-span">
+    		 #{list scenics?.alias,as:'a'}
+    		 	${a.alias}&nbsp;
+    	 	#{/list}
+        </span>
+        <a href="#scenic-alias-add" data-toggle="modal" class="update-link">增加别名</a>
+    </div>
     <div id="scenic-address">
         <span id="scenic-address-span">地址：${scenic?.address}</span>&nbsp;<a href="#scenic-address-update"
             data-toggle="modal" class="update-link">修改</a>
@@ -276,6 +284,24 @@
     </div>
 </div>
 <!-- 景点人均消费  End -->
+<!-- 景点alias Start -->
+<div class="modal fade" id="scenic-alias-add">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>新别名:</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            <input type="text" class="required input-xxlarge"
+                id="scenic-alias" value="" />
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">取消</a>
+        <button type="submit" class="btn btn-primary" onclick="addAlias('scenic-alias-add','scenic-alias')">保存</button>
+    </div>
+</div>
+<!-- 景点alias  End -->
 <!-- 景点Description Start -->
 <div class="modal fade scenic-desc-modal" id="scenic-desc-update">
 	<div class="modal-header">

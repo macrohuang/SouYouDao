@@ -9,6 +9,7 @@ import java.util.Map;
 
 import jobs.ScenicImageDownloader;
 import models.scenic.Scenic;
+import models.scenic.ScenicAlias;
 import models.scenic.ScenicImage;
 import models.scenic.ScenicUpdateHelper;
 
@@ -223,9 +224,33 @@ public class Scenics extends Controller {
             scenic = new Scenic();
             scenic.name = name;
             scenic.save();
-            response.status = ResponseStatus.WEB_RESPONSE_OK;
-            response.data = scenic.id;
+            processOK(response, scenic.id);
         }
         renderJSON(response.toJsonString());
+    }
+
+    public static void addAlias(long scenicId, String alias) {
+        System.out.println(alias);
+        WebResponse response = new WebResponse();
+        Scenic scenic = Scenic.findById(scenicId);
+        ScenicAlias scenicAlias = new ScenicAlias();
+        scenicAlias.alias = alias;
+        if (scenic.alias == null)
+            scenic.alias = new ArrayList<ScenicAlias>();
+        if (scenic.alias.contains(scenicAlias)) {
+            response.status = ResponseStatus.WEB_RESPONSE_PARAM_ERROR;
+            response.msg = "该别名已经存在！";
+        } else {
+            scenicAlias.save();
+            scenic.alias.add(scenicAlias);
+            scenic.save();
+            processOK(response, alias);
+        }
+        renderJSON(response.toJsonString());
+    }
+
+    private static void processOK(WebResponse response, Object data) {
+        response.status = ResponseStatus.WEB_RESPONSE_OK;
+        response.data = data;
     }
 }
